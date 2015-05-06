@@ -1,0 +1,130 @@
+#! /bin/sh
+#
+# /etc/init.d/pacs-dcm4chee -- startup script for the dcm4chee PACS
+#
+### BEGIN INIT INFO
+# Provides:          pacs-dcm4chee
+# Required-Start:    $local_fs $remote_fs $network $time <%= @db_type %>
+# Required-Stop:     $local_fs $remote_fs $network $time <%= @db_type %>
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: DCM4CHEE PACS
+# Description:       DCM4CHEE DICOM Image Manager
+### END INIT INFO
+
+# JBOSS configurations
+JBOSS_HOME=${JBOSS_HOME:-"<%= @jboss_home_path %>"}
+JBOSS_CONF=${JBOSS_CONF:-"default"}
+
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+DAEMON="${JBOSS_HOME}/bin/run.sh"
+
+# Exit if the package is not installed
+[ -x "$DAEMON" ] || exit 5
+
+NAME="pacs-dcm4chee"
+DESC="DCM4CHEE PACS"
+
+DAEMON_ARGS="-c ${JBOSS_CONF} -b 0.0.0.0"
+DAEMON_USER="dcm4chee"
+# run jboss in background
+# only then will signals to run.sh be forwarded to the jvm
+export LAUNCH_JBOSS_IN_BACKGROUND=1
+
+PIDDIR="/var/run/${NAME}"
+PIDFILE="${PIDDIR}/${NAME}.pid"
+SCRIPTNAME="/etc/init.d/${NAME}"
+
+JAVAPTH=${JAVAPTH:-"<%= @java_path %>"}
+if [ -z "`echo $PATH | grep $JAVAPTH`" ]; then
+  export PATH=$PATH:$JAVAPTH
+fi
+
+# Define LSB log_* functions.
+. /lib/lsb/init-functions
+
+#
+# Function that starts the daemon/service
+#
+do_start()
+{
+    # Checked the PID file exists and check the actual status of process
+    if [ -e "${PIDFILE}" ]; then
+        status_of_proc -p ${PIDFILE} ${DAEMON} "${NAME}" && status="0" || status="$?"
+        # no need to start again on success
+        if [ ${status} -eq 0 ]; then
+            echo "PID: "$(cat "${PIDFILE}")
+            exit
+        fi
+    fi
+
+    # Start the daemon.
+    log_daemon_msg "Starting ${NAME}"
+
+    echo "As user: ${DAEMON_USER}"
+    if [ ! -d "${PIDDIR}" ]
+    then
+        mkdir -p "${PIDDIR}"
+        chown "${DAEMON_USER}":"${DAEMON_USER}" "${PIDDIR}"
+    fi
+
+    if start-stop-daemon --start --user ${DAEMON_USER} --chuid ${DAEMON_USER} --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} -- ${DAEMON_ARGS} ; then
+        log_end_msg 0
+        echo "PID: "$(cat "${PIDFILE}")
+    else
+        log_end_msg 1
+    fi
+}
+
+#
+# Function that stops the daemon/service
+#
+do_stop()
+{
+    if [ -e "${PIDFILE}" ]; then
+        status_of_proc -p ${PIDFILE} ${DAEMON} "Stoppping ${NAME} which" && status="0" || status="$?"
+
+        if [ "${status}" = 0 ]; then
+            start-stop-daemon --stop --pidfile ${PIDFILE}
+            #start-stop-daemon --stop --retry=TERM/30/KILL/5 --pidfile ${PIDFILE}
+
+            RETVAL="$?"
+            [ "${RETVAL}" = 2 ] && return 2
+
+            if [ "${RETVAL}" -eq 0 ]; then
+                echo "[OK]"
+            else
+                echo "[WARNING] RETVAL: ${RETVAL}"
+                return "${RETVAL}"
+            fi
+
+            # Delete their pidfiles when they exit.
+            rm -f ${PIDFILE}
+        fi
+    else
+        log_daemon_msg "${NAME} is not running"
+        log_end_msg 0
+    fi
+}
+
+case "$1" in
+  start)
+    do_start
+    ;;
+  stop)
+    do_stop
+    ;;
+  status)
+    if [ -e "${PIDFILE}" ]; then
+        status_of_proc -p "$PIDFILE" "$DAEMON" "$NAME process" && exit 0 || exit $?
+    else
+        log_daemon_msg "${NAME} is not running"
+        log_end_msg 3
+    fi
+    ;;
+  *)
+    echo "Usage: ${SCRIPTNAME} {start|stop|status}" >&2
+    exit 3
+    ;;
+esac
+
