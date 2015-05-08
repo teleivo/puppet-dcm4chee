@@ -12,10 +12,12 @@ class dcm4chee::staging (
     $dcm4chee_base_url = 'http://sourceforge.net/projects/dcm4che/files/dcm4chee/'
     $dcm4chee_source_url = "${dcm4chee_base_url}${dcm4chee::dcm4chee_version}/${dcm4chee_archive_name}/download"
 
-    class { '::staging':
-        path  => $dcm4chee::staging_path,
-        owner => $dcm4chee::user,
-        group => $dcm4chee::user,
+    include staging
+
+    file { $dcm4chee::staging_path:
+        ensure => directory,
+        owner  => $dcm4chee::user,
+        group  => $dcm4chee::user,
     }
 
     staging::deploy { $dcm4chee_archive_name:
@@ -23,6 +25,7 @@ class dcm4chee::staging (
         target => $dcm4chee::staging_path,
         user   => $dcm4chee::user,
         group  => $dcm4chee::user,
+        require => File["${dcm4chee::staging_path}"],
     }
 
     class { 'dcm4chee::staging::replace_jai_imageio_with_64bit':
@@ -30,6 +33,7 @@ class dcm4chee::staging (
     }
 
     class { 'dcm4chee::staging::jboss':
+        require => File["${dcm4chee::staging_path}"],
     }
 
     exec { "${dcm4chee_bin_path}install_jboss.sh":
