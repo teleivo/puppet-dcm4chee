@@ -5,6 +5,7 @@ class dcm4chee::params (
     $execute_staging = 'false',
     $dcm4chee_version = '2.18.0',
     $jboss_version = '4.2.3.GA',
+    $db_host = 'localhost',
     $db_name = 'pacsdb',
     $db_owner = 'dcm4chee',
     $db_owner_password = 'dcm4chee',
