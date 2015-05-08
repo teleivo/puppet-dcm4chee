@@ -12,6 +12,7 @@ class dcm4chee (
     $jboss_ajp_connector_port = $::dcm4chee::params::jboss_ajp_connector_port,
     $jboss_java_opts = $::dcm4chee::params::jboss_java_opts,
 ) inherits dcm4chee::params {
+
     $bin_path = "${home_path}${::dcm4chee::params::bin_rel_path}"
     $sql_path = "${home_path}${::dcm4chee::params::sql_rel_path}"
     $server_deploy_path = "${home_path}${::dcm4chee::params::server_deploy_rel_path}"
@@ -23,15 +24,12 @@ class dcm4chee (
         managehome  => true,
     }
 
-    if str2bool(downcase("$execute_staging")) {
-        class { 'dcm4chee::staging':
-            before  => Class['Dcm4chee::install'], 
-            require => User["$user"],
-        }
+    class { 'dcm4chee::staging':
+        require => User["$user"],
     }
 
     class { 'dcm4chee::install':
-        require => User["$user"],
+        require => Class['Dcm4chee::staging'],
     }
 
     class { 'dcm4chee::config':

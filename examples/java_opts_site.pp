@@ -6,7 +6,6 @@ include 'mysql::server'
 
 class { 'dcm4chee':
     java_path       => "/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java",
-    execute_staging => 'true',
     jboss_java_opts => [ '-Xms128m',
                          '-Xmx740m',
                          '-XX:MaxPermSize=256m',

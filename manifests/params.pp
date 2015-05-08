@@ -2,7 +2,6 @@ class dcm4chee::params (
     $user = 'dcm4chee',
     $user_home = '/opt/dcm4chee/',
     $staging_path = '/opt/dcm4chee/staging/',
-    $execute_staging = 'false',
     $dcm4chee_version = '2.18.0',
     $jboss_version = '4.2.3.GA',
     $db_host = 'localhost',
