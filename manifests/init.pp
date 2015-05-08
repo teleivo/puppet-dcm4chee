@@ -4,6 +4,7 @@ class dcm4chee (
     $home_path = $::dcm4chee::params::dcm4chee_home_path,
     $staging_home_path = $::dcm4chee::params::staging_dcm4chee_home_path,
     $execute_staging = $::dcm4chee::params::execute_staging,
+    $db_host = $::dcm4chee::params::db_host,
     $db_name = $::dcm4chee::params::db_name,
     $db_owner = $::dcm4chee::params::db_owner,
     $db_owner_password = $::dcm4chee::params::db_owner_password,
