@@ -51,14 +51,17 @@ Following describes the basic building blocks executed by the module:
 ###Setup requirements
 
 The dcm4chee module requires
-[nanliu-staging](https://forge.puppetlabs.com/nanliu/staging) version 1.0.4 or newer.
+[nanliu-staging](https://forge.puppetlabs.com/nanliu/staging) version 1.0.3 or newer.
 [puppetlabs-mysql](https://forge.puppetlabs.com/puppetlabs/mysql) version 3.1.0 or newer.
 To install the modules do:
 
 ~~~
-puppet module install nanliu-staging
 puppet module install puppetlabs-mysql
+puppet module install nanliu-staging
 ~~~
+
+**This module expects you to have java already installed.**
+**This module expects that you have the packages needed by nanliu-staging (such as unzip, curl) already installed.**
 
 ###Beginning with dcm4chee
 
@@ -122,7 +125,6 @@ class { 'dcm4chee':
 This module was only tested with Ubuntu 14.04 64bit.
 This module was only tested with dcm4chee-2.18.0-mysql.
 This module is currently limited to dcm4chee using mysql.
-This module does expect you to have java already installed.
 
 ##Contributions
 
