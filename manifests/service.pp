@@ -1,8 +1,8 @@
 # Class: dcm4chee::service: See README.md for documentation.
-class dcm4chee::service () {
-  $jboss_home_path = $::dcm4chee::home_path
-  $java_path = $::dcm4chee::java_path
-
+class dcm4chee::service (
+  $jboss_home_path = undef,
+  $java_path = undef
+) {
   $initd_script_name = 'pacs-dcm4chee'
 
   file { "/etc/init.d/${initd_script_name}":

@@ -39,6 +39,8 @@ dcm4chee::params {
   }
 
   class { 'dcm4chee::service':
+    jboss_home_path => $home_path,
+    java_path       => $java_path,
     require => Class['Dcm4chee::config'],
   }
 }
