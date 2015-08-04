@@ -12,7 +12,7 @@
     * [I want to specify jboss java options](#i-want-to-specify-jboss-java-options)
     * [I want to specify jboss ports](#i-want-to-specify-jboss-ports)
 5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Contributions](#contributions)
+6. [Development](#development)
 
 ##Overview
 
@@ -126,6 +126,17 @@ This module was only tested with Ubuntu 14.04 64bit.
 This module was only tested with dcm4chee-2.18.0-mysql.
 This module is currently limited to dcm4chee using mysql.
 
-##Contributions
+##Development
 
-Contributions are very welcome :)
+Please feel free to open pull requests!
+
+###Running tests
+This project contains tests for [rspec-puppet](http://rspec-puppet.com/) to
+verify functionality.
+
+To run the tests:
+```bash
+gem install bundler
+bundle install
+bundle exec rake spec
+```
