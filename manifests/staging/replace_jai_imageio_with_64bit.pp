@@ -1,24 +1,20 @@
 class dcm4chee::staging::replace_jai_imageio_with_64bit (
 ) {
-    $imageio_archive_base = 'jai_imageio-1_1-lib-linux-amd64'
-    $imageio_archive_name = "${imageio_archive_base}.tar.gz"
-    $imageio_source_url = "http://download.java.net/media/jai-imageio/builds/release/1.1/${imageio_archive_name}"
+    $imageio_library_source_name = 'libclib_jiio-1.2-b04-linux-x86-64.so'
+    $imageio_library_source_url =
+    "http://dicom.vital-it.ch:8087/nexus/content/repositories/releases/org/weasis/thirdparty/com/sun/media/libclib_jiio/1.2-b04/${imageio_library_source_name}"
+    $imageio_library_source_path = "${dcm4chee::staging_path}${imageio_library_source_name}"
+    $imageio_library_destination_path = "${dcm4chee::staging::dcm4chee_home_path}bin/native/libclib_jiio.so"
 
-    $imageio_filename = 'libclib_jiio.so'
-    $imageio_archive_src_location = "jai_imageio-1_1/lib/${imageio_filename}"
-    $imageio_archive_destination = "${dcm4chee::staging::dcm4chee_home_path}bin/native/"
-
-    staging::deploy { $imageio_archive_name:
-        source => $imageio_source_url,
-        target => $dcm4chee::staging_path,
-        user   => $dcm4chee::user,
-        group  => $dcm4chee::user,
+    staging::file { $imageio_library_source_name:
+        source => $imageio_library_source_url,
+        target => $imageio_library_source_path,
     }->
 
-    file { "${imageio_archive_destination}${imageio_filename}":
+    file { $imageio_library_destination_path:
         ensure  => present,
         owner   => $dcm4chee::user,
         group   => $dcm4chee::user,
-        source  => "${dcm4chee::staging_path}${imageio_archive_src_location}",
+        source  => $imageio_library_source_path,
     }
 }
