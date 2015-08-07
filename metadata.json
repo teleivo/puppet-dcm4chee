@@ -1,6 +1,6 @@
 {
   "name": "teleivo-dcm4chee",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "teleivo",
   "summary": "Installs, configures, and manages a dcm4chee pacs.",
   "license": "Apache-2.0",
