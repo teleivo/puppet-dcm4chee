@@ -2,7 +2,7 @@
 class dcm4chee::staging () {
   $dcm4chee_home_path = "${dcm4chee::staging_path}${dcm4chee::archive_basename}/"
   $dcm4chee_bin_path = "${dcm4chee_home_path}${dcm4chee::bin_rel_path}"
-  $dcm4chee_deploy_path = 
+  $dcm4chee_deploy_path =
   "${dcm4chee_home_path}${dcm4chee::server_deploy_rel_path}"
 
   $jboss_extract_path = "${dcm4chee::staging_path}jboss-${dcm4chee::jboss_version}/"

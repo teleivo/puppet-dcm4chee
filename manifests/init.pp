@@ -12,11 +12,11 @@ class dcm4chee (
   $db_owner_password        = $::dcm4chee::params::db_owner_password,
   $jboss_http_port          = $::dcm4chee::params::jboss_http_port,
   $jboss_ajp_connector_port = $::dcm4chee::params::jboss_ajp_connector_port,
-  $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,) inherits 
-dcm4chee::params {
+  $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,) inherits
+  dcm4chee::params {
   $bin_path = "${home_path}${::dcm4chee::params::bin_rel_path}"
   $sql_path = "${home_path}${::dcm4chee::params::sql_rel_path}"
-  $server_deploy_path = 
+  $server_deploy_path =
   "${home_path}${::dcm4chee::params::server_deploy_rel_path}"
   $server_conf_path = "${home_path}${::dcm4chee::params::server_conf_rel_path}"
 
@@ -41,6 +41,6 @@ dcm4chee::params {
   class { 'dcm4chee::service':
     jboss_home_path => $home_path,
     java_path       => $java_path,
-    require => Class['Dcm4chee::config'],
+    require         => Class['Dcm4chee::config'],
   }
 }

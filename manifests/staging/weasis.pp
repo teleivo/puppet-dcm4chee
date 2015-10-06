@@ -8,10 +8,10 @@ class dcm4chee::staging::weasis (
 
   $weasis_connector_base_url = "${weasis_base_url}weasis-pacs-connector/${weasis_pacs_connector_version}/"
   $weasis_connector_archive_name = 'weasis-pacs-connector.war'
-  $weasis_connector_source_url = 
+  $weasis_connector_source_url =
   "${weasis_connector_base_url}${weasis_connector_archive_name}"
   $weasis_dcm4chee_web_name = 'dcm4chee-web-weasis.jar'
-  $weasis_dcm4chee_web_source_url = 
+  $weasis_dcm4chee_web_source_url =
   "${weasis_connector_base_url}${weasis_dcm4chee_web_name}"
 
   $source_directory = "${dcm4chee::staging_path}weasis/"
@@ -42,7 +42,7 @@ class dcm4chee::staging::weasis (
     require => File[$source_directory],
   }
 
-  file { 
+  file {
   "${dcm4chee::staging::dcm4chee_deploy_path}${weasis_connector_archive_name}":
     ensure  => present,
     owner   => $dcm4chee::user,

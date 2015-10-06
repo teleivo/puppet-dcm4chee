@@ -12,9 +12,9 @@ class dcm4chee::staging::replace_jai_imageio_with_64bit (
   }->
 
   file { $imageio_library_destination_path:
-    ensure  => present,
-    owner   => $dcm4chee::user,
-    group   => $dcm4chee::user,
-    source  => $imageio_library_source_path,
+    ensure => present,
+    owner  => $dcm4chee::user,
+    group  => $dcm4chee::user,
+    source => $imageio_library_source_path,
   }
 }
