@@ -16,6 +16,7 @@ group :development, :unit_tests do
   gem 'simplecov',               :require => false
   gem 'puppet_facts',            :require => false
   gem 'json',                    :require => false
+  gem 'guard-rake',              :require => false
 end
 
 group :system_tests do

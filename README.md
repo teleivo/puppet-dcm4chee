@@ -136,9 +136,19 @@ Please feel free to open pull requests!
 This project contains tests for [rspec-puppet](http://rspec-puppet.com/) to
 verify functionality.
 
-To run the tests:
+To install all dependencies for the testing environment:
 ```bash
-gem install bundler
+sudo gem install bundler
 bundle install
+```
+
+To run the tests once:
+```bash
 bundle exec rake spec
 ```
+
+To run the tests on any change of puppet files in the manifests folder:
+```bash
+bundle exec guard
+```
+
