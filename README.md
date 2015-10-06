@@ -1,5 +1,7 @@
 #puppet-dcm4chee
 
+[![Build Status](https://secure.travis-ci.org/teleivo/puppet-dcm4chee.png?branch=master)](https://travis-ci.org/teleivo/puppet-dcm4chee)
+
 ####Table of Contents
 
 1. [Overview](#overview)
