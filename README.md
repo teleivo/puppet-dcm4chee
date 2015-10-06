@@ -124,8 +124,8 @@ class { 'dcm4chee':
 
 ##Limitations
 
-This module was only tested with Ubuntu 14.04 64bit.
 This module was only tested with dcm4chee-2.18.0-mysql.
+This module is currently limited to Ubuntu 14.04 64bit.
 This module is currently limited to dcm4chee using mysql.
 
 ##Development
