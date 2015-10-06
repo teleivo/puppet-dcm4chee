@@ -16,6 +16,38 @@ describe 'dcm4chee', :type => :class do
     ) }
   end
 
+  context 'should gracefully fail on any OS other than Ubuntu 14.04 64bit' do
+    describe 'on Ubuntu 14.04 32bit' do
+      let(:facts) {{
+        :osfamily               => 'Debian',
+        :operatingsystem        => 'Ubuntu',
+        :operatingsystemrelease => '14.04',
+        :architecture           => 'x86',
+      }}
+      it { is_expected.to compile.and_raise_error(/Module only supports Ubuntu 14.04 64bit/) }
+    end
+
+    describe 'on Ubuntu 12.02 64bit' do
+      let(:facts) {{
+        :osfamily               => 'Debian',
+        :operatingsystem        => 'Ubuntu',
+        :operatingsystemrelease => '12.02',
+        :architecture           => 'amd64',
+      }}
+      it { is_expected.to compile.and_raise_error(/Module only supports Ubuntu 14.04 64bit/) }
+    end
+
+    describe 'on Centos 7' do
+      let(:facts) {{
+        :osfamily               => 'RedHat',
+        :operatingsystem        => 'CentOS',
+        :operatingsystemrelease => '7',
+        :architecture           => 'amd64',
+      }}
+      it { is_expected.to compile.and_raise_error(/Module only supports Ubuntu 14.04 64bit/) }
+    end
+  end
+
   context 'dcm4chee::staging' do
     it { is_expected.to contain_class('staging') }
     it { is_expected.to contain_class('dcm4chee::staging::replace_jai_imageio_with_64bit') }

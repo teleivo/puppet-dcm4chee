@@ -12,6 +12,12 @@ class dcm4chee::params (
   $jboss_http_port          = '8080',
   $jboss_ajp_connector_port = '8009',
   $jboss_java_opts          = undef,) {
+  
+  if !($::operatingsystem == 'Ubuntu' and $::operatingsystemrelease == '14.04'
+  and $::architecture == 'amd64') {
+    fail('Module only supports Ubuntu 14.04 64bit')
+  }
+
   $archive_basename = "dcm4chee-${dcm4chee_version}-mysql"
 
   $bin_rel_path = 'bin/'
