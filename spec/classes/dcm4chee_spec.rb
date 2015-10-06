@@ -48,6 +48,27 @@ describe 'dcm4chee', :type => :class do
     end
   end
 
+  context 'with non absolute path parameters' do
+    describe 'given non absolute user_home' do
+      let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+                       :user_home => 'opt/dcm4chee',
+      }}
+      it { should_not compile }
+    end
+    describe 'given non absolute home_path' do
+      let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+                       :home_path => 'opt/dcm4chee/dcm4chee-2.18.0-mysql',
+      }}
+      it { should_not compile }
+    end
+    describe 'given non absolute staging_home_path' do
+      let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+                       :staging_home_path => 'opt/dcm4chee/staging',
+      }}
+      it { should_not compile }
+    end
+  end
+
   context 'dcm4chee::staging' do
     it { is_expected.to contain_class('staging') }
     it { is_expected.to contain_class('dcm4chee::staging::replace_jai_imageio_with_64bit') }
