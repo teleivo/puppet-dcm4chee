@@ -4,7 +4,6 @@ class dcm4chee::params (
   $user_home                = '/opt/dcm4chee/',
   $staging_path             = '/opt/dcm4chee/staging/',
   $dcm4chee_version         = '2.18.0',
-  $jboss_version            = '4.2.3.GA',
   $db_host                  = 'localhost',
   $db_name                  = 'pacsdb',
   $db_owner                 = 'dcm4chee',
@@ -19,13 +18,14 @@ class dcm4chee::params (
   }
 
   $archive_basename = "dcm4chee-${dcm4chee_version}-mysql"
+  $staging_dcm4chee_home_path = "${staging_path}${archive_basename}/"
+  $dcm4chee_home_path = "${user_home}${archive_basename}/"
+
+  $jboss_version = '4.2.3.GA'
 
   $bin_rel_path = 'bin/'
   $sql_rel_path = 'sql/'
   $server_rel_path = 'server/default/'
   $server_deploy_rel_path = "${server_rel_path}deploy/"
   $server_conf_rel_path = "${server_rel_path}conf/"
-
-  $staging_dcm4chee_home_path = "${staging_path}${archive_basename}/"
-  $dcm4chee_home_path = "${user_home}${archive_basename}/"
 }
