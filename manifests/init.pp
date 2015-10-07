@@ -40,11 +40,11 @@ class dcm4chee (
 
   class { 'dcm4chee::config':
     require => Class['Dcm4chee::install'],
+    notify  => Class['Dcm4chee::service'],
   }
 
   class { 'dcm4chee::service':
     jboss_home_path => $home_path,
     java_path       => $java_path,
-    require         => Class['Dcm4chee::config'],
   }
 }
