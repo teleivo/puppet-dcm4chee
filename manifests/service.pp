@@ -3,19 +3,18 @@ class dcm4chee::service (
   $jboss_home_path = undef,
   $java_path = undef
 ) {
-  $initd_script_name = 'pacs-dcm4chee'
 
-  file { "/etc/init.d/${initd_script_name}":
+  file { "/etc/init.d/dcm4chee":
     ensure  => file,
     mode    => '0755',
     owner   => 'root',
     group   => 'root',
-    content => template('dcm4chee/etc/init.d/pacs-dcm4chee.erb'),
-    notify  => Service[$initd_script_name],
+    content => template('dcm4chee/etc/init.d/dcm4chee.erb'),
+    notify  => Service['dcm4chee'],
   }
 
-  service { $initd_script_name:
-    ensure => 'running',
-    enable => true,
+  service { 'dcm4chee':
+    ensure     => 'running',
+    enable     => true,
   }
 }

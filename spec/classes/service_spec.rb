@@ -9,12 +9,12 @@ describe 'dcm4chee::service', :type => :class do
   }
 
   context 'with standard conditions' do
-    it { is_expected.to contain_service('pacs-dcm4chee').with(
-      'name'   => 'pacs-dcm4chee',
+    it { is_expected.to contain_service('dcm4chee').with(
+      'name'   => 'dcm4chee',
       'ensure' => 'running',
       'enable' => 'true'
     ) }
-    it { is_expected.to contain_file('/etc/init.d/pacs-dcm4chee') }
+    it { is_expected.to contain_file('/etc/init.d/dcm4chee') }
   end
 end
 

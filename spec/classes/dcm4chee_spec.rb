@@ -11,7 +11,7 @@ describe 'dcm4chee', :type => :class do
     it { is_expected.to contain_class('dcm4chee::config') }
     it { is_expected.to contain_class('dcm4chee::service').that_subscribes_to('dcm4chee::config') }
     it { is_expected.to contain_user('dcm4chee') }
-    it { is_expected.to contain_service('pacs-dcm4chee').with(
+    it { is_expected.to contain_service('dcm4chee').with(
       'ensure' => 'running'
     ) }
 
