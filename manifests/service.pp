@@ -4,7 +4,7 @@ class dcm4chee::service (
   $java_path = undef
 ) {
 
-  file { "/etc/init.d/dcm4chee":
+  file { '/etc/init.d/dcm4chee':
     ensure  => file,
     mode    => '0755',
     owner   => 'root',
@@ -14,7 +14,7 @@ class dcm4chee::service (
   }
 
   service { 'dcm4chee':
-    ensure     => 'running',
-    enable     => true,
+    ensure => 'running',
+    enable => true,
   }
 }
