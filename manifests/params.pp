@@ -3,7 +3,6 @@ class dcm4chee::params (
   $user                     = 'dcm4chee',
   $user_home                = '/opt/dcm4chee/',
   $staging_path             = '/opt/dcm4chee/staging/',
-  $dcm4chee_version         = '2.18.0',
   $db_host                  = 'localhost',
   $db_name                  = 'pacsdb',
   $db_owner                 = 'dcm4chee',
@@ -17,6 +16,7 @@ class dcm4chee::params (
     fail('Module only supports Ubuntu 14.04 64bit')
   }
 
+  $dcm4chee_version = '2.18.0'
   $archive_basename = "dcm4chee-${dcm4chee_version}-mysql"
   $staging_dcm4chee_home_path = "${staging_path}${archive_basename}/"
   $dcm4chee_home_path = "${user_home}${archive_basename}/"
