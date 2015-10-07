@@ -18,6 +18,11 @@ class dcm4chee (
   validate_absolute_path($home_path)
   validate_absolute_path($staging_home_path)
 
+  $tcp_port_max = 65535
+  $tcp_port_min = 0
+  validate_integer($jboss_http_port, $tcp_port_max, $tcp_port_min)
+  validate_integer($jboss_ajp_connector_port, $tcp_port_max, $tcp_port_min)
+
   $bin_path = "${home_path}${::dcm4chee::params::bin_rel_path}"
   $sql_path = "${home_path}${::dcm4chee::params::sql_rel_path}"
   $server_deploy_path =
