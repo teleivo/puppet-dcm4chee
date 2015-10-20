@@ -18,6 +18,7 @@ group :development, :unit_tests do
   gem 'json',                    :require => false
   gem 'guard-rake',              :require => false
   gem 'metadata-json-lint',      :require => false
+  gem 'ffmpeg'
 end
 
 group :system_tests do
