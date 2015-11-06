@@ -5,7 +5,6 @@ class dcm4chee (
   $user_home                = $::dcm4chee::params::user_home,
   $home_path                = $::dcm4chee::params::dcm4chee_home_path,
   $staging_home_path        = $::dcm4chee::params::staging_dcm4chee_home_path,
-  $execute_staging          = $::dcm4chee::params::execute_staging,
   $db_host                  = $::dcm4chee::params::db_host,
   $db_name                  = $::dcm4chee::params::db_name,
   $db_owner                 = $::dcm4chee::params::db_owner,
@@ -17,6 +16,10 @@ class dcm4chee (
   validate_absolute_path($user_home)
   validate_absolute_path($home_path)
   validate_absolute_path($staging_home_path)
+  validate_string($db_host)
+  validate_string($db_name)
+  validate_string($db_owner)
+  validate_string($db_owner_password)
 
   $tcp_port_max = 65535
   $tcp_port_min = 0

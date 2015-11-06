@@ -17,56 +17,80 @@ describe 'dcm4chee', :type => :class do
 
     context 'with invalid parameters' do
       describe 'given non absolute user_home' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :user_home => 'opt/dcm4chee',
+        let(:params) {{
+          :user_home => 'opt/dcm4chee',
         }}
         it { should_not compile }
       end
       describe 'given non absolute home_path' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :home_path => 'opt/dcm4chee/dcm4chee-2.18.0-mysql',
+        let(:params) {{
+          :home_path => 'opt/dcm4chee/dcm4chee-2.18.0-mysql',
         }}
         it { should_not compile }
       end
       describe 'given non absolute staging_home_path' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :staging_home_path => 'opt/dcm4chee/staging',
+        let(:params) {{
+          :staging_home_path => 'opt/dcm4chee/staging',
+        }}
+        it { should_not compile }
+      end
+      describe 'given non string db_host' do
+        let(:params) {{
+          :db_host => true,
+        }}
+        it { should_not compile }
+      end
+      describe 'given non string db_name' do
+        let(:params) {{
+          :db_name => true,
+        }}
+        it { should_not compile }
+      end
+      describe 'given non string db_owner' do
+        let(:params) {{
+          :db_owner => true,
+        }}
+        it { should_not compile }
+      end
+      describe 'given non string db_owner_password' do
+        let(:params) {{
+          :db_owner_password => true,
         }}
         it { should_not compile }
       end
       describe 'given non integer jboss_http_port' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :jboss_http_port => 'UpsNotANumber',
+        let(:params) {{
+          :jboss_http_port => 'UpsNotANumber',
         }}
         it { should_not compile }
       end
       describe 'given jboss_http_port < 0' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :jboss_http_port => '-1',
+        let(:params) {{
+          :jboss_http_port => '-1',
         }}
         it { should_not compile }
       end
       describe 'given jboss_http_port > 65535' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :jboss_http_port => '65536',
+        let(:params) {{
+          :jboss_http_port => '65536',
         }}
         it { should_not compile }
       end
       describe 'given non integer jboss_ajp_connector_port' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :jboss_ajp_connector_port => 'UpsNotANumber',
+        let(:params) {{
+          :jboss_ajp_connector_port => 'UpsNotANumber',
         }}
         it { should_not compile }
       end
       describe 'given jboss_ajp_connector_port < 0' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :jboss_ajp_connector_port => '-1',
+        let(:params) {{
+          :jboss_ajp_connector_port => '-1',
         }}
         it { should_not compile }
       end
       describe 'given jboss_ajp_connector_port > 65535' do
-        let(:params) {{ :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-                        :jboss_ajp_connector_port => '65536',
+        let(:params) {{
+          :jboss_ajp_connector_port => '65536',
         }}
         it { should_not compile }
       end
