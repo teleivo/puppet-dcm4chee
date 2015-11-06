@@ -13,6 +13,7 @@ class dcm4chee (
   $jboss_ajp_connector_port = $::dcm4chee::params::jboss_ajp_connector_port,
   $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,) inherits
   dcm4chee::params {
+  validate_string($user)
   validate_absolute_path($user_home)
   validate_absolute_path($home_path)
   validate_absolute_path($staging_home_path)

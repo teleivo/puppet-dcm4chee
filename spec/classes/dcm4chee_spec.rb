@@ -16,6 +16,12 @@ describe 'dcm4chee', :type => :class do
     ) }
 
     context 'with invalid parameters' do
+      describe 'given non string user' do
+        let(:params) {{
+          :user => true,
+        }}
+        it { should_not compile }
+      end
       describe 'given non absolute user_home' do
         let(:params) {{
           :user_home => 'opt/dcm4chee',
