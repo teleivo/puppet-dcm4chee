@@ -1,15 +1,16 @@
 # Private class: See README.md for documentation.
-class dcm4chee::params (
-  $user                     = 'dcm4chee',
-  $user_home                = '/opt/dcm4chee/',
-  $staging_path             = '/opt/dcm4chee/staging/',
-  $db_host                  = 'localhost',
-  $db_name                  = 'pacsdb',
-  $db_owner                 = 'dcm4chee',
-  $db_owner_password        = 'dcm4chee',
-  $jboss_http_port          = '8080',
-  $jboss_ajp_connector_port = '8009',
-  $jboss_java_opts          = undef,) {
+class dcm4chee::params {
+
+  $user = 'dcm4chee'
+  $user_home = '/opt/dcm4chee/'
+  $staging_path = '/opt/dcm4chee/staging/'
+  $db_host = 'localhost'
+  $db_name = 'pacsdb'
+  $db_owner = 'dcm4chee'
+  $db_owner_password = 'dcm4chee'
+  $jboss_http_port = '8080'
+  $jboss_ajp_connector_port = '8009'
+  $jboss_java_opts = undef
   
   if !($::operatingsystem == 'Ubuntu' and $::operatingsystemrelease == '14.04'
   and $::architecture == 'amd64') {
