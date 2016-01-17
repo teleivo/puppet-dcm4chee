@@ -11,8 +11,9 @@ class dcm4chee (
   $db_owner_password        = $::dcm4chee::params::db_owner_password,
   $jboss_http_port          = $::dcm4chee::params::jboss_http_port,
   $jboss_ajp_connector_port = $::dcm4chee::params::jboss_ajp_connector_port,
-  $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,) inherits
-  dcm4chee::params {
+  $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,
+) inherits dcm4chee::params {
+
   validate_string($user)
   validate_absolute_path($user_home)
   validate_absolute_path($home_path)

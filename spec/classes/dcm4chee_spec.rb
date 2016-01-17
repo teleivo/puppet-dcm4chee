@@ -26,6 +26,9 @@ describe 'dcm4chee', :type => :class do
     end
 
     context 'with invalid parameters' do
+      describe 'given no java_path' do
+        it { should_not compile }
+      end
       describe 'given non string user' do
         let :params do
           valid_required_params.merge({
