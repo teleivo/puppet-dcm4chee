@@ -1,9 +1,11 @@
 class dcm4chee::config::mysql (
-  $db_name,
-  $db_owner,
-  $db_owner_password,
-  $db_host = 'localhost',
-  $db_port = 3306,) {
+  $database_name,
+  $database_owner,
+  $database_owner_password,
+  $database_host = 'localhost',
+  $database_port = 3306,
+) {
+
   $db_connection_file = 'pacs-mysql-ds.xml'
   $db_connection_file_path =
   "${::dcm4chee::server_deploy_path}${db_connection_file}"

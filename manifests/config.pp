@@ -1,9 +1,9 @@
 # Class: dcm4chee::config: See README.md for documentation.
 class dcm4chee::config () {
   class { 'dcm4chee::config::mysql':
-    db_name           => $::dcm4chee::db_name,
-    db_owner          => $::dcm4chee::db_owner,
-    db_owner_password => $::dcm4chee::db_owner_password,
+    database_name           => $::dcm4chee::database_name,
+    database_owner          => $::dcm4chee::database_owner,
+    database_owner_password => $::dcm4chee::database_owner_password,
   } ->
   class { 'dcm4chee::config::jboss':
     jboss_http_port          => $::dcm4chee::jboss_http_port,

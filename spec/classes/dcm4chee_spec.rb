@@ -61,34 +61,34 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
-      describe 'given non string db_host' do
+      describe 'given non string database_host' do
         let :params do
           valid_required_params.merge({
-            :db_host => true,
+            :database_host => true,
           })
         end
         it { should_not compile }
       end
-      describe 'given non string db_name' do
+      describe 'given non string database_name' do
         let :params do
           valid_required_params.merge({
-            :db_name => true,
+            :database_name => true,
           })
         end
         it { should_not compile }
       end
-      describe 'given non string db_owner' do
+      describe 'given non string database_owner' do
         let :params do
           valid_required_params.merge({
-            :db_owner => true,
+            :database_owner => true,
           })
         end
         it { should_not compile }
       end
-      describe 'given non string db_owner_password' do
+      describe 'given non string database_owner_password' do
         let :params do
           valid_required_params.merge({
-            :db_owner_password => true,
+            :database_owner_password => true,
           })
         end
         it { should_not compile }
