@@ -5,10 +5,10 @@ class dcm4chee (
   $user_home                = $::dcm4chee::params::user_home,
   $home_path                = $::dcm4chee::params::dcm4chee_home_path,
   $staging_home_path        = $::dcm4chee::params::staging_dcm4chee_home_path,
-  $db_host                  = $::dcm4chee::params::db_host,
-  $db_name                  = $::dcm4chee::params::db_name,
-  $db_owner                 = $::dcm4chee::params::db_owner,
-  $db_owner_password        = $::dcm4chee::params::db_owner_password,
+  $database_host            = $::dcm4chee::params::database_host,
+  $database_name            = $::dcm4chee::params::database_name,
+  $database_owner           = $::dcm4chee::params::database_owner,
+  $database_owner_password  = $::dcm4chee::params::database_owner_password,
   $jboss_http_port          = $::dcm4chee::params::jboss_http_port,
   $jboss_ajp_connector_port = $::dcm4chee::params::jboss_ajp_connector_port,
   $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,
@@ -18,10 +18,10 @@ class dcm4chee (
   validate_absolute_path($user_home)
   validate_absolute_path($home_path)
   validate_absolute_path($staging_home_path)
-  validate_string($db_host)
-  validate_string($db_name)
-  validate_string($db_owner)
-  validate_string($db_owner_password)
+  validate_string($database_host)
+  validate_string($database_name)
+  validate_string($database_owner)
+  validate_string($database_owner_password)
 
   $tcp_port_max = 65535
   $tcp_port_min = 0
