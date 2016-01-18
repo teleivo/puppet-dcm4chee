@@ -148,6 +148,11 @@ describe 'dcm4chee', :type => :class do
         valid_required_params
       end
       it { is_expected.to contain_class('staging') }
+      it { is_expected.to contain_file('/opt/dcm4chee/staging/').with({
+        'ensure' => 'directory',
+        'owner'  => 'dcm4chee',
+        'group'  => 'dcm4chee',
+      }) }
       it { is_expected.to contain_class('dcm4chee::staging::replace_jai_imageio_with_64bit') }
       it { is_expected.to contain_class('dcm4chee::staging::jboss') }
       it { is_expected.to contain_class('dcm4chee::staging::weasis') }
@@ -157,6 +162,10 @@ describe 'dcm4chee', :type => :class do
       let :params do
         valid_required_params
       end
+      it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.0-mysql/').with({
+        'source'  => '/opt/dcm4chee/staging/dcm4chee-2.18.0-mysql/',
+        'recurse' => true,
+      }) }
       it { is_expected.to contain_mysql_database('pacsdb') }
       it { is_expected.to contain_mysql_user('dcm4chee@localhost') }
     end
