@@ -142,21 +142,6 @@ describe 'dcm4chee', :type => :class do
         it { should_not compile }
       end
     end
-
-    context 'dcm4chee::staging' do
-      let :params do
-        valid_required_params
-      end
-      it { is_expected.to contain_class('staging') }
-      it { is_expected.to contain_file('/opt/dcm4chee/staging/').with({
-        'ensure' => 'directory',
-        'owner'  => 'dcm4chee',
-        'group'  => 'dcm4chee',
-      }) }
-      it { is_expected.to contain_class('dcm4chee::staging::replace_jai_imageio_with_64bit') }
-      it { is_expected.to contain_class('dcm4chee::staging::jboss') }
-      it { is_expected.to contain_class('dcm4chee::staging::weasis') }
-    end
   end
 
   context 'should gracefully fail on any OS other than Ubuntu 14.04 64bit' do
