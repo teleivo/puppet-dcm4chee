@@ -9,6 +9,15 @@ describe 'dcm4chee::database', :type => :class do
        }"
     end
 
+    it { is_expected.to contain_mysql__db('pacsdb')
+      .with({
+        'user'     => 'dcm4chee',
+        'password' => 'dcm4chee',
+        'host'     => 'localhost',
+        'grant'    => ['ALL'],
+        'sql'      => "/opt/dcm4chee/staging/dcm4chee-2.18.0-mysql/sql//create.mysql",
+      }).that_requires('Staging::Deploy[dcm4chee-2.18.0-mysql.zip]')
+    } 
     it { is_expected.to contain_mysql_database('pacsdb') }
     it { is_expected.to contain_mysql_user('dcm4chee@localhost') }
   end
