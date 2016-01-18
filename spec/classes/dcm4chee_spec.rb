@@ -9,25 +9,63 @@ describe 'dcm4chee', :type => :class do
 
   context 'on Ubuntu 14.04 64bit' do
 
-    context 'with only required parameters given' do
+    context 'with server = true and database = true and java_path set' do
       let :params do
         valid_required_params
       end
       it { is_expected.to compile }
       it { is_expected.to contain_class('dcm4chee') }
+      it { is_expected.to contain_user('dcm4chee') }
       it { is_expected.to contain_class('dcm4chee::staging').that_comes_before('dcm4chee::database') }
       it { is_expected.to contain_class('dcm4chee::database').that_comes_before('dcm4chee::install') }
       it { is_expected.to contain_class('dcm4chee::install').that_comes_before('dcm4chee::config') }
       it { is_expected.to contain_class('dcm4chee::config') }
       it { is_expected.to contain_class('dcm4chee::service').that_subscribes_to('dcm4chee::config') }
+    end
+
+    context 'with server = true and database = false' do
+      let :params do
+        valid_required_params.merge({
+          :database => false,
+        })
+      end
+      it { is_expected.to compile }
+      it { is_expected.to contain_class('dcm4chee') }
       it { is_expected.to contain_user('dcm4chee') }
-      it { is_expected.to contain_service('dcm4chee').with(
-        'ensure' => 'running'
-      ) }
+      it { is_expected.to contain_class('dcm4chee::staging') }
+      it { is_expected.not_to contain_class('dcm4chee::database') }
+      it { is_expected.to contain_class('dcm4chee::install').that_comes_before('dcm4chee::config') }
+      it { is_expected.to contain_class('dcm4chee::config') }
+      it { is_expected.to contain_class('dcm4chee::service').that_subscribes_to('dcm4chee::config') }
+    end
+
+    context 'with server = false and database = true' do
+      let :params do
+        {
+          :server   => false,
+          :database => true,
+        }
+      end
+      it { is_expected.to compile }
+      it { is_expected.to contain_class('dcm4chee') }
+      it { is_expected.to contain_user('dcm4chee') }
+      it { is_expected.to contain_class('dcm4chee::staging').that_comes_before('dcm4chee::database') }
+      it { is_expected.to contain_class('dcm4chee::database') }
+      it { is_expected.not_to contain_class('dcm4chee::install') }
+      it { is_expected.not_to contain_class('dcm4chee::config') }
+      it { is_expected.not_to contain_class('dcm4chee::service') }
     end
 
     context 'with invalid parameters' do
-      describe 'given no java_path' do
+      describe 'given non boolean server' do
+        let :params do
+          valid_required_params.merge({
+            :server => 'NOTBOOLEAN',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given no java_path when server = true' do
         it { should_not compile }
       end
       describe 'given non string user' do
@@ -58,6 +96,14 @@ describe 'dcm4chee', :type => :class do
         let :params do
           valid_required_params.merge({
             :staging_home_path => 'opt/dcm4chee/staging',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given non boolean database' do
+        let :params do
+          valid_required_params.merge({
+            :database => 'NOTBOOLEAN',
           })
         end
         it { should_not compile }
@@ -138,6 +184,15 @@ describe 'dcm4chee', :type => :class do
         let :params do
           valid_required_params.merge({
             :jboss_ajp_connector_port => '65536',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given server = false and database = false' do
+        let :params do
+          valid_required_params.merge({
+            :server   => false,
+            :database => false,
           })
         end
         it { should_not compile }

@@ -1,6 +1,7 @@
 # Class: dcm4chee: See README.md for documentation.
 class dcm4chee (
-  $java_path,
+  $server                   = $::dcm4chee::params::server,
+  $java_path                = $::dcm4chee::params::java_path,
   $user                     = $::dcm4chee::params::user,
   $user_home                = $::dcm4chee::params::user_home,
   $home_path                = $::dcm4chee::params::dcm4chee_home_path,
@@ -15,6 +16,7 @@ class dcm4chee (
   $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,
 ) inherits dcm4chee::params {
 
+  validate_bool($server)
   validate_string($user)
   validate_absolute_path($user_home)
   validate_absolute_path($home_path)
@@ -30,6 +32,14 @@ class dcm4chee (
   validate_integer($jboss_http_port, $tcp_port_max, $tcp_port_min)
   validate_integer($jboss_ajp_connector_port, $tcp_port_max, $tcp_port_min)
 
+  if ($server == false and $database == false) {
+    fail('server and database cannot both be false')
+  }
+
+  if ($server == true and $java_path == undef) {
+    fail('java_path is undefined. needs to be defined if server = true')
+  }
+
   $bin_path = "${home_path}${::dcm4chee::params::bin_rel_path}"
   $sql_path = "${staging_home_path}${::dcm4chee::params::sql_rel_path}"
   $server_deploy_path =
@@ -41,16 +51,30 @@ class dcm4chee (
     home       => $user_home,
     managehome => true,
   }->
-  class { 'dcm4chee::staging':
-  }->
-  class { 'dcm4chee::database':
-  }->
-  class { 'dcm4chee::install':
-  }->
-  class { 'dcm4chee::config':
-  }~>
-  class { 'dcm4chee::service':
-    jboss_home_path => $home_path,
-    java_path       => $java_path,
+  
+  class { 'dcm4chee::staging': }
+  
+  if $database {
+    class { 'dcm4chee::database': }
+    Class['dcm4chee::staging'] ->
+    Class['dcm4chee::database']
+  }
+  
+  if $server {
+    class { 'dcm4chee::install': }
+    class { 'dcm4chee::config': }
+    class { 'dcm4chee::service':
+      jboss_home_path => $home_path,
+      java_path       => $java_path,
+    }
+    Class['dcm4chee::staging'] ->
+    Class['dcm4chee::install'] ->
+    Class['dcm4chee::config'] ~>
+    Class['dcm4chee::service']
+
+    if $database {
+      Class['dcm4chee::database'] ->
+      Class['dcm4chee::install']
+    }
   }
 }

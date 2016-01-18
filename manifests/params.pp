@@ -1,6 +1,8 @@
 # Private class: See README.md for documentation.
 class dcm4chee::params {
 
+  $server = true
+  $java_path = undef
   $user = 'dcm4chee'
   $user_home = '/opt/dcm4chee/'
   $staging_path = '/opt/dcm4chee/staging/'
