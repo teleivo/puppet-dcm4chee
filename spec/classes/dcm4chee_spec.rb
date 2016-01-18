@@ -157,27 +157,6 @@ describe 'dcm4chee', :type => :class do
       it { is_expected.to contain_class('dcm4chee::staging::jboss') }
       it { is_expected.to contain_class('dcm4chee::staging::weasis') }
     end
-
-    context 'dcm4chee::install' do
-      let :params do
-        valid_required_params
-      end
-      it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.0-mysql/').with({
-        'source'  => '/opt/dcm4chee/staging/dcm4chee-2.18.0-mysql/',
-        'recurse' => true,
-      }) }
-      it { is_expected.to contain_mysql_database('pacsdb') }
-      it { is_expected.to contain_mysql_user('dcm4chee@localhost') }
-    end
-
-    context 'dcm4chee::config' do
-      let :params do
-        valid_required_params
-      end
-      it { is_expected.to contain_class('dcm4chee::config::mysql') }
-      it { is_expected.to contain_class('dcm4chee::config::jboss') }
-      it { is_expected.to contain_class('dcm4chee::config::weasis') }
-    end
   end
 
   context 'should gracefully fail on any OS other than Ubuntu 14.04 64bit' do
