@@ -4,6 +4,7 @@ class dcm4chee::params {
   $user = 'dcm4chee'
   $user_home = '/opt/dcm4chee/'
   $staging_path = '/opt/dcm4chee/staging/'
+  $database = true
   $database_host = 'localhost'
   $database_name = 'pacsdb'
   $database_owner = 'dcm4chee'

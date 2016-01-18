@@ -13,8 +13,6 @@ describe 'dcm4chee::install', :type => :class do
       'source'  => '/opt/dcm4chee/staging/dcm4chee-2.18.0-mysql/',
       'recurse' => true,
     }) }
-    it { is_expected.to contain_mysql_database('pacsdb') }
-    it { is_expected.to contain_mysql_user('dcm4chee@localhost') }
   end
 end
 

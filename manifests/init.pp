@@ -5,6 +5,7 @@ class dcm4chee (
   $user_home                = $::dcm4chee::params::user_home,
   $home_path                = $::dcm4chee::params::dcm4chee_home_path,
   $staging_home_path        = $::dcm4chee::params::staging_dcm4chee_home_path,
+  $database                 = $::dcm4chee::params::database,
   $database_host            = $::dcm4chee::params::database_host,
   $database_name            = $::dcm4chee::params::database_name,
   $database_owner           = $::dcm4chee::params::database_owner,
@@ -18,6 +19,7 @@ class dcm4chee (
   validate_absolute_path($user_home)
   validate_absolute_path($home_path)
   validate_absolute_path($staging_home_path)
+  validate_bool($database)
   validate_string($database_host)
   validate_string($database_name)
   validate_string($database_owner)
@@ -29,7 +31,7 @@ class dcm4chee (
   validate_integer($jboss_ajp_connector_port, $tcp_port_max, $tcp_port_min)
 
   $bin_path = "${home_path}${::dcm4chee::params::bin_rel_path}"
-  $sql_path = "${home_path}${::dcm4chee::params::sql_rel_path}"
+  $sql_path = "${staging_home_path}${::dcm4chee::params::sql_rel_path}"
   $server_deploy_path =
   "${home_path}${::dcm4chee::params::server_deploy_rel_path}"
   $server_conf_path = "${home_path}${::dcm4chee::params::server_conf_rel_path}"
@@ -38,21 +40,15 @@ class dcm4chee (
     ensure     => present,
     home       => $user_home,
     managehome => true,
-  }
-
+  }->
   class { 'dcm4chee::staging':
-    require => User[$user],
-  }
-
+  }->
+  class { 'dcm4chee::database':
+  }->
   class { 'dcm4chee::install':
-    require => Class['Dcm4chee::staging'],
-  }
-
+  }->
   class { 'dcm4chee::config':
-    require => Class['Dcm4chee::install'],
-    notify  => Class['Dcm4chee::service'],
-  }
-
+  }~>
   class { 'dcm4chee::service':
     jboss_home_path => $home_path,
     java_path       => $java_path,
