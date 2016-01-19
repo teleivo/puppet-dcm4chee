@@ -42,7 +42,7 @@ class dcm4chee (
   }
 
   if ($server == true and $server_java_path == undef) {
-    fail('java_path is undefined. needs to be defined if server = true')
+    fail('server_java_path is undefined. needs to be defined if server = true')
   }
 
   $bin_path = "${home_path}${::dcm4chee::params::bin_rel_path}"
