@@ -8,6 +8,7 @@ class dcm4chee (
   $staging_home_path        = $::dcm4chee::params::staging_dcm4chee_home_path,
   $database                 = $::dcm4chee::params::database,
   $database_host            = $::dcm4chee::params::database_host,
+  $database_port            = $::dcm4chee::params::database_port,
   $database_name            = $::dcm4chee::params::database_name,
   $database_owner           = $::dcm4chee::params::database_owner,
   $database_owner_password  = $::dcm4chee::params::database_owner_password,
@@ -16,6 +17,9 @@ class dcm4chee (
   $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,
 ) inherits dcm4chee::params {
 
+  $tcp_port_max = 65535
+  $tcp_port_min = 0
+
   validate_bool($server)
   validate_string($user)
   validate_absolute_path($user_home)
@@ -23,12 +27,11 @@ class dcm4chee (
   validate_absolute_path($staging_home_path)
   validate_bool($database)
   validate_string($database_host)
+  validate_integer($database_port, $tcp_port_max, $tcp_port_min)
   validate_string($database_name)
   validate_string($database_owner)
   validate_string($database_owner_password)
 
-  $tcp_port_max = 65535
-  $tcp_port_min = 0
   validate_integer($jboss_http_port, $tcp_port_max, $tcp_port_min)
   validate_integer($jboss_ajp_connector_port, $tcp_port_max, $tcp_port_min)
 
