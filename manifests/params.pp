@@ -8,6 +8,7 @@ class dcm4chee::params {
   $staging_path = '/opt/dcm4chee/staging/'
   $database = true
   $database_host = 'localhost'
+  $database_port = '3306'
   $database_name = 'pacsdb'
   $database_owner = 'dcm4chee'
   $database_owner_password = 'dcm4chee'

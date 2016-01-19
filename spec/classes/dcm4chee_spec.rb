@@ -116,6 +116,30 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non integer database_port' do
+        let :params do
+          valid_required_params.merge({
+            :database_port => 'UpsNotANumber',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given database_port < 0' do
+        let :params do
+          valid_required_params.merge({
+            :database_port => '-1',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given database_port > 65535' do
+        let :params do
+          valid_required_params.merge({
+            :database_port => '65536',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non string database_name' do
         let :params do
           valid_required_params.merge({
