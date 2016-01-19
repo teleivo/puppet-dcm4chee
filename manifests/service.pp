@@ -1,7 +1,7 @@
 # Class: dcm4chee::service: See README.md for documentation.
 class dcm4chee::service () {
 
-  $jboss_home_path = $::dcm4chee::home_path
+  $jboss_home_path = $::dcm4chee::dcm4chee_home_path
   $java_path = $::dcm4chee::server_java_path
 
   file { '/etc/init.d/dcm4chee':
