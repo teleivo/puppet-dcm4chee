@@ -3,7 +3,7 @@ class dcm4chee::params {
 
   $server = true
   $server_host = 'localhost'
-  $java_path = undef
+  $server_java_path = undef
   $user = 'dcm4chee'
   $user_home = '/opt/dcm4chee/'
   $staging_path = '/opt/dcm4chee/staging/'

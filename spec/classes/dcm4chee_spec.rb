@@ -3,13 +3,13 @@ require 'spec_helper'
 describe 'dcm4chee', :type => :class do
   let :valid_required_params do
     {
-      :java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+      :server_java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
     }
   end
 
   context 'on Ubuntu 14.04 64bit' do
 
-    context 'with server = true and database = true and java_path set' do
+    context 'with server = true and database = true and server_java_path set' do
       let :params do
         valid_required_params
       end
@@ -73,7 +73,7 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
-      describe 'given no java_path when server = true' do
+      describe 'given no server_java_path when server = true' do
         it { should_not compile }
       end
       describe 'given non string user' do
