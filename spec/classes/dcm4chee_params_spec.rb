@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'dcm4chee::params', :type => :class do
+
   context "on Ubuntu 14.04 64bit" do
     it { is_expected.to contain_dcm4chee__params }
 
@@ -37,3 +38,4 @@ describe 'dcm4chee::params', :type => :class do
     end
   end
 end
+

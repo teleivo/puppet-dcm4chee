@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'dcm4chee', :type => :class do
+
   let :valid_required_params do
     {
       :server_java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
@@ -124,6 +125,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given database_type other than "mysql" or "postgresql"' do
+        let :params do
+          valid_required_params.merge({
+            :server => 'mongodb',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non string database_host' do
         let :params do
           valid_required_params.merge({
@@ -160,14 +169,6 @@ describe 'dcm4chee', :type => :class do
         let :params do
           valid_required_params.merge({
             :database_name => true,
-          })
-        end
-        it { should_not compile }
-      end
-      describe 'given non string database_owner' do
-        let :params do
-          valid_required_params.merge({
-            :database_owner => true,
           })
         end
         it { should_not compile }
@@ -308,3 +309,4 @@ describe 'dcm4chee', :type => :class do
     end
   end
 end
+

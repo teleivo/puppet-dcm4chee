@@ -8,6 +8,7 @@ RSpec.configure do |config|
     :operatingsystemmajrelease => '14.04',
     :architecture              => 'amd64',
     :path                      => '/usr/local/bin:/usr/bin:/bin',
+    :concat_basedir            => '/tmp',
   }
 end
 

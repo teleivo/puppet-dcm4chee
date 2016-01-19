@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BE WARE -->
+<!-- Managed by puppet Class['dcm4chee'] -->
+<!-- BE WARE -->
+
+<!-- ======================================================== -->
+<!--  Datasource config for PostgreSQL                        -->
+<!-- ======================================================== -->
+
+<datasources>
+  <local-tx-datasource>
+    <jndi-name>pacsDS</jndi-name>
+    <connection-url>jdbc:postgresql://<%= @database_host %>:<%= @database_port %>/<%= @database_name %></connection-url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <user-name><%= @database_owner %></user-name>
+    <password><%= @database_owner_password %></password>
+      <!-- corresponding type-mapping in the standardjbosscmp-jdbc.xml (optional) -->
+      <metadata>
+         <type-mapping>PostgreSQL 7.2</type-mapping>
+      </metadata>
+  </local-tx-datasource>
+
+</datasources>

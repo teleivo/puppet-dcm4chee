@@ -9,5 +9,11 @@ fixtures:
     'mysql':
         repo: 'https://github.com/puppetlabs/puppetlabs-mysql'
         ref: 3.6.1
+    'postgresql':
+        repo: 'https://github.com/puppetlabs/puppetlabs-postgresql'
+        ref: 4.6.1
+    concat:
+      repo: 'https://github.com/puppetlabs/puppetlabs-concat'
+      ref: 1.2.5
   symlinks:
     dcm4chee: "#{source_dir}"
