@@ -7,7 +7,7 @@ class dcm4chee::config::mysql () {
 
   $db_connection_file = 'pacs-mysql-ds.xml'
   $db_connection_file_path =
-  "${::dcm4chee::server_deploy_path}${db_connection_file}"
+  "${::dcm4chee::dcm4chee_server_deploy_path}${db_connection_file}"
 
   file { $db_connection_file_path:
     ensure  => file,

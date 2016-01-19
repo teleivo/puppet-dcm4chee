@@ -5,9 +5,9 @@ class dcm4chee::config::jboss () {
   $jboss_http_port = $::dcm4chee::server_http_port
   $jboss_ajp_connector_port = $::dcm4chee::server_ajp_connector_port
 
-  $jboss_server_web_deploy_path = "${::dcm4chee::server_deploy_path}jboss-web.deployer/"
+  $jboss_server_web_deploy_path = "${::dcm4chee::dcm4chee_server_deploy_path}jboss-web.deployer/"
   $jboss_server_xml_path = "${jboss_server_web_deploy_path}server.xml"
-  $jboss_run_conf_path = "${::dcm4chee::bin_path}run.conf"
+  $jboss_run_conf_path = "${::dcm4chee::dcm4chee_bin_path}run.conf"
 
   file { $jboss_server_xml_path:
     ensure  => file,

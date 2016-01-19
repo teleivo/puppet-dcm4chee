@@ -10,7 +10,7 @@ class dcm4chee::config::weasis (
 
   $weasis_connector_file = 'weasis-connector.properties'
   $weasis_connector_file_path =
-  "${::dcm4chee::server_conf_path}${weasis_connector_file}"
+  "${::dcm4chee::dcm4chee_server_conf_path}${weasis_connector_file}"
 
   file { $weasis_connector_file_path:
     ensure  => file,

@@ -42,23 +42,24 @@ class dcm4chee (
     fail('server_java_path is undefined. needs to be defined if server = true')
   }
 
-  $archive_basename = "dcm4chee-${server_version}-mysql"
-  $home_path = "${user_home}${archive_basename}/"
-  $staging_path = "${user_home}staging/"
-  $staging_home_path = "${staging_path}${archive_basename}/"
-
+  # Define archive name, jboss version and important relative paths
+  $dcm4chee_archive_basename = "dcm4chee-${server_version}-mysql"
   $jboss_version = '4.2.3.GA'
+  $dcm4chee_bin_rel_path = 'bin/'
+  $dcm4chee_sql_rel_path = 'sql/'
+  $dcm4chee_server_rel_path = 'server/default/'
+  $dcm4chee_server_deploy_rel_path = "${dcm4chee_server_rel_path}deploy/"
+  $dcm4chee_server_conf_rel_path = "${dcm4chee_server_rel_path}conf/"
 
-  $bin_rel_path = 'bin/'
-  $sql_rel_path = 'sql/'
-  $server_rel_path = 'server/default/'
-  $server_deploy_rel_path = "${server_rel_path}deploy/"
-  $server_conf_rel_path = "${server_rel_path}conf/"
+  # Construct main paths needed by staging, installation, configuration
+  $staging_path = "${user_home}staging/"
+  $staging_dcm4chee_home_path = "${staging_path}${dcm4chee_archive_basename}/"
 
-  $bin_path = "${home_path}${bin_rel_path}"
-  $sql_path = "${staging_home_path}${sql_rel_path}"
-  $server_deploy_path = "${home_path}${server_deploy_rel_path}"
-  $server_conf_path = "${home_path}${server_conf_rel_path}"
+  $dcm4chee_home_path = "${user_home}${dcm4chee_archive_basename}/"
+  $dcm4chee_bin_path = "${dcm4chee_home_path}${dcm4chee_bin_rel_path}"
+  $dcm4chee_sql_path = "${staging_dcm4chee_home_path}${dcm4chee_sql_rel_path}"
+  $dcm4chee_server_deploy_path = "${dcm4chee_home_path}${dcm4chee_server_deploy_rel_path}"
+  $dcm4chee_server_conf_path = "${dcm4chee_home_path}${dcm4chee_server_conf_rel_path}"
 
   user { $user:
     ensure     => present,
