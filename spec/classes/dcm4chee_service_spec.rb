@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'dcm4chee::service', :type => :class do
   
-  describe 'without defaults and server_java_path set' do
+  describe 'with defaults and server_java_path set' do
     let :pre_condition do
       "class {'dcm4chee':
          server_java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
