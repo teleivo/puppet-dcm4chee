@@ -65,6 +65,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non string server_host' do
+        let :params do
+          valid_required_params.merge({
+            :server_host => true,
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given no java_path when server = true' do
         it { should_not compile }
       end
