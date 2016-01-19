@@ -4,6 +4,9 @@ class dcm4chee::params {
   $server = true
   $server_host = 'localhost'
   $server_java_path = undef
+  $server_java_opts = undef
+  $server_http_port = '8080'
+  $server_ajp_connector_port = '8009'
   $user = 'dcm4chee'
   $user_home = '/opt/dcm4chee/'
   $staging_path = '/opt/dcm4chee/staging/'
@@ -13,9 +16,6 @@ class dcm4chee::params {
   $database_name = 'pacsdb'
   $database_owner = 'dcm4chee'
   $database_owner_password = 'dcm4chee'
-  $jboss_http_port = '8080'
-  $jboss_ajp_connector_port = '8009'
-  $jboss_java_opts = undef
   
   if !($::operatingsystem == 'Ubuntu' and $::operatingsystemrelease == '14.04'
   and $::architecture == 'amd64') {

@@ -1,21 +1,21 @@
 # Class: dcm4chee: See README.md for documentation.
 class dcm4chee (
-  $server                   = $::dcm4chee::params::server,
-  $server_host              = $::dcm4chee::params::server_host,
-  $server_java_path         = $::dcm4chee::params::server_java_path,
-  $user                     = $::dcm4chee::params::user,
-  $user_home                = $::dcm4chee::params::user_home,
-  $home_path                = $::dcm4chee::params::dcm4chee_home_path,
-  $staging_home_path        = $::dcm4chee::params::staging_dcm4chee_home_path,
-  $database                 = $::dcm4chee::params::database,
-  $database_host            = $::dcm4chee::params::database_host,
-  $database_port            = $::dcm4chee::params::database_port,
-  $database_name            = $::dcm4chee::params::database_name,
-  $database_owner           = $::dcm4chee::params::database_owner,
-  $database_owner_password  = $::dcm4chee::params::database_owner_password,
-  $jboss_http_port          = $::dcm4chee::params::jboss_http_port,
-  $jboss_ajp_connector_port = $::dcm4chee::params::jboss_ajp_connector_port,
-  $jboss_java_opts          = $::dcm4chee::params::jboss_java_opts,
+  $server                    = $::dcm4chee::params::server,
+  $server_host               = $::dcm4chee::params::server_host,
+  $server_java_path          = $::dcm4chee::params::server_java_path,
+  $server_java_opts          = $::dcm4chee::params::server_java_opts,
+  $server_http_port          = $::dcm4chee::params::server_http_port,
+  $server_ajp_connector_port = $::dcm4chee::params::server_ajp_connector_port,
+  $user                      = $::dcm4chee::params::user,
+  $user_home                 = $::dcm4chee::params::user_home,
+  $home_path                 = $::dcm4chee::params::dcm4chee_home_path,
+  $staging_home_path         = $::dcm4chee::params::staging_dcm4chee_home_path,
+  $database                  = $::dcm4chee::params::database,
+  $database_host             = $::dcm4chee::params::database_host,
+  $database_port             = $::dcm4chee::params::database_port,
+  $database_name             = $::dcm4chee::params::database_name,
+  $database_owner            = $::dcm4chee::params::database_owner,
+  $database_owner_password   = $::dcm4chee::params::database_owner_password,
 ) inherits dcm4chee::params {
 
   $tcp_port_max = 65535
@@ -23,6 +23,8 @@ class dcm4chee (
 
   validate_bool($server)
   validate_string($server_host)
+  validate_integer($server_http_port, $tcp_port_max, $tcp_port_min)
+  validate_integer($server_ajp_connector_port, $tcp_port_max, $tcp_port_min)
   validate_string($user)
   validate_absolute_path($user_home)
   validate_absolute_path($home_path)
@@ -33,9 +35,6 @@ class dcm4chee (
   validate_string($database_name)
   validate_string($database_owner)
   validate_string($database_owner_password)
-
-  validate_integer($jboss_http_port, $tcp_port_max, $tcp_port_min)
-  validate_integer($jboss_ajp_connector_port, $tcp_port_max, $tcp_port_min)
 
   if ($server == false and $database == false) {
     fail('server and database cannot both be false')
