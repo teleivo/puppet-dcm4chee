@@ -11,7 +11,7 @@ class dcm4chee::staging () {
   $dcm4chee_base_url = 'http://sourceforge.net/projects/dcm4che/files/dcm4chee/'
   $dcm4chee_source_url = "${dcm4chee_base_url}${dcm4chee::dcm4chee_version}/${dcm4chee_archive_name}/download"
 
-  include staging
+  include '::staging'
 
   file { $dcm4chee::staging_path:
     ensure => directory,
@@ -27,32 +27,34 @@ class dcm4chee::staging () {
     require => File[$dcm4chee::staging_path],
   }
 
-  class { 'dcm4chee::staging::replace_jai_imageio_with_64bit':
-    require => Staging::Deploy[$dcm4chee_archive_name],
-  }
+  if $::dcm4chee::server {
+    class { 'dcm4chee::staging::replace_jai_imageio_with_64bit':
+      require => Staging::Deploy[$dcm4chee_archive_name],
+    }
 
-  class { 'dcm4chee::staging::jboss':
-    require => File[$dcm4chee::staging_path],
-  }
+    class { 'dcm4chee::staging::jboss':
+      require => File[$dcm4chee::staging_path],
+    }
 
-  exec { "${dcm4chee_bin_path}install_jboss.sh":
-    cwd     => $dcm4chee::staging_path,
-    user    => $dcm4chee::user,
-    command => "${dcm4chee_bin_path}install_jboss.sh ${jboss_extract_path}",
-    require => [
-      Staging::Deploy[$dcm4chee_archive_name],
-      Class['dcm4chee::staging::jboss']],
-  }
+    exec { "${dcm4chee_bin_path}install_jboss.sh":
+      cwd     => $dcm4chee::staging_path,
+      user    => $dcm4chee::user,
+      command => "${dcm4chee_bin_path}install_jboss.sh ${jboss_extract_path}",
+      require => [
+        Staging::Deploy[$dcm4chee_archive_name],
+        Class['dcm4chee::staging::jboss']],
+    }
 
-  file { "${dcm4chee_bin_path}run.sh":
-    ensure  => present,
-    owner   => $dcm4chee::user,
-    source  => "${jboss_extract_path}bin/run.sh",
-    require => Exec["${dcm4chee_bin_path}install_jboss.sh"],
-  }
+    file { "${dcm4chee_bin_path}run.sh":
+      ensure  => present,
+      owner   => $dcm4chee::user,
+      source  => "${jboss_extract_path}bin/run.sh",
+      require => Exec["${dcm4chee_bin_path}install_jboss.sh"],
+    }
 
-  class { 'dcm4chee::staging::weasis':
-    require => File["${dcm4chee_bin_path}run.sh"],
+    class { 'dcm4chee::staging::weasis':
+      require => File["${dcm4chee_bin_path}run.sh"],
+    }
   }
 }
 
