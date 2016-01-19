@@ -1,12 +1,13 @@
-class dcm4chee::staging::weasis (
-  $weasis_version                = '2.0.3',
-  $weasis_pacs_connector_version = '5.0.0',) {
+# Class: dcm4chee::staging::weasis. See README.md for documentation.
+class dcm4chee::staging::weasis () {
+
   $weasis_base_url = 'http://sourceforge.net/projects/dcm4che/files/Weasis/'
 
   $weasis_archive_name = 'weasis.war'
-  $weasis_source_url = "${weasis_base_url}${weasis_version}/${weasis_archive_name}"
+  $weasis_source_url = "${weasis_base_url}${::dcm4chee::weasis_version}/${weasis_archive_name}"
 
-  $weasis_connector_base_url = "${weasis_base_url}weasis-pacs-connector/${weasis_pacs_connector_version}/"
+  $weasis_connector_base_url =
+  "${weasis_base_url}weasis-pacs-connector/${::dcm4chee::weasis_pacs_connector_version}/"
   $weasis_connector_archive_name = 'weasis-pacs-connector.war'
   $weasis_connector_source_url =
   "${weasis_connector_base_url}${weasis_connector_archive_name}"

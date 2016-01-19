@@ -53,6 +53,14 @@ class dcm4chee (
   $dcm4chee_server_deploy_rel_path = "${dcm4chee_server_rel_path}deploy/"
   $dcm4chee_server_conf_rel_path = "${dcm4chee_server_rel_path}conf/"
 
+  # Dicom webviewer versions, settings
+  $weasis_version = '2.0.3'
+  $weasis_pacs_connector_version = '5.0.0'
+  $weasis_aet = 'DCM4CHEE'
+  $weasis_host = 'localhost'
+  $weasis_port = '11112'
+  $weasis_hosts_allow = ''
+
   # Construct main paths needed by staging, installation, configuration
   $staging_path = "${user_home}staging/"
   $staging_dcm4chee_home_path = "${staging_path}${dcm4chee_archive_basename}/"
