@@ -17,6 +17,7 @@ class dcm4chee::params {
   $database_name = 'pacsdb'
   $database_owner = 'dcm4chee'
   $database_owner_password = 'dcm4chee'
+  $dicom_webviewer = true
   
   if !($::operatingsystem == 'Ubuntu' and $::operatingsystemrelease == '14.04'
   and $::architecture == 'amd64') {

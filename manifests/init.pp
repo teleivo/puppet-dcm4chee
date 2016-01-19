@@ -15,6 +15,7 @@ class dcm4chee (
   $database_name             = $::dcm4chee::params::database_name,
   $database_owner            = $::dcm4chee::params::database_owner,
   $database_owner_password   = $::dcm4chee::params::database_owner_password,
+  $dicom_webviewer           = $::dcm4chee::params::dicom_webviewer,
 ) inherits dcm4chee::params {
 
   $tcp_port_max = 65535
@@ -33,6 +34,7 @@ class dcm4chee (
   validate_string($database_name)
   validate_string($database_owner)
   validate_string($database_owner_password)
+  validate_bool($dicom_webviewer)
 
   if ($server == false and $database == false) {
     fail('server and database cannot both be false')
