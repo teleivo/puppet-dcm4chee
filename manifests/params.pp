@@ -22,16 +22,4 @@ class dcm4chee::params {
   and $::architecture == 'amd64') {
     fail('Module only supports Ubuntu 14.04 64bit')
   }
-
-  $archive_basename = "dcm4chee-${server_version}-mysql"
-  $staging_dcm4chee_home_path = "${staging_path}${archive_basename}/"
-  $dcm4chee_home_path = "${user_home}${archive_basename}/"
-
-  $jboss_version = '4.2.3.GA'
-
-  $bin_rel_path = 'bin/'
-  $sql_rel_path = 'sql/'
-  $server_rel_path = 'server/default/'
-  $server_deploy_rel_path = "${server_rel_path}deploy/"
-  $server_conf_rel_path = "${server_rel_path}conf/"
 }
