@@ -9,7 +9,7 @@ class dcm4chee::staging () {
 
   $dcm4chee_archive_name = "${dcm4chee::archive_basename}.zip"
   $dcm4chee_base_url = 'http://sourceforge.net/projects/dcm4che/files/dcm4chee/'
-  $dcm4chee_source_url = "${dcm4chee_base_url}${dcm4chee::dcm4chee_version}/${dcm4chee_archive_name}/download"
+  $dcm4chee_source_url = "${dcm4chee_base_url}${dcm4chee::server_version}/${dcm4chee_archive_name}/download"
 
   include '::staging'
 

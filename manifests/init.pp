@@ -1,6 +1,7 @@
 # Class: dcm4chee: See README.md for documentation.
 class dcm4chee (
   $server                    = $::dcm4chee::params::server,
+  $server_version            = $::dcm4chee::params::server_version,
   $server_host               = $::dcm4chee::params::server_host,
   $server_java_path          = $::dcm4chee::params::server_java_path,
   $server_java_opts          = $::dcm4chee::params::server_java_opts,
@@ -22,6 +23,7 @@ class dcm4chee (
   $tcp_port_min = 0
 
   validate_bool($server)
+  validate_re($server_version, '(^2.18.0$)', "server_version ${server_version} is not supported. Allowed values are '2.18.0'.")
   validate_string($server_host)
   validate_integer($server_http_port, $tcp_port_max, $tcp_port_min)
   validate_integer($server_ajp_connector_port, $tcp_port_max, $tcp_port_min)

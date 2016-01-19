@@ -2,6 +2,7 @@
 class dcm4chee::params {
 
   $server = true
+  $server_version = '2.18.0'
   $server_host = 'localhost'
   $server_java_path = undef
   $server_java_opts = undef
@@ -22,8 +23,7 @@ class dcm4chee::params {
     fail('Module only supports Ubuntu 14.04 64bit')
   }
 
-  $dcm4chee_version = '2.18.0'
-  $archive_basename = "dcm4chee-${dcm4chee_version}-mysql"
+  $archive_basename = "dcm4chee-${server_version}-mysql"
   $staging_dcm4chee_home_path = "${staging_path}${archive_basename}/"
   $dcm4chee_home_path = "${user_home}${archive_basename}/"
 

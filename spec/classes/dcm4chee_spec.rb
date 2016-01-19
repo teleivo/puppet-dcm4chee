@@ -65,6 +65,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given server_version other than "2.18.0"' do
+        let :params do
+          valid_required_params.merge({
+            :server => '2.18.1',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non string server_host' do
         let :params do
           valid_required_params.merge({
