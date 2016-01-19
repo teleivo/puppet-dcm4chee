@@ -9,8 +9,6 @@ class dcm4chee (
   $server_ajp_connector_port = $::dcm4chee::params::server_ajp_connector_port,
   $user                      = $::dcm4chee::params::user,
   $user_home                 = $::dcm4chee::params::user_home,
-  $home_path                 = $::dcm4chee::params::dcm4chee_home_path,
-  $staging_home_path         = $::dcm4chee::params::staging_dcm4chee_home_path,
   $database                  = $::dcm4chee::params::database,
   $database_host             = $::dcm4chee::params::database_host,
   $database_port             = $::dcm4chee::params::database_port,
@@ -29,8 +27,6 @@ class dcm4chee (
   validate_integer($server_ajp_connector_port, $tcp_port_max, $tcp_port_min)
   validate_string($user)
   validate_absolute_path($user_home)
-  validate_absolute_path($home_path)
-  validate_absolute_path($staging_home_path)
   validate_bool($database)
   validate_string($database_host)
   validate_integer($database_port, $tcp_port_max, $tcp_port_min)
@@ -46,11 +42,23 @@ class dcm4chee (
     fail('server_java_path is undefined. needs to be defined if server = true')
   }
 
-  $bin_path = "${home_path}${::dcm4chee::params::bin_rel_path}"
-  $sql_path = "${staging_home_path}${::dcm4chee::params::sql_rel_path}"
-  $server_deploy_path =
-  "${home_path}${::dcm4chee::params::server_deploy_rel_path}"
-  $server_conf_path = "${home_path}${::dcm4chee::params::server_conf_rel_path}"
+  $archive_basename = "dcm4chee-${server_version}-mysql"
+  $home_path = "${user_home}${archive_basename}/"
+  $staging_path = "${user_home}staging/"
+  $staging_home_path = "${staging_path}${archive_basename}/"
+
+  $jboss_version = '4.2.3.GA'
+
+  $bin_rel_path = 'bin/'
+  $sql_rel_path = 'sql/'
+  $server_rel_path = 'server/default/'
+  $server_deploy_rel_path = "${server_rel_path}deploy/"
+  $server_conf_rel_path = "${server_rel_path}conf/"
+
+  $bin_path = "${home_path}${bin_rel_path}"
+  $sql_path = "${staging_home_path}${sql_rel_path}"
+  $server_deploy_path = "${home_path}${server_deploy_rel_path}"
+  $server_conf_path = "${home_path}${server_conf_rel_path}"
 
   user { $user:
     ensure     => present,
