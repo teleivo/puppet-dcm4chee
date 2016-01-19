@@ -5,7 +5,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
   describe 'without parameters' do
     let :pre_condition do
       "class {'dcm4chee':
-         java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+         server_java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
        }"
     end
 

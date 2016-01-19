@@ -2,7 +2,7 @@
 class dcm4chee (
   $server                   = $::dcm4chee::params::server,
   $server_host              = $::dcm4chee::params::server_host,
-  $java_path                = $::dcm4chee::params::java_path,
+  $server_java_path         = $::dcm4chee::params::server_java_path,
   $user                     = $::dcm4chee::params::user,
   $user_home                = $::dcm4chee::params::user_home,
   $home_path                = $::dcm4chee::params::dcm4chee_home_path,
@@ -41,7 +41,7 @@ class dcm4chee (
     fail('server and database cannot both be false')
   }
 
-  if ($server == true and $java_path == undef) {
+  if ($server == true and $server_java_path == undef) {
     fail('java_path is undefined. needs to be defined if server = true')
   }
 
