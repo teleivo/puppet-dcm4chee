@@ -8,6 +8,8 @@ class dcm4chee::params {
   $server_java_opts = undef
   $server_http_port = '8080'
   $server_ajp_connector_port = '8009'
+  $server_dicom_aet = 'DCM4CHEE'
+  $server_dicom_port = '11112'
   $user = 'dcm4chee'
   $user_home = '/opt/dcm4chee/'
   $staging_path = '/opt/dcm4chee/staging/'

@@ -1,8 +1,8 @@
 class dcm4chee::config::weasis () {
 
-  $weasis_aet = $::dcm4chee::weasis_aet
-  $weasis_host = $::dcm4chee::weasis_host
-  $weasis_port = $::dcm4chee::weasis_port
+  $weasis_aet = $::dcm4chee::server_dicom_aet
+  $weasis_host = $::dcm4chee::server_host
+  $weasis_port = $::dcm4chee::server_dicom_port
   $weasis_hosts_allow = $::dcm4chee::weasis_host_allow
 
   $weasis_connector_file = 'weasis-connector.properties'

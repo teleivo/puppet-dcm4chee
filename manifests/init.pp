@@ -7,6 +7,8 @@ class dcm4chee (
   $server_java_opts          = $::dcm4chee::params::server_java_opts,
   $server_http_port          = $::dcm4chee::params::server_http_port,
   $server_ajp_connector_port = $::dcm4chee::params::server_ajp_connector_port,
+  $server_dicom_aet          = $::dcm4chee::params::server_dicom_aet,
+  $server_dicom_port         = $::dcm4chee::params::server_dicom_port,
   $user                      = $::dcm4chee::params::user,
   $user_home                 = $::dcm4chee::params::user_home,
   $database                  = $::dcm4chee::params::database,
@@ -26,6 +28,8 @@ class dcm4chee (
   validate_string($server_host)
   validate_integer($server_http_port, $tcp_port_max, $tcp_port_min)
   validate_integer($server_ajp_connector_port, $tcp_port_max, $tcp_port_min)
+  validate_string($server_dicom_aet)
+  validate_integer($server_dicom_port, $tcp_port_max, $tcp_port_min)
   validate_string($user)
   validate_absolute_path($user_home)
   validate_bool($database)
@@ -56,9 +60,6 @@ class dcm4chee (
   # Dicom webviewer versions, settings
   $weasis_version = '2.0.3'
   $weasis_pacs_connector_version = '5.0.0'
-  $weasis_aet = 'DCM4CHEE'
-  $weasis_host = 'localhost'
-  $weasis_port = '11112'
   $weasis_hosts_allow = ''
 
   # Construct main paths needed by staging, installation, configuration

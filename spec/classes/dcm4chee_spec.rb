@@ -228,6 +228,38 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non string server_dicom_aet' do
+        let :params do
+          valid_required_params.merge({
+            :server_dicom_aet => true,
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given non integer server_dicom_port' do
+        let :params do
+          valid_required_params.merge({
+            :server_dicom_port => 'UpsNotANumber',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given server_dicom_port < 0' do
+        let :params do
+          valid_required_params.merge({
+            :server_dicom_port => '-1',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given server_dicom_port > 65535' do
+        let :params do
+          valid_required_params.merge({
+            :server_dicom_port => '65536',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given server = false and database = false' do
         let :params do
           valid_required_params.merge({
