@@ -1,6 +1,7 @@
 # Class: dcm4chee: See README.md for documentation.
 class dcm4chee (
   $server                   = $::dcm4chee::params::server,
+  $server_host              = $::dcm4chee::params::server_host,
   $java_path                = $::dcm4chee::params::java_path,
   $user                     = $::dcm4chee::params::user,
   $user_home                = $::dcm4chee::params::user_home,
@@ -21,6 +22,7 @@ class dcm4chee (
   $tcp_port_min = 0
 
   validate_bool($server)
+  validate_string($server_host)
   validate_string($user)
   validate_absolute_path($user_home)
   validate_absolute_path($home_path)
