@@ -172,50 +172,50 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
-      describe 'given non integer jboss_http_port' do
+      describe 'given non integer server_http_port' do
         let :params do
           valid_required_params.merge({
-            :jboss_http_port => 'UpsNotANumber',
+            :server_http_port => 'UpsNotANumber',
           })
         end
         it { should_not compile }
       end
-      describe 'given jboss_http_port < 0' do
+      describe 'given server_http_port < 0' do
         let :params do
           valid_required_params.merge({
-            :jboss_http_port => '-1',
+            :server_http_port => '-1',
           })
         end
         it { should_not compile }
       end
-      describe 'given jboss_http_port > 65535' do
+      describe 'given server_http_port > 65535' do
         let :params do
           valid_required_params.merge({
-            :jboss_http_port => '65536',
+            :server_http_port => '65536',
           })
         end
         it { should_not compile }
       end
-      describe 'given non integer jboss_ajp_connector_port' do
+      describe 'given non integer server_ajp_connector_port' do
         let :params do
           valid_required_params.merge({
-            :jboss_ajp_connector_port => 'UpsNotANumber',
+            :server_ajp_connector_port => 'UpsNotANumber',
           })
         end
         it { should_not compile }
       end
-      describe 'given jboss_ajp_connector_port < 0' do
+      describe 'given server_ajp_connector_port < 0' do
         let :params do
           valid_required_params.merge({
-            :jboss_ajp_connector_port => '-1',
+            :server_ajp_connector_port => '-1',
           })
         end
         it { should_not compile }
       end
-      describe 'given jboss_ajp_connector_port > 65535' do
+      describe 'given server_ajp_connector_port > 65535' do
         let :params do
           valid_required_params.merge({
-            :jboss_ajp_connector_port => '65536',
+            :server_ajp_connector_port => '65536',
           })
         end
         it { should_not compile }
