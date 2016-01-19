@@ -68,10 +68,7 @@ class dcm4chee (
   if $server {
     class { 'dcm4chee::install': }
     class { 'dcm4chee::config': }
-    class { 'dcm4chee::service':
-      jboss_home_path => $home_path,
-      java_path       => $java_path,
-    }
+    class { 'dcm4chee::service': }
     Class['dcm4chee::staging'] ->
     Class['dcm4chee::install'] ->
     Class['dcm4chee::config'] ~>

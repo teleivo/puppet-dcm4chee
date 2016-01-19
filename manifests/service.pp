@@ -1,8 +1,8 @@
 # Class: dcm4chee::service: See README.md for documentation.
-class dcm4chee::service (
-  $jboss_home_path = undef,
-  $java_path = undef
-) {
+class dcm4chee::service () {
+
+  $jboss_home_path = $::dcm4chee::home_path
+  $java_path = $::dcm4chee::java_path
 
   file { '/etc/init.d/dcm4chee':
     ensure  => file,
