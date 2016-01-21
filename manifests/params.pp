@@ -14,10 +14,10 @@ class dcm4chee::params {
   $user_home = '/opt/dcm4chee/'
   $staging_path = '/opt/dcm4chee/staging/'
   $database = true
+  $database_type = 'postgresql'
   $database_host = 'localhost'
-  $database_port = '3306'
+  $database_port = undef
   $database_name = 'pacsdb'
-  $database_owner = 'dcm4chee'
   $database_owner_password = 'dcm4chee'
   $dicom_webviewer = true
   

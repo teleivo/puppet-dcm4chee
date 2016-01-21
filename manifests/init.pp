@@ -12,10 +12,10 @@ class dcm4chee (
   $user                      = $::dcm4chee::params::user,
   $user_home                 = $::dcm4chee::params::user_home,
   $database                  = $::dcm4chee::params::database,
+  $database_type             = $::dcm4chee::params::database_type,
   $database_host             = $::dcm4chee::params::database_host,
   $database_port             = $::dcm4chee::params::database_port,
   $database_name             = $::dcm4chee::params::database_name,
-  $database_owner            = $::dcm4chee::params::database_owner,
   $database_owner_password   = $::dcm4chee::params::database_owner_password,
   $dicom_webviewer           = $::dcm4chee::params::dicom_webviewer,
 ) inherits dcm4chee::params {
@@ -33,10 +33,18 @@ class dcm4chee (
   validate_string($user)
   validate_absolute_path($user_home)
   validate_bool($database)
+  validate_re($database_type, '(^mysql|postgresql$)', "database_type ${database_type} is not supported. Allowed values are 'mysql', 'postgresql'.")
   validate_string($database_host)
-  validate_integer($database_port, $tcp_port_max, $tcp_port_min)
+
+  $database_port_picked = pick(
+    $database_port,
+    $database_type ? {
+      'mysql' => '3306',
+      'postgresql' => '5432',
+    }
+  )
+  validate_integer($database_port_picked, $tcp_port_max, $tcp_port_min)
   validate_string($database_name)
-  validate_string($database_owner)
   validate_string($database_owner_password)
   validate_bool($dicom_webviewer)
 
@@ -49,7 +57,11 @@ class dcm4chee (
   }
 
   # Define archive name, jboss version and important relative paths
-  $dcm4chee_archive_basename = "dcm4chee-${server_version}-mysql"
+  $database_type_short = $database_type ? {
+    'postgresql' => 'psql',
+    'mysql'      => 'mysql',
+  }
+  $dcm4chee_archive_basename = "dcm4chee-${server_version}-${database_type_short}"
   $jboss_version = '4.2.3.GA'
   $dcm4chee_bin_rel_path = 'bin/'
   $dcm4chee_sql_rel_path = 'sql/'
