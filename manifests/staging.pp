@@ -30,11 +30,11 @@ class dcm4chee::staging () {
   }
 
   if $::dcm4chee::server {
-    class { 'dcm4chee::staging::replace_jai_imageio_with_64bit':
+    class { '::dcm4chee::staging::replace_jai_imageio_with_64bit':
       require => Staging::Deploy[$dcm4chee_archive_name],
     }
 
-    class { 'dcm4chee::staging::jboss':
+    class { '::dcm4chee::staging::jboss':
       require => File[$::dcm4chee::staging_path],
     }
 
@@ -71,14 +71,14 @@ class dcm4chee::staging () {
     # bug http://www.dcm4che.org/jira/browse/DCMEE-2090
     # which is fixed in run.sh coming with jboss 4.2.3.GA archive
     file { "${dcm4chee_bin_path}run.sh":
-      ensure  => present,
+      ensure  => file,
       owner   => $::dcm4chee::user,
       source  => "${jboss_extract_path}bin/run.sh",
       require => Exec["${dcm4chee_bin_path}install_jboss.sh"],
     }
   
     if $::dcm4chee::dicom_webviewer {
-      class { 'dcm4chee::staging::weasis':
+      class { '::dcm4chee::staging::weasis':
         require => File["${dcm4chee_bin_path}run.sh"],
       }
     }
