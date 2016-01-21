@@ -38,15 +38,38 @@ class dcm4chee::staging () {
       require => File[$::dcm4chee::staging_path],
     }
 
-    exec { "${dcm4chee_bin_path}install_jboss.sh":
-      cwd     => $::dcm4chee::staging_path,
-      user    => $::dcm4chee::user,
-      command => "${dcm4chee_bin_path}install_jboss.sh ${jboss_extract_path}",
-      require => [
-        Staging::Deploy[$dcm4chee_archive_name],
-        Class['dcm4chee::staging::jboss']],
+    # Copies jboss files over to dcm4chee
+    # Custom script checks if run.jar is already in
+    # destinations bin folder, if so install_jboss.sh
+    # does not need to be run
+    $validate_jboss_installed =
+    '/usr/local/bin/validate_dcm4chee_jboss_installed.sh'
+    file { $validate_jboss_installed:
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+      source =>
+      'puppet:///modules/dcm4chee/validate_dcm4chee_jboss_installed.sh',
     }
 
+    $unless_cmd = join([$validate_jboss_installed, $dcm4chee_home_path ], ' ')
+    exec { "${dcm4chee_bin_path}install_jboss.sh":
+      unless  => $unless_cmd,
+      command => "${dcm4chee_bin_path}install_jboss.sh ${jboss_extract_path}",
+      cwd     => $::dcm4chee::staging_path,
+      user    => $::dcm4chee::user,
+      path    => '/bin:/usr/bin:/usr/local/bin',
+      require => [
+        Staging::Deploy[$dcm4chee_archive_name],
+        Class['dcm4chee::staging::jboss'],
+        File[$validate_jboss_installed],
+      ],
+    }
+
+    # Replacing run.sh coming with dcm4chee archive due to
+    # bug http://www.dcm4che.org/jira/browse/DCMEE-2090
+    # which is fixed in run.sh coming with jboss 4.2.3.GA archive
     file { "${dcm4chee_bin_path}run.sh":
       ensure  => present,
       owner   => $::dcm4chee::user,
