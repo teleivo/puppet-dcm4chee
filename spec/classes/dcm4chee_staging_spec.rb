@@ -57,7 +57,7 @@ describe 'dcm4chee::staging', :type => :class do
       }
       it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/bin/run.sh")
             .with({
-              'ensure'  => 'present',
+              'ensure'  => 'file',
               'owner'   => 'dcm4chee',
               'source'  => '/opt/dcm4chee/staging/jboss-4.2.3.GA/bin/run.sh',
             })
@@ -137,7 +137,7 @@ describe 'dcm4chee::staging', :type => :class do
     }
     it { is_expected.to contain_file('/opt/dcm4chee/staging/dcm4chee-2.18.0-psql/bin/run.sh')
           .with({
-            'ensure'  => 'present',
+            'ensure'  => 'file',
             'owner'   => 'dcm4chee',
             'source'  => '/opt/dcm4chee/staging/jboss-4.2.3.GA/bin/run.sh',
           })
