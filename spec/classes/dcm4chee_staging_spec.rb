@@ -34,9 +34,26 @@ describe 'dcm4chee::staging', :type => :class do
       it { is_expected.to contain_class('dcm4chee::staging::jboss')
             .that_requires('File[/opt/dcm4chee/staging/]')
       }
+      it { is_expected.to contain_file('/usr/local/bin/validate_dcm4chee_jboss_installed.sh')
+        .with({
+          'ensure' => 'file',
+          'owner'  => 'root',
+          'group'  => 'root',
+          'mode'   => '0755',
+          'source' => 'puppet:///modules/dcm4chee/validate_dcm4chee_jboss_installed.sh',
+        })
+      }
       it { is_expected.to contain_exec("/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/bin/install_jboss.sh")
-            .that_requires("Staging::Deploy[dcm4chee-2.18.0-#{database_type_short}.zip]")
-            .that_requires('Class[dcm4chee::staging::jboss]')
+        .with({
+          'unless'    => "/usr/local/bin/validate_dcm4chee_jboss_installed.sh /opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/",
+          'command'   => "/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/bin/install_jboss.sh /opt/dcm4chee/staging/jboss-4.2.3.GA/",
+          'cwd'       => '/opt/dcm4chee/staging/',
+          'user'      => 'dcm4chee',
+          'path'      => '/bin:/usr/bin:/usr/local/bin',
+        })
+        .that_requires("Staging::Deploy[dcm4chee-2.18.0-#{database_type_short}.zip]")
+        .that_requires('Class[dcm4chee::staging::jboss]')
+        .that_requires('File[/usr/local/bin/validate_dcm4chee_jboss_installed.sh]')
       }
       it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/bin/run.sh")
             .with({
