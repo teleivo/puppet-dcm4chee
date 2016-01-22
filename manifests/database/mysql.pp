@@ -1,6 +1,8 @@
 # Class: dcm4chee::database::mysql. See README.md for documentation.
 class dcm4chee::database::mysql () {
 
+  include ::mysql::server
+
   ::mysql::db { $::dcm4chee::database_name:
     user     => $::dcm4chee::user,
     password => $::dcm4chee::database_owner_password,

@@ -10,6 +10,7 @@ describe 'dcm4chee::database::mysql', :type => :class do
        }"
     end
 
+    it { is_expected.to contain_class('mysql::server') }
     it { is_expected.to contain_mysql__db('pacsdb')
       .with({
         'user'     => 'dcm4chee',
@@ -35,6 +36,7 @@ describe 'dcm4chee::database::mysql', :type => :class do
        }"
     end
 
+    it { is_expected.to contain_class('mysql::server') }
     it { is_expected.to contain_mysql__db('medpacs')
       .with({
         'user'     => 'felix',
