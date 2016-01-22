@@ -1,4 +1,5 @@
 class dcm4chee::config::mysql () {
+
   $database_host = $::dcm4chee::database_host
   $database_port = $::dcm4chee::database_port_picked
   $database_name = $::dcm4chee::database_name

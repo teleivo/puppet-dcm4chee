@@ -90,26 +90,26 @@ class dcm4chee (
     managehome => true,
   }->
   
-  class { 'dcm4chee::staging': }
+  class { '::dcm4chee::staging': }
   
   if $database {
-    class { 'dcm4chee::database': }
-    Class['dcm4chee::staging'] ->
-    Class['dcm4chee::database']
+    class { '::dcm4chee::database': }
+    Class['::dcm4chee::staging'] ->
+    Class['::dcm4chee::database']
   }
   
   if $server {
-    class { 'dcm4chee::install': }
-    class { 'dcm4chee::config': }
-    class { 'dcm4chee::service': }
-    Class['dcm4chee::staging'] ->
-    Class['dcm4chee::install'] ->
-    Class['dcm4chee::config'] ~>
-    Class['dcm4chee::service']
+    class { '::dcm4chee::install': }
+    class { '::dcm4chee::config': }
+    class { '::dcm4chee::service': }
+    Class['::dcm4chee::staging'] ->
+    Class['::dcm4chee::install'] ->
+    Class['::dcm4chee::config'] ~>
+    Class['::dcm4chee::service']
 
     if $database {
-      Class['dcm4chee::database'] ->
-      Class['dcm4chee::install']
+      Class['::dcm4chee::database'] ->
+      Class['::dcm4chee::install']
     }
   }
 }

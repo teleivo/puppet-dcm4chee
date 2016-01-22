@@ -23,7 +23,7 @@ class dcm4chee::staging::weasis () {
     group  => $::dcm4chee::user,
   }
 
-  staging::file { $weasis_archive_name:
+  ::staging::file { $weasis_archive_name:
     source  => $weasis_source_url,
     target  => "${source_directory}${weasis_archive_name}",
     require => File[$source_directory],
@@ -37,7 +37,7 @@ class dcm4chee::staging::weasis () {
     require => Staging::File[$weasis_archive_name],
   }
 
-  staging::file { $weasis_connector_archive_name:
+  ::staging::file { $weasis_connector_archive_name:
     source  => $weasis_connector_source_url,
     target  => "${source_directory}${weasis_connector_archive_name}",
     require => File[$source_directory],
@@ -51,7 +51,7 @@ class dcm4chee::staging::weasis () {
     require => Staging::File[$weasis_connector_archive_name],
   }
 
-  staging::file { $weasis_dcm4chee_web_name:
+  ::staging::file { $weasis_dcm4chee_web_name:
     source  => $weasis_dcm4chee_web_source_url,
     target  => "${source_directory}${weasis_dcm4chee_web_name}",
     require => File[$source_directory],
