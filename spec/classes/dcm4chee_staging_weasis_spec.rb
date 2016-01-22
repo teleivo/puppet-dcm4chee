@@ -20,7 +20,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
       }
       it { is_expected.to contain_staging__file('weasis.war')
             .with({
-              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/2.0.3/weasis.war',
+              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/2.0.5/weasis.war',
               'target'  => '/opt/dcm4chee/staging/weasis/weasis.war',
             })
             .that_requires('File[/opt/dcm4chee/staging/weasis/]')
@@ -36,7 +36,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
       }
       it { is_expected.to contain_staging__file('weasis-pacs-connector.war')
             .with({
-              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/weasis-pacs-connector/5.0.0/weasis-pacs-connector.war',
+              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/weasis-pacs-connector/5.0.1/weasis-pacs-connector.war',
               'target'  => '/opt/dcm4chee/staging/weasis/weasis-pacs-connector.war',
             })
             .that_requires('File[/opt/dcm4chee/staging/weasis/]')
@@ -52,7 +52,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
       }
       it { is_expected.to contain_staging__file('dcm4chee-web-weasis.jar')
             .with({
-              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/weasis-pacs-connector/5.0.0/dcm4chee-web-weasis.jar',
+              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/weasis-pacs-connector/5.0.1/dcm4chee-web-weasis.jar',
               'target'  => '/opt/dcm4chee/staging/weasis/dcm4chee-web-weasis.jar',
             })
             .that_requires('File[/opt/dcm4chee/staging/weasis/]')
