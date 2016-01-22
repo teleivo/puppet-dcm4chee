@@ -28,7 +28,7 @@ describe 'dcm4chee::staging', :type => :class do
             })
             .that_requires('File[/opt/dcm4chee/staging/]')
       }
-      it { is_expected.to contain_class('dcm4chee::staging::replace_jai_imageio_with_64bit')
+      it { is_expected.to contain_class('dcm4chee::staging::jai_imageio')
             .that_requires("Staging::Deploy[dcm4chee-2.18.1-#{database_type_short}.zip]")
       }
       it { is_expected.to contain_class('dcm4chee::staging::jboss')
@@ -94,7 +94,7 @@ describe 'dcm4chee::staging', :type => :class do
           })
           .that_requires('File[/opt/dcm4chee/staging/]')
     }
-    it { is_expected.not_to contain_class('dcm4chee::staging::replace_jai_imageio_with_64bit') }
+    it { is_expected.not_to contain_class('dcm4chee::staging::jai_imageio') }
     it { is_expected.not_to contain_class('dcm4chee::staging::jboss') }
     it { is_expected.not_to contain_exec('/opt/dcm4chee/staging/dcm4chee-2.18.1-psql/bin/install_jboss.sh') }
     it { is_expected.not_to contain_file('/opt/dcm4chee/staging/dcm4chee-2.18.1-psql/bin/run.sh') }
@@ -126,7 +126,7 @@ describe 'dcm4chee::staging', :type => :class do
           })
           .that_requires('File[/opt/dcm4chee/staging/]')
     }
-    it { is_expected.to contain_class('dcm4chee::staging::replace_jai_imageio_with_64bit')
+    it { is_expected.to contain_class('dcm4chee::staging::jai_imageio')
           .that_requires('Staging::Deploy[dcm4chee-2.18.1-psql.zip]')
     }
     it { is_expected.to contain_class('dcm4chee::staging::jboss')

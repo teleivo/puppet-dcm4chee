@@ -1,4 +1,5 @@
-class dcm4chee::staging::replace_jai_imageio_with_64bit () {
+# Class: dcm4chee::staging::jai_imageio. See README.md for documentation.
+class dcm4chee::staging::jai_imageio () {
 
   $imageio_library_source_name = 'libclib_jiio-1.2-b04-linux-x86-64.so'
   $imageio_library_source_url =
