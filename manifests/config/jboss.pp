@@ -1,7 +1,10 @@
 # Class: dcm4chee::config::jboss. See README.md for documentation.
 class dcm4chee::config::jboss () {
   
-  $jboss_java_opts = $::dcm4chee::server_java_opts
+  $jboss_java_opts = empty($::dcm4chee::server_java_opts) ? {
+    true  => undef,
+    false => join($::dcm4chee::server_java_opts, ' '),
+  }
   $jboss_http_port = $::dcm4chee::server_http_port
   $jboss_ajp_connector_port = $::dcm4chee::server_ajp_connector_port
 
