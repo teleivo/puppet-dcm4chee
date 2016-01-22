@@ -2,6 +2,7 @@
 # Prepares a staging directory with all archives, files in place
 # so installation only copies staging directory to its final destination
 class dcm4chee::staging () {
+
   $dcm4chee_home_path = $::dcm4chee::staging_dcm4chee_home_path
   $dcm4chee_bin_path = "${dcm4chee_home_path}${::dcm4chee::dcm4chee_bin_rel_path}"
   $dcm4chee_deploy_path =
@@ -21,7 +22,7 @@ class dcm4chee::staging () {
     group  => $::dcm4chee::user,
   }
 
-  staging::deploy { $dcm4chee_archive_name:
+  ::staging::deploy { $dcm4chee_archive_name:
     source  => $dcm4chee_source_url,
     target  => $::dcm4chee::staging_path,
     user    => $::dcm4chee::user,
