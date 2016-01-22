@@ -5,7 +5,7 @@ class dcm4chee::params {
   $server_version = '2.18.0'
   $server_host = 'localhost'
   $server_java_path = undef
-  $server_java_opts = undef
+  $server_java_opts = []
   $server_http_port = '8080'
   $server_ajp_connector_port = '8009'
   $server_dicom_aet = 'DCM4CHEE'

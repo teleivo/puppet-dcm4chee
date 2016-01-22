@@ -27,6 +27,7 @@ class dcm4chee (
   validate_bool($server)
   validate_re($server_version, '(^2.18.0$)', "server_version ${server_version} is not supported. Allowed values are '2.18.0'.")
   validate_string($server_host)
+  validate_array($server_java_opts)
   validate_integer($server_http_port, $tcp_port_max, $tcp_port_min)
   validate_integer($server_ajp_connector_port, $tcp_port_max, $tcp_port_min)
   validate_string($server_dicom_aet)

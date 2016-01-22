@@ -46,7 +46,7 @@
 #
 <%- if @jboss_java_opts -%>
 # Options set via puppet
-JAVA_OPTS="<%= @jboss_java_opts.join(' ') %>"
+JAVA_OPTS="<%= @jboss_java_opts %>"
 
 <%- end -%>
 if [ "x$JAVA_OPTS" = "x" ]; then

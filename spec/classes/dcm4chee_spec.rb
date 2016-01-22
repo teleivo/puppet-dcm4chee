@@ -82,6 +82,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non array server_java_opts' do
+        let :params do
+          valid_required_params.merge({
+            :server_java_opts => '-Xms512m, -Xmx1024m',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given no server_java_path when server = true' do
         it { should_not compile }
       end
