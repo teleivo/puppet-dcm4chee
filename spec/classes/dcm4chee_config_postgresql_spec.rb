@@ -14,7 +14,7 @@ describe 'dcm4chee::config::postgresql', :type => :class do
             'ensure'  => 'file',
             'owner'   => 'dcm4chee',
             'group'   => 'dcm4chee',
-            'mode'    => '0644',
+            'mode'    => '0640',
           })
           .with_content(/<connection-url>jdbc:postgresql:\/\/localhost:5432\/pacsdb<\/connection-url>/)
           .with_content(/<user-name>dcm4chee<\/user-name>/)
@@ -39,7 +39,7 @@ describe 'dcm4chee::config::postgresql', :type => :class do
             'ensure'  => 'file',
             'owner'   => 'felix',
             'group'   => 'felix',
-            'mode'    => '0644',
+            'mode'    => '0640',
           })
           .with_content(/<connection-url>jdbc:postgresql:\/\/192.168.1.11:5435\/medpacs<\/connection-url>/)
           .with_content(/<user-name>felix<\/user-name>/)

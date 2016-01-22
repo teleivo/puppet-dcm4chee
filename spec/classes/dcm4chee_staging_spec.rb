@@ -17,6 +17,7 @@ describe 'dcm4chee::staging', :type => :class do
               'ensure' => 'directory',
               'owner'  => 'dcm4chee',
               'group'  => 'dcm4chee',
+              'mode'   => '0750',
             })
       }
       it { is_expected.to contain_staging__deploy("dcm4chee-2.18.0-#{database_type_short}.zip")
@@ -59,6 +60,7 @@ describe 'dcm4chee::staging', :type => :class do
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
+              'mode'    => '0750',
               'source'  => '/opt/dcm4chee/staging/jboss-4.2.3.GA/bin/run.sh',
             })
             .that_requires("Exec[/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/bin/install_jboss.sh]")
@@ -82,6 +84,7 @@ describe 'dcm4chee::staging', :type => :class do
             'ensure' => 'directory',
             'owner'  => 'dcm4chee',
             'group'  => 'dcm4chee',
+            'mode'   => '0750',
           })
     }
     it { is_expected.to contain_staging__deploy('dcm4chee-2.18.0-psql.zip')
@@ -114,6 +117,7 @@ describe 'dcm4chee::staging', :type => :class do
             'ensure' => 'directory',
             'owner'  => 'dcm4chee',
             'group'  => 'dcm4chee',
+            'mode'   => '0750',
           })
     }
     it { is_expected.to contain_staging__deploy('dcm4chee-2.18.0-psql.zip')
@@ -139,6 +143,7 @@ describe 'dcm4chee::staging', :type => :class do
           .with({
             'ensure'  => 'file',
             'owner'   => 'dcm4chee',
+            'mode'    => '0750',
             'source'  => '/opt/dcm4chee/staging/jboss-4.2.3.GA/bin/run.sh',
           })
           .that_requires('Exec[/opt/dcm4chee/staging/dcm4chee-2.18.0-psql/bin/install_jboss.sh]')

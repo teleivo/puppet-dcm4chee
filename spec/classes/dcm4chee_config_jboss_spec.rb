@@ -16,7 +16,7 @@ describe 'dcm4chee::config::jboss', :type => :class do
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
               'group'   => 'dcm4chee',
-              'mode'    => '0644',
+              'mode'    => '0640',
             })
       }
       it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.0-#{database_type_short}/bin/run.conf")
@@ -24,7 +24,7 @@ describe 'dcm4chee::config::jboss', :type => :class do
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
               'group'   => 'dcm4chee',
-              'mode'    => '0644',
+              'mode'    => '0640',
             })
             .without_content(/^# Options set via puppet$/)
             .without_content(/^JAVA_OPTS=$/)
@@ -46,7 +46,7 @@ describe 'dcm4chee::config::jboss', :type => :class do
                 'ensure'  => 'file',
                 'owner'   => 'dcm4chee',
                 'group'   => 'dcm4chee',
-                'mode'    => '0644',
+                'mode'    => '0640',
               })
               .with_content(/^# Options set via puppet$/)
               .with_content(/^JAVA_OPTS="-Xms256m -Xmx1024m -XX:MaxPermSize=512m"$/)

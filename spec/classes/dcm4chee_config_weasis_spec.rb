@@ -16,7 +16,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
               'group'   => 'dcm4chee',
-              'mode'    => '0644',
+              'mode'    => '0640',
             })
             .with_content(/^pacs.aet=DCM4CHEE$/)
             .with_content(/^pacs.host=localhost$/)
@@ -42,7 +42,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
               'group'   => 'dcm4chee',
-              'mode'    => '0644',
+              'mode'    => '0640',
             })
             .with_content(/^pacs.aet=MEDPACS$/)
             .with_content(/^pacs.host=192.168.1.11$/)

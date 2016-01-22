@@ -14,7 +14,7 @@ class dcm4chee::config::postgresql () {
     ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
-    mode    => '0644',
+    mode    => $::dcm4chee::file_mode,
     content => template("dcm4chee/dcm4chee_home/server/default/deploy/${db_connection_file}.erb"
     ),
   }

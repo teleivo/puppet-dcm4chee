@@ -16,7 +16,7 @@ class dcm4chee::config::jboss () {
     ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
-    mode    => '0644',
+    mode    => $::dcm4chee::file_mode,
     content => template('dcm4chee/dcm4chee_home/server/default/deploy/jboss-web.deployer/server.xml.erb'
     ),
   }
@@ -25,7 +25,7 @@ class dcm4chee::config::jboss () {
     ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
-    mode    => '0644',
+    mode    => $::dcm4chee::file_mode,
     content => template('dcm4chee/dcm4chee_home/bin/run.conf.erb'),
   }
 }

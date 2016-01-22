@@ -87,6 +87,11 @@ class dcm4chee (
   $dcm4chee_server_deploy_path = "${dcm4chee_home_path}${dcm4chee_server_deploy_rel_path}"
   $dcm4chee_server_conf_path = "${dcm4chee_home_path}${dcm4chee_server_conf_rel_path}"
 
+  # Default file and directory permissions
+  $file_mode = '0640'
+  $file_exec_mode = '0750'
+  $dir_mode = '0750'
+
   user { $user:
     ensure     => present,
     home       => $user_home,

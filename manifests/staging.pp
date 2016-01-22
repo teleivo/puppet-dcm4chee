@@ -20,6 +20,7 @@ class dcm4chee::staging () {
     ensure => directory,
     owner  => $::dcm4chee::user,
     group  => $::dcm4chee::user,
+    mode   => $::dcm4chee::dir_mode,
   }
 
   ::staging::deploy { $dcm4chee_archive_name:
@@ -75,6 +76,7 @@ class dcm4chee::staging () {
       ensure  => file,
       owner   => $::dcm4chee::user,
       source  => "${jboss_extract_path}bin/run.sh",
+      mode    => $::dcm4chee::file_exec_mode,
       require => Exec["${dcm4chee_bin_path}install_jboss.sh"],
     }
   

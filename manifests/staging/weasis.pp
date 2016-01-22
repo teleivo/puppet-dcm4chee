@@ -21,6 +21,7 @@ class dcm4chee::staging::weasis () {
     ensure => directory,
     owner  => $::dcm4chee::user,
     group  => $::dcm4chee::user,
+    mode   => $::dcm4chee::dir_mode,
   }
 
   ::staging::file { $weasis_archive_name:
@@ -33,6 +34,7 @@ class dcm4chee::staging::weasis () {
     ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
+    mode    => $::dcm4chee::file_mode,
     source  => "${source_directory}${weasis_archive_name}",
     require => Staging::File[$weasis_archive_name],
   }
@@ -47,6 +49,7 @@ class dcm4chee::staging::weasis () {
     ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
+    mode    => $::dcm4chee::file_mode,
     source  => "${source_directory}${weasis_connector_archive_name}",
     require => Staging::File[$weasis_connector_archive_name],
   }
@@ -61,6 +64,7 @@ class dcm4chee::staging::weasis () {
     ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
+    mode    => $::dcm4chee::file_mode,
     source  => "${source_directory}${weasis_dcm4chee_web_name}",
     require => Staging::File[$weasis_dcm4chee_web_name],
   }
