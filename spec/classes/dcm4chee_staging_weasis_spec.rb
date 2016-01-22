@@ -16,6 +16,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
               'ensure' => 'directory',
               'owner'  => 'dcm4chee',
               'group'  => 'dcm4chee',
+              'mode'   => '0750',
             })
       }
       it { is_expected.to contain_staging__file('weasis.war')
@@ -30,6 +31,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
               'group'   => 'dcm4chee',
+              'mode'    => '0640',
               'source'  => '/opt/dcm4chee/staging/weasis/weasis.war',
             })
             .that_requires('Staging::File[weasis.war]')
@@ -46,6 +48,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
               'group'   => 'dcm4chee',
+              'mode'    => '0640',
               'source'  => '/opt/dcm4chee/staging/weasis/weasis-pacs-connector.war',
             })
             .that_requires('Staging::File[weasis-pacs-connector.war]')
@@ -62,6 +65,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
               'group'   => 'dcm4chee',
+              'mode'    => '0640',
               'source'  => '/opt/dcm4chee/staging/weasis/dcm4chee-web-weasis.jar',
             })
             .that_requires('Staging::File[dcm4chee-web-weasis.jar]')

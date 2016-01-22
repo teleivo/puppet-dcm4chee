@@ -22,6 +22,8 @@ describe 'dcm4chee::staging::replace_jai_imageio_with_64bit', :type => :class do
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
+              'group'   => 'dcm4chee',
+              'mode'    => '0640',
               'source'  => '/opt/dcm4chee/staging/libclib_jiio-1.2-b04-linux-x86-64.so',
             })
       }
