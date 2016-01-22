@@ -1,23 +1,24 @@
 # Class: dcm4chee: See README.md for documentation.
 class dcm4chee (
-  $server                    = $::dcm4chee::params::server,
-  $server_version            = $::dcm4chee::params::server_version,
-  $server_host               = $::dcm4chee::params::server_host,
-  $server_java_path          = $::dcm4chee::params::server_java_path,
-  $server_java_opts          = $::dcm4chee::params::server_java_opts,
-  $server_http_port          = $::dcm4chee::params::server_http_port,
-  $server_ajp_connector_port = $::dcm4chee::params::server_ajp_connector_port,
-  $server_dicom_aet          = $::dcm4chee::params::server_dicom_aet,
-  $server_dicom_port         = $::dcm4chee::params::server_dicom_port,
-  $user                      = $::dcm4chee::params::user,
-  $user_home                 = $::dcm4chee::params::user_home,
-  $database                  = $::dcm4chee::params::database,
-  $database_type             = $::dcm4chee::params::database_type,
-  $database_host             = $::dcm4chee::params::database_host,
-  $database_port             = $::dcm4chee::params::database_port,
-  $database_name             = $::dcm4chee::params::database_name,
-  $database_owner_password   = $::dcm4chee::params::database_owner_password,
-  $dicom_webviewer           = $::dcm4chee::params::dicom_webviewer,
+  $server                      = $::dcm4chee::params::server,
+  $server_version              = $::dcm4chee::params::server_version,
+  $server_host                 = $::dcm4chee::params::server_host,
+  $server_java_path            = $::dcm4chee::params::server_java_path,
+  $server_java_opts            = $::dcm4chee::params::server_java_opts,
+  $server_http_port            = $::dcm4chee::params::server_http_port,
+  $server_ajp_connector_port   = $::dcm4chee::params::server_ajp_connector_port,
+  $server_dicom_aet            = $::dcm4chee::params::server_dicom_aet,
+  $server_dicom_port           = $::dcm4chee::params::server_dicom_port,
+  $user                        = $::dcm4chee::params::user,
+  $user_home                   = $::dcm4chee::params::user_home,
+  $database                    = $::dcm4chee::params::database,
+  $database_type               = $::dcm4chee::params::database_type,
+  $database_host               = $::dcm4chee::params::database_host,
+  $database_port               = $::dcm4chee::params::database_port,
+  $database_name               = $::dcm4chee::params::database_name,
+  $database_owner_password     = $::dcm4chee::params::database_owner_password,
+  $dicom_webviewer             = $::dcm4chee::params::dicom_webviewer,
+  $dicom_webviewer_hosts_allow = $::dcm4chee::params::dicom_webviewer_hosts_allow,
 ) inherits dcm4chee::params {
 
   $tcp_port_max = 65535
@@ -47,6 +48,7 @@ class dcm4chee (
   validate_string($database_name)
   validate_string($database_owner_password)
   validate_bool($dicom_webviewer)
+  validate_string($dicom_webviewer_hosts_allow)
 
   if ($server == false and $database == false) {
     fail('server and database cannot both be false')
