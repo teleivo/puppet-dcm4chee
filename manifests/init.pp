@@ -48,7 +48,7 @@ class dcm4chee (
   validate_string($database_name)
   validate_string($database_owner_password)
   validate_bool($dicom_webviewer)
-  validate_string($dicom_webviewer_hosts_allow)
+  validate_array($dicom_webviewer_hosts_allow)
 
   if ($server == false and $database == false) {
     fail('server and database cannot both be false')

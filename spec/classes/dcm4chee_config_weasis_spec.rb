@@ -33,7 +33,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
            server_host                 => '192.168.1.11',
            server_dicom_aet            => 'MEDPACS',
            server_dicom_port           => '104',
-           dicom_webviewer_hosts_allow => '192.168.1.20,192.168.1.21'
+           dicom_webviewer_hosts_allow => [ '192.168.1.20', '192.168.1.21' ]
         }"
       end
 

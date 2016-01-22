@@ -278,10 +278,10 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
-      describe 'given non string dicom_webviewer_hosts_allow' do
+      describe 'given non array dicom_webviewer_hosts_allow' do
         let :params do
           valid_required_params.merge({
-            :dicom_webviewer_hosts_allow => true,
+            :dicom_webviewer_hosts_allow => 'localhost, 192.168.1.11',
           })
         end
         it { should_not compile }
