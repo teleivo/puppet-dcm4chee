@@ -30,7 +30,7 @@ class dcm4chee::staging::weasis () {
   }
 
   file { "${::dcm4chee::staging::dcm4chee_deploy_path}${weasis_archive_name}":
-    ensure  => present,
+    ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
     source  => "${source_directory}${weasis_archive_name}",
@@ -44,7 +44,7 @@ class dcm4chee::staging::weasis () {
   }
 
   file { "${::dcm4chee::staging::dcm4chee_deploy_path}${weasis_connector_archive_name}":
-    ensure  => present,
+    ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
     source  => "${source_directory}${weasis_connector_archive_name}",
@@ -58,7 +58,7 @@ class dcm4chee::staging::weasis () {
   }
 
   file { "${::dcm4chee::staging::dcm4chee_deploy_path}${weasis_dcm4chee_web_name}":
-    ensure  => present,
+    ensure  => file,
     owner   => $::dcm4chee::user,
     group   => $::dcm4chee::user,
     source  => "${source_directory}${weasis_dcm4chee_web_name}",
