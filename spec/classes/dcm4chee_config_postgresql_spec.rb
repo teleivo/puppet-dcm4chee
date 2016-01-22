@@ -9,7 +9,7 @@ describe 'dcm4chee::config::postgresql', :type => :class do
        }"
     end
 
-    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.0-psql/server/default/deploy/pacs-postgres-ds.xml')
+    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.1-psql/server/default/deploy/pacs-postgres-ds.xml')
           .with({
             'ensure'  => 'file',
             'owner'   => 'dcm4chee',
@@ -34,7 +34,7 @@ describe 'dcm4chee::config::postgresql', :type => :class do
        }"
     end
 
-    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.0-psql/server/default/deploy/pacs-postgres-ds.xml')
+    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.1-psql/server/default/deploy/pacs-postgres-ds.xml')
           .with({
             'ensure'  => 'file',
             'owner'   => 'felix',
