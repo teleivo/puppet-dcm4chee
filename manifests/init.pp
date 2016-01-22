@@ -55,8 +55,8 @@ class dcm4chee (
     fail('server and database cannot both be false')
   }
 
-  if ($server == true and $server_java_path == undef) {
-    fail('server_java_path is undefined. needs to be defined if server = true')
+  if $server == true {
+    validate_absolute_path($server_java_path)
   }
 
   # Define archive name, jboss version and important relative paths
