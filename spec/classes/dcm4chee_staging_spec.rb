@@ -60,6 +60,7 @@ describe 'dcm4chee::staging', :type => :class do
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
+              'group'   => 'dcm4chee',
               'mode'    => '0750',
               'source'  => '/opt/dcm4chee/staging/jboss-4.2.3.GA/bin/run.sh',
             })
@@ -143,6 +144,7 @@ describe 'dcm4chee::staging', :type => :class do
           .with({
             'ensure'  => 'file',
             'owner'   => 'dcm4chee',
+            'group'   => 'dcm4chee',
             'mode'    => '0750',
             'source'  => '/opt/dcm4chee/staging/jboss-4.2.3.GA/bin/run.sh',
           })

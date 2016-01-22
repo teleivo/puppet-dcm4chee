@@ -75,6 +75,7 @@ class dcm4chee::staging () {
     file { "${dcm4chee_bin_path}run.sh":
       ensure  => file,
       owner   => $::dcm4chee::user,
+      group   => $::dcm4chee::user,
       source  => "${jboss_extract_path}bin/run.sh",
       mode    => $::dcm4chee::file_exec_mode,
       require => Exec["${dcm4chee_bin_path}install_jboss.sh"],
