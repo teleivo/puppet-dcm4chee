@@ -17,7 +17,7 @@ describe 'dcm4chee::staging::replace_jai_imageio_with_64bit', :type => :class do
               'target'  => '/opt/dcm4chee/staging/libclib_jiio-1.2-b04-linux-x86-64.so',
             })
       }
-      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/bin/native/libclib_jiio.so")
+      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database_type_short}/bin/native/libclib_jiio.so")
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',

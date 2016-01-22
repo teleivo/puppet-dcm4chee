@@ -11,7 +11,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
         }"
       end
 
-      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.0-#{database_type_short}/server/default/conf/weasis-connector.properties")
+      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.1-#{database_type_short}/server/default/conf/weasis-connector.properties")
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
@@ -37,7 +37,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
         }"
       end
 
-      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.0-#{database_type_short}/server/default/conf/weasis-connector.properties")
+      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.1-#{database_type_short}/server/default/conf/weasis-connector.properties")
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',

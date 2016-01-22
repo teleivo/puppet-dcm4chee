@@ -10,7 +10,7 @@ describe 'dcm4chee::config::mysql', :type => :class do
        }"
     end
 
-    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.0-mysql/server/default/deploy/pacs-mysql-ds.xml')
+    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.1-mysql/server/default/deploy/pacs-mysql-ds.xml')
           .with({
             'ensure'  => 'file',
             'owner'   => 'dcm4chee',
@@ -36,7 +36,7 @@ describe 'dcm4chee::config::mysql', :type => :class do
        }"
     end
 
-    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.0-mysql/server/default/deploy/pacs-mysql-ds.xml')
+    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.1-mysql/server/default/deploy/pacs-mysql-ds.xml')
           .with({
             'ensure'  => 'file',
             'owner'   => 'felix',

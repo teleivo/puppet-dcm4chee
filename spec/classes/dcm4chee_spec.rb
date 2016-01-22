@@ -66,7 +66,7 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
-      describe 'given server_version other than "2.18.0"' do
+      describe 'given server_version other than "2.18.1"' do
         let :params do
           valid_required_params.merge({
             :server => '2.18.1',
@@ -123,7 +123,7 @@ describe 'dcm4chee', :type => :class do
       describe 'given non absolute home_path' do
         let :params do
           valid_required_params.merge({
-            :home_path => 'opt/dcm4chee/dcm4chee-2.18.0-mysql',
+            :home_path => 'opt/dcm4chee/dcm4chee-2.18.1-mysql',
           })
         end
         it { should_not compile }

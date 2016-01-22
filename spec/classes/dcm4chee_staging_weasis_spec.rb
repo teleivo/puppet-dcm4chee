@@ -25,7 +25,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
             })
             .that_requires('File[/opt/dcm4chee/staging/weasis/]')
       }
-      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/server/default/deploy/weasis.war")
+      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database_type_short}/server/default/deploy/weasis.war")
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
@@ -41,7 +41,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
             })
             .that_requires('File[/opt/dcm4chee/staging/weasis/]')
       }
-      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/server/default/deploy/weasis-pacs-connector.war")
+      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database_type_short}/server/default/deploy/weasis-pacs-connector.war")
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
@@ -57,7 +57,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
             })
             .that_requires('File[/opt/dcm4chee/staging/weasis/]')
       }
-      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/server/default/deploy/dcm4chee-web-weasis.jar")
+      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database_type_short}/server/default/deploy/dcm4chee-web-weasis.jar")
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',

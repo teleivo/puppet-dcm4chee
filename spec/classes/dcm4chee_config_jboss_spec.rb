@@ -11,7 +11,7 @@ describe 'dcm4chee::config::jboss', :type => :class do
         }"
       end
 
-      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.0-#{database_type_short}/server/default/deploy/jboss-web.deployer/server.xml")
+      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.1-#{database_type_short}/server/default/deploy/jboss-web.deployer/server.xml")
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
@@ -19,7 +19,7 @@ describe 'dcm4chee::config::jboss', :type => :class do
               'mode'    => '0644',
             })
       }
-      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.0-#{database_type_short}/bin/run.conf")
+      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.1-#{database_type_short}/bin/run.conf")
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
@@ -41,7 +41,7 @@ describe 'dcm4chee::config::jboss', :type => :class do
           }"
         end
 
-        it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.0-#{database_type_short}/bin/run.conf")
+        it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.1-#{database_type_short}/bin/run.conf")
               .with({
                 'ensure'  => 'file',
                 'owner'   => 'dcm4chee',

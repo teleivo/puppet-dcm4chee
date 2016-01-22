@@ -17,8 +17,8 @@ describe 'dcm4chee::database::mysql', :type => :class do
         'password' => 'dcm4chee',
         'host'     => 'localhost',
         'grant'    => ['ALL'],
-        'sql'      => "/opt/dcm4chee/staging/dcm4chee-2.18.0-mysql/sql//create.mysql",
-      }).that_requires('Staging::Deploy[dcm4chee-2.18.0-mysql.zip]')
+        'sql'      => "/opt/dcm4chee/staging/dcm4chee-2.18.1-mysql/sql//create.mysql",
+      }).that_requires('Staging::Deploy[dcm4chee-2.18.1-mysql.zip]')
     } 
     it { is_expected.to contain_mysql_database('pacsdb') }
     it { is_expected.to contain_mysql_user('dcm4chee@localhost') }
@@ -43,8 +43,8 @@ describe 'dcm4chee::database::mysql', :type => :class do
         'password' => 'wrong11!',
         'host'     => '192.168.1.11',
         'grant'    => ['ALL'],
-        'sql'      => "/opt/dcm4chee/staging/dcm4chee-2.18.0-mysql/sql//create.mysql",
-      }).that_requires('Staging::Deploy[dcm4chee-2.18.0-mysql.zip]')
+        'sql'      => "/opt/dcm4chee/staging/dcm4chee-2.18.1-mysql/sql//create.mysql",
+      }).that_requires('Staging::Deploy[dcm4chee-2.18.1-mysql.zip]')
     }
     it { is_expected.to contain_mysql_database('medpacs') }
     it { is_expected.to contain_mysql_user('felix@192.168.1.11') }

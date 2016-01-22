@@ -2,7 +2,7 @@
 class dcm4chee::params {
 
   $server = true
-  $server_version = '2.18.0'
+  $server_version = '2.18.1'
   $server_host = 'localhost'
   $server_java_path = undef
   $server_java_opts = []

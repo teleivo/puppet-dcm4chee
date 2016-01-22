@@ -9,8 +9,8 @@ describe 'dcm4chee::install', :type => :class do
        }"
     end
 
-    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.0-psql/').with({
-      'source'  => '/opt/dcm4chee/staging/dcm4chee-2.18.0-psql/',
+    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.1-psql/').with({
+      'source'  => '/opt/dcm4chee/staging/dcm4chee-2.18.1-psql/',
       'recurse' => true,
     }) }
   end
@@ -23,8 +23,8 @@ describe 'dcm4chee::install', :type => :class do
        }"
     end
 
-    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.0-mysql/').with({
-      'source'  => '/opt/dcm4chee/staging/dcm4chee-2.18.0-mysql/',
+    it { is_expected.to contain_file('/opt/dcm4chee/dcm4chee-2.18.1-mysql/').with({
+      'source'  => '/opt/dcm4chee/staging/dcm4chee-2.18.1-mysql/',
       'recurse' => true,
     }) }
   end
