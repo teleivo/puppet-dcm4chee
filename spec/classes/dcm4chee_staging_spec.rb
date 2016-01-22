@@ -59,6 +59,7 @@ describe 'dcm4chee::staging', :type => :class do
             .with({
               'ensure'  => 'file',
               'owner'   => 'dcm4chee',
+              'group'   => 'dcm4chee',
               'source'  => '/opt/dcm4chee/staging/jboss-4.2.3.GA/bin/run.sh',
             })
             .that_requires("Exec[/opt/dcm4chee/staging/dcm4chee-2.18.0-#{database_type_short}/bin/install_jboss.sh]")
@@ -139,6 +140,7 @@ describe 'dcm4chee::staging', :type => :class do
           .with({
             'ensure'  => 'file',
             'owner'   => 'dcm4chee',
+            'group'   => 'dcm4chee',
             'source'  => '/opt/dcm4chee/staging/jboss-4.2.3.GA/bin/run.sh',
           })
           .that_requires('Exec[/opt/dcm4chee/staging/dcm4chee-2.18.0-psql/bin/install_jboss.sh]')
