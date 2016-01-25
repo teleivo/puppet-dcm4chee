@@ -15,6 +15,9 @@ class dcm4chee::staging::weasis () {
   $weasis_dcm4chee_web_source_url =
   "${weasis_connector_base_url}${weasis_dcm4chee_web_name}"
 
+  $weasis_i18n_archive_name = 'weasis-i18n.war'
+  $weasis_i18n_source_url = "${weasis_base_url}${::dcm4chee::weasis_version}/${weasis_i18n_archive_name}"
+
   $source_directory = "${::dcm4chee::staging_path}weasis/"
 
   file { $source_directory:
@@ -63,5 +66,19 @@ class dcm4chee::staging::weasis () {
     group   => $::dcm4chee::user,
     source  => "${source_directory}${weasis_dcm4chee_web_name}",
     require => Staging::File[$weasis_dcm4chee_web_name],
+  }
+
+  ::staging::file { $weasis_i18n_archive_name:
+    source  => $weasis_i18n_source_url,
+    target  => "${source_directory}${weasis_i18n_archive_name}",
+    require => File[$source_directory],
+  }
+
+  file { "${::dcm4chee::staging::dcm4chee_deploy_path}${weasis_i18n_archive_name}":
+    ensure  => file,
+    owner   => $::dcm4chee::user,
+    group   => $::dcm4chee::user,
+    source  => "${source_directory}${weasis_i18n_archive_name}",
+    require => Staging::File[$weasis_i18n_archive_name],
   }
 }
