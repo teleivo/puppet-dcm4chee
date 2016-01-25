@@ -66,6 +66,22 @@ describe 'dcm4chee::staging::weasis', :type => :class do
             })
             .that_requires('Staging::File[dcm4chee-web-weasis.jar]')
       }
+      it { is_expected.to contain_staging__file('weasis-i18n.war')
+            .with({
+              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/2.0.5/weasis-i18n.war',
+              'target'  => '/opt/dcm4chee/staging/weasis/weasis-i18n.war',
+            })
+            .that_requires('File[/opt/dcm4chee/staging/weasis/]')
+      }
+      it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database_type_short}/server/default/deploy/weasis-i18n.war")
+            .with({
+              'ensure'  => 'file',
+              'owner'   => 'dcm4chee',
+              'group'   => 'dcm4chee',
+              'source'  => '/opt/dcm4chee/staging/weasis/weasis-i18n.war',
+            })
+            .that_requires('Staging::File[weasis-i18n.war]')
+      }
     end
   end
 end
