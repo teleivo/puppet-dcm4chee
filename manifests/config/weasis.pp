@@ -6,7 +6,7 @@ class dcm4chee::config::weasis () {
   $pacs_port = $::dcm4chee::server_dicom_port
   $weasis_hosts_allow = join($::dcm4chee::dicom_webviewer_hosts_allow, ',')
 
-  $weasis_connector_file = 'weasis-connector.properties'
+  $weasis_connector_file = 'weasis-pacs-connector.properties'
   $weasis_connector_file_path =
   "${::dcm4chee::dcm4chee_server_conf_path}${weasis_connector_file}"
 
