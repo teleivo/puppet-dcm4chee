@@ -18,6 +18,7 @@ class dcm4chee (
   $database_name               = $::dcm4chee::params::database_name,
   $database_owner_password     = $::dcm4chee::params::database_owner_password,
   $dicom_webviewer             = $::dcm4chee::params::dicom_webviewer,
+  $dicom_webviewer_aet         = $::dcm4chee::params::dicom_webviewer_aet,
   $dicom_webviewer_hosts_allow = $::dcm4chee::params::dicom_webviewer_hosts_allow,
 ) inherits dcm4chee::params {
 
@@ -49,6 +50,7 @@ class dcm4chee (
   validate_string($database_name)
   validate_string($database_owner_password)
   validate_bool($dicom_webviewer)
+  validate_string($dicom_webviewer_aet)
   validate_array($dicom_webviewer_hosts_allow)
 
   if ($server == false and $database == false) {
