@@ -4,8 +4,8 @@ class dcm4chee::config::weasis () {
   $pacs_host = $::dcm4chee::server_host
   $pacs_aet = $::dcm4chee::server_dicom_aet
   $pacs_port = $::dcm4chee::server_dicom_port
-  $weasis_hosts_allow = join($::dcm4chee::dicom_webviewer_hosts_allow, ',')
-  $weasis_aet = $::dcm4chee::dicom_webviewer_aet
+  $weasis_hosts_allow = join($::dcm4chee::weasis_webviewer_hosts_allow, ',')
+  $weasis_aet = $::dcm4chee::weasis_webviewer_aet
 
   $weasis_connector_file = 'weasis-pacs-connector.properties'
   $weasis_connector_file_path =

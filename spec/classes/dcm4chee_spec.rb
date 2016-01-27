@@ -289,26 +289,26 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
-      describe 'given non string dicom_webviewer_aet' do
+      describe 'given non string weasis_webviewer_aet' do
         let :params do
           valid_required_params.merge({
-            :dicom_webviewer_aet => true,
+            :weasis_webviewer_aet => true,
           })
         end
         it { should_not compile }
       end
-      describe 'given non boolean dicom_webviewer' do
+      describe 'given non boolean weasis_webviewer' do
         let :params do
           valid_required_params.merge({
-            :dicom_webviewer => 'NOTBOOLEAN',
+            :weasis_webviewer => 'NOTBOOLEAN',
           })
         end
         it { should_not compile }
       end
-      describe 'given non array dicom_webviewer_hosts_allow' do
+      describe 'given non array weasis_webviewer_hosts_allow' do
         let :params do
           valid_required_params.merge({
-            :dicom_webviewer_hosts_allow => 'localhost, 192.168.1.11',
+            :weasis_webviewer_hosts_allow => 'localhost, 192.168.1.11',
           })
         end
         it { should_not compile }
