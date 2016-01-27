@@ -21,6 +21,7 @@ class dcm4chee::params {
   $database_owner_password = 'dcm4chee'
   $weasis = true
   $weasis_aet = 'PACS-CONNECTOR'
+  $weasis_request_addparams = undef
   $weasis_request_ids = [
     'patientID',
     'studyUID',

@@ -22,6 +22,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
             .with_content(/^pacs.aet=DCM4CHEE$/)
             .with_content(/^pacs.host=localhost$/)
             .with_content(/^pacs.port=11112$/)
+            .without_content(/^request.addparams=/)
             .with_content(/^request.ids=patientID,studyUID,accessionNumber,seriesUID,objectUID$/)
             .with_content(/^hosts.allow=$/)
       }
@@ -30,14 +31,15 @@ describe 'dcm4chee::config::weasis', :type => :class do
     describe "with database_type=#{database_type} and custom server parameters" do
       let :pre_condition do
         "class {'dcm4chee':
-           database_type      => #{database_type},
-           server_java_path   => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-           server_host        => '192.168.1.11',
-           server_dicom_aet   => 'MEDPACS',
-           server_dicom_port  => '104',
-           weasis_aet         => 'WEASIS',
-           weasis_request_ids => [ 'patientID', 'studyUID' ],
-           weasis_hosts_allow => [ '192.168.1.20', '192.168.1.21' ],
+           database_type            => #{database_type},
+           server_java_path         => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+           server_host              => '192.168.1.11',
+           server_dicom_aet         => 'MEDPACS',
+           server_dicom_port        => '104',
+           weasis_aet               => 'WEASIS',
+           weasis_request_addparams => '&embedManifest',
+           weasis_request_ids       => [ 'patientID', 'studyUID' ],
+           weasis_hosts_allow       => [ '192.168.1.20', '192.168.1.21' ],
         }"
       end
 
@@ -52,6 +54,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
             .with_content(/^pacs.aet=MEDPACS$/)
             .with_content(/^pacs.host=192.168.1.11$/)
             .with_content(/^pacs.port=104$/)
+            .with_content(/^request.addparams=&embedManifest$/)
             .with_content(/^request.ids=patientID,studyUID$/)
             .with_content(/^hosts.allow=192.168.1.20,192.168.1.21$/)
       }
