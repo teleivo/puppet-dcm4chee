@@ -18,6 +18,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
               'group'   => 'dcm4chee',
               'mode'    => '0644',
             })
+            .with_content(/^aet=PACS-CONNECTOR$/)
             .with_content(/^pacs.aet=DCM4CHEE$/)
             .with_content(/^pacs.host=localhost$/)
             .with_content(/^pacs.port=11112$/)
@@ -33,7 +34,8 @@ describe 'dcm4chee::config::weasis', :type => :class do
            server_host                 => '192.168.1.11',
            server_dicom_aet            => 'MEDPACS',
            server_dicom_port           => '104',
-           dicom_webviewer_hosts_allow => [ '192.168.1.20', '192.168.1.21' ]
+           dicom_webviewer_aet         => 'WEASIS',
+           dicom_webviewer_hosts_allow => [ '192.168.1.20', '192.168.1.21' ],
         }"
       end
 
@@ -44,6 +46,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
               'group'   => 'dcm4chee',
               'mode'    => '0644',
             })
+            .with_content(/^aet=WEASIS$/)
             .with_content(/^pacs.aet=MEDPACS$/)
             .with_content(/^pacs.host=192.168.1.11$/)
             .with_content(/^pacs.port=104$/)

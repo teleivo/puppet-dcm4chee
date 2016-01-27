@@ -289,6 +289,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non string dicom_webviewer_aet' do
+        let :params do
+          valid_required_params.merge({
+            :dicom_webviewer_aet => true,
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non boolean dicom_webviewer' do
         let :params do
           valid_required_params.merge({
