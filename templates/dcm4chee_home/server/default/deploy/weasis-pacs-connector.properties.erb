@@ -21,6 +21,9 @@ server.canonical.hostname.mode=false
 
 ##### Allows additional parameters at the end of pacs connector URL
 #request.addparams=&embedManifest
+<%- if @weasis_request_addparams -%>
+request.addparams=<%= @weasis_request_addparams %>
+<%- end -%>
 
 ##### Name of the default jnlp template (must be placed in the same directory as this file)
 #jnlp.default.name=weasis2.jnlp

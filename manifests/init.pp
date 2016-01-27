@@ -19,6 +19,7 @@ class dcm4chee (
   $database_owner_password   = $::dcm4chee::params::database_owner_password,
   $weasis                    = $::dcm4chee::params::weasis,
   $weasis_aet                = $::dcm4chee::params::weasis_aet,
+  $weasis_request_addparams  = $::dcm4chee::params::weasis_request_addparams,
   $weasis_request_ids        = $::dcm4chee::params::weasis_request_ids,
   $weasis_hosts_allow        = $::dcm4chee::params::weasis_hosts_allow,
 ) inherits dcm4chee::params {
@@ -53,6 +54,7 @@ class dcm4chee (
   
   validate_bool($weasis)
   validate_string($weasis_aet)
+  validate_string($weasis_request_addparams)
   validate_array($weasis_request_ids)
   if empty($weasis_request_ids) {
     fail('weasis_request_ids cannot be empty. Choose from values: patientID, studyUID, accessionNumber, seriesUID, objectUID')

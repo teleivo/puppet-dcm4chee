@@ -305,6 +305,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non string weasis_request_addparams' do
+        let :params do
+          valid_required_params.merge({
+            :weasis_request_addparams => true,
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non array weasis_request_ids' do
         let :params do
           valid_required_params.merge({
