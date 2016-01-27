@@ -19,9 +19,9 @@ class dcm4chee::params {
   $database_port = undef
   $database_name = 'pacsdb'
   $database_owner_password = 'dcm4chee'
-  $dicom_webviewer = true
-  $dicom_webviewer_aet = 'PACS-CONNECTOR'
-  $dicom_webviewer_hosts_allow = []
+  $weasis_webviewer = true
+  $weasis_webviewer_aet = 'PACS-CONNECTOR'
+  $weasis_webviewer_hosts_allow = []
   
   if !($::operatingsystem == 'Ubuntu' and $::operatingsystemrelease == '14.04'
   and $::architecture == 'amd64') {

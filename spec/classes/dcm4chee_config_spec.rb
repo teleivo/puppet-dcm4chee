@@ -19,11 +19,11 @@ describe 'dcm4chee::config', :type => :class do
     it { is_expected.not_to contain_class('dcm4chee::config::mysql') }
   end
 
-  describe 'with defaults and dicom_webviewer = false' do
+  describe 'with defaults and weasis_webviewer = false' do
     let :pre_condition do
       "class {'dcm4chee':
          server_java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-         dicom_webviewer  => false,
+         weasis_webviewer => false,
        }"
     end
 

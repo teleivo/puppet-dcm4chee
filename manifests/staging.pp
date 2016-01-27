@@ -79,7 +79,7 @@ class dcm4chee::staging () {
       require => Exec["${dcm4chee_bin_path}install_jboss.sh"],
     }
   
-    if $::dcm4chee::dicom_webviewer {
+    if $::dcm4chee::weasis_webviewer {
       class { '::dcm4chee::staging::weasis':
         require => File["${dcm4chee_bin_path}run.sh"],
       }
