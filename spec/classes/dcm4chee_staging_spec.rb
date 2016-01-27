@@ -101,11 +101,11 @@ describe 'dcm4chee::staging', :type => :class do
     it { is_expected.not_to contain_class('dcm4chee::staging::weasis') }
   end
 
-  describe 'given defaults, server_java_path set and weasis_webviewer = false' do
+  describe 'given defaults, server_java_path set and weasis = false' do
     let :pre_condition do
       "class {'dcm4chee':
         server_java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-        weasis_webviewer => false,
+        weasis           => false,
       }"
     end
 
