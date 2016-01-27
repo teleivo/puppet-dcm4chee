@@ -5,7 +5,7 @@ class dcm4chee::config () {
   class { $database_class: } ->
   class { '::dcm4chee::config::jboss': }
   
-  if $::dcm4chee::weasis_webviewer {
+  if $::dcm4chee::weasis {
     class { '::dcm4chee::config::weasis': }
     Class['::dcm4chee::config::jboss'] ->
     Class['::dcm4chee::config::weasis']

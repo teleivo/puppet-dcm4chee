@@ -289,42 +289,42 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
-      describe 'given non string weasis_webviewer_aet' do
+      describe 'given non string weasis_aet' do
         let :params do
           valid_required_params.merge({
-            :weasis_webviewer_aet => true,
+            :weasis_aet => true,
           })
         end
         it { should_not compile }
       end
-      describe 'given non boolean weasis_webviewer' do
+      describe 'given non boolean weasis' do
         let :params do
           valid_required_params.merge({
-            :weasis_webviewer => 'NOTBOOLEAN',
+            :weasis => 'NOTBOOLEAN',
           })
         end
         it { should_not compile }
       end
-      describe 'given non array weasis_webviewer_request_ids' do
+      describe 'given non array weasis_request_ids' do
         let :params do
           valid_required_params.merge({
-            :weasis_webviewer_request_ids => 'studyUID, patientID',
+            :weasis_request_ids => 'studyUID, patientID',
           })
         end
         it { should_not compile }
       end
-      describe 'given empty array weasis_webviewer_request_ids' do
+      describe 'given empty array weasis_request_ids' do
         let :params do
           valid_required_params.merge({
-            :weasis_webviewer_request_ids => [],
+            :weasis_request_ids => [],
           })
         end
         it { should_not compile }
       end
-      describe 'given non array weasis_webviewer_hosts_allow' do
+      describe 'given non array weasis_hosts_allow' do
         let :params do
           valid_required_params.merge({
-            :weasis_webviewer_hosts_allow => 'localhost, 192.168.1.11',
+            :weasis_hosts_allow => 'localhost, 192.168.1.11',
           })
         end
         it { should_not compile }
