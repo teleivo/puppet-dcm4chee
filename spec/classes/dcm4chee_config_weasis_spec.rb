@@ -22,6 +22,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
             .with_content(/^pacs.aet=DCM4CHEE$/)
             .with_content(/^pacs.host=localhost$/)
             .with_content(/^pacs.port=11112$/)
+            .with_content(/^request.ids=patientID,studyUID,accessionNumber,seriesUID,objectUID$/)
             .with_content(/^hosts.allow=$/)
       }
     end
@@ -35,6 +36,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
            server_dicom_aet             => 'MEDPACS',
            server_dicom_port            => '104',
            weasis_webviewer_aet         => 'WEASIS',
+           weasis_webviewer_request_ids => [ 'patientID', 'studyUID' ],
            weasis_webviewer_hosts_allow => [ '192.168.1.20', '192.168.1.21' ],
         }"
       end
@@ -50,6 +52,7 @@ describe 'dcm4chee::config::weasis', :type => :class do
             .with_content(/^pacs.aet=MEDPACS$/)
             .with_content(/^pacs.host=192.168.1.11$/)
             .with_content(/^pacs.port=104$/)
+            .with_content(/^request.ids=patientID,studyUID$/)
             .with_content(/^hosts.allow=192.168.1.20,192.168.1.21$/)
       }
     end

@@ -305,6 +305,22 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non array weasis_webviewer_request_ids' do
+        let :params do
+          valid_required_params.merge({
+            :weasis_webviewer_request_ids => 'studyUID, patientID',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given empty array weasis_webviewer_request_ids' do
+        let :params do
+          valid_required_params.merge({
+            :weasis_webviewer_request_ids => [],
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non array weasis_webviewer_hosts_allow' do
         let :params do
           valid_required_params.merge({

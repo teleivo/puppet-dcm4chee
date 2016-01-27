@@ -19,6 +19,7 @@ class dcm4chee (
   $database_owner_password      = $::dcm4chee::params::database_owner_password,
   $weasis_webviewer             = $::dcm4chee::params::weasis_webviewer,
   $weasis_webviewer_aet         = $::dcm4chee::params::weasis_webviewer_aet,
+  $weasis_webviewer_request_ids = $::dcm4chee::params::weasis_webviewer_request_ids,
   $weasis_webviewer_hosts_allow = $::dcm4chee::params::weasis_webviewer_hosts_allow,
 ) inherits dcm4chee::params {
 
@@ -49,8 +50,13 @@ class dcm4chee (
   validate_integer($database_port_picked, $tcp_port_max, $tcp_port_min)
   validate_string($database_name)
   validate_string($database_owner_password)
+  
   validate_bool($weasis_webviewer)
   validate_string($weasis_webviewer_aet)
+  validate_array($weasis_webviewer_request_ids)
+  if empty($weasis_webviewer_request_ids) {
+    fail('weasis_webviewer_request_ids cannot be empty. Choose from values: patientID, studyUID, accessionNumber, seriesUID, objectUID')
+  }
   validate_array($weasis_webviewer_hosts_allow)
 
   if ($server == false and $database == false) {
