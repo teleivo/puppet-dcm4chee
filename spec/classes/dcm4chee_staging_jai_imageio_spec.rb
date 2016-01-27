@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe 'dcm4chee::staging::replace_jai_imageio_with_64bit', :type => :class do
-  
+describe 'dcm4chee::staging::jai_imageio', :type => :class do
+
   { 'mysql' => 'mysql', 'postgresql' => 'psql' }.each do |database_type, database_type_short|
     describe "with defaults, server_java_path set and database_type=#{database_type}" do
       let :pre_condition do
         "class {'dcm4chee':
-           database_type    => #{database_type}, 
+           database_type    => #{database_type},
            server_java_path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
         }"
       end

@@ -31,7 +31,7 @@ class dcm4chee::staging () {
   }
 
   if $::dcm4chee::server {
-    class { '::dcm4chee::staging::replace_jai_imageio_with_64bit':
+    class { '::dcm4chee::staging::jai_imageio':
       require => Staging::Deploy[$dcm4chee_archive_name],
     }
 
