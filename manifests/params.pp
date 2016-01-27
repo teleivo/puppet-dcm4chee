@@ -21,6 +21,13 @@ class dcm4chee::params {
   $database_owner_password = 'dcm4chee'
   $weasis_webviewer = true
   $weasis_webviewer_aet = 'PACS-CONNECTOR'
+  $weasis_webviewer_request_ids = [
+    'patientID',
+    'studyUID',
+    'accessionNumber',
+    'seriesUID',
+    'objectUID',
+  ]
   $weasis_webviewer_hosts_allow = []
   
   if !($::operatingsystem == 'Ubuntu' and $::operatingsystemrelease == '14.04'
