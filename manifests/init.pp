@@ -9,6 +9,7 @@ class dcm4chee (
   $server_ajp_connector_port = $::dcm4chee::params::server_ajp_connector_port,
   $server_dicom_aet          = $::dcm4chee::params::server_dicom_aet,
   $server_dicom_port         = $::dcm4chee::params::server_dicom_port,
+  $manage_user               = $::dcm4chee::params::manage_user,
   $user                      = $::dcm4chee::params::user,
   $user_home                 = $::dcm4chee::params::user_home,
   $database                  = $::dcm4chee::params::database,
@@ -35,6 +36,7 @@ class dcm4chee (
   validate_integer($server_ajp_connector_port, $tcp_port_max, $tcp_port_min)
   validate_string($server_dicom_aet)
   validate_integer($server_dicom_port, $tcp_port_max, $tcp_port_min)
+  validate_bool($manage_user)
   validate_string($user)
   validate_absolute_path($user_home)
   validate_bool($database)
@@ -96,11 +98,13 @@ class dcm4chee (
   $dcm4chee_server_deploy_path = "${dcm4chee_home_path}${dcm4chee_server_deploy_rel_path}"
   $dcm4chee_server_conf_path = "${dcm4chee_home_path}${dcm4chee_server_conf_rel_path}"
 
-  user { $user:
-    ensure     => present,
-    home       => $user_home,
-    managehome => true,
-  }->
+  if $manage_user {
+    user { $user:
+      ensure     => present,
+      home       => $user_home,
+      managehome => true,
+    }
+  }
   
   class { '::dcm4chee::staging': }
   

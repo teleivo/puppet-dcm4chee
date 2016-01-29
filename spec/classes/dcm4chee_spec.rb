@@ -10,7 +10,7 @@ describe 'dcm4chee', :type => :class do
 
   context 'on Ubuntu 14.04 64bit' do
 
-    context 'with server = true and database = true and server_java_path set' do
+    context 'with defaults and server_java_path set' do
       let :params do
         valid_required_params
       end
@@ -22,6 +22,16 @@ describe 'dcm4chee', :type => :class do
       it { is_expected.to contain_class('dcm4chee::install').that_comes_before('dcm4chee::config') }
       it { is_expected.to contain_class('dcm4chee::config') }
       it { is_expected.to contain_class('dcm4chee::service').that_subscribes_to('dcm4chee::config') }
+    end
+
+    context 'with manage_user = false' do
+      let :params do
+        valid_required_params.merge({
+          :manage_user => false,
+        })
+      end
+      it { is_expected.to compile }
+      it { is_expected.not_to contain_user('dcm4chee') }
     end
 
     context 'with server = true and database = false' do
@@ -102,6 +112,14 @@ describe 'dcm4chee', :type => :class do
         it { should_not compile }
       end
       describe 'given no server_java_path when server = true' do
+        it { should_not compile }
+      end
+      describe 'given non boolean manage_user' do
+        let :params do
+          valid_required_params.merge({
+            :manage_user => 'NOTBOOLEAN',
+          })
+        end
         it { should_not compile }
       end
       describe 'given non string user' do
