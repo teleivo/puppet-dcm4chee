@@ -266,6 +266,30 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non string server_log_file_path' do
+        let :params do
+          valid_required_params.merge({
+            :server_log_file_path => true,
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given non string server_log_file_max_size ' do
+        let :params do
+          valid_required_params.merge({
+            :server_log_file_max_size  => true,
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given non integer server_log_max_backups' do
+        let :params do
+          valid_required_params.merge({
+            :server_log_max_backups => 'UpsNotANumber',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non string server_dicom_aet' do
         let :params do
           valid_required_params.merge({

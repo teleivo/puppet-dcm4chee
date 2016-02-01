@@ -28,4 +28,16 @@ class dcm4chee::config::jboss () {
     mode    => '0644',
     content => template('dcm4chee/dcm4chee_home/bin/run.conf.erb'),
   }
+
+  $jboss_log_file_path = $::dcm4chee::server_log_file_path
+  $jboss_log_file_max_size = $::dcm4chee::server_log_file_max_size
+  $jboss_log_max_backups = $::dcm4chee::server_log_max_backups
+  file { "${::dcm4chee::dcm4chee_server_conf_path}jboss-log4j.xml":
+    ensure  => file,
+    owner   => $::dcm4chee::user,
+    group   => $::dcm4chee::user,
+    mode    => '0644',
+    content => template('dcm4chee/dcm4chee_home/server/default/conf/jboss-log4j.xml.erb'),
+  }
 }
+

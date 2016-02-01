@@ -206,6 +206,24 @@ Specifies the dcm4chee (jboss) ajp connector port.
 Valid options: integer between 0 and 65535.
 Defaults to '8009'.
 
+##### `server_log_file_path`
+
+Specifies the dcm4chee (jboss) log file path managing 'server/default/conf/jboss-log4j.xml' RollingFileAppender param "File".
+Valid options: string.
+Defaults to '${jboss.server.log.dir}/server.log'.
+
+##### `server_log_file_max_size`
+
+Specifies the dcm4chee (jboss) log file max size managing 'server/default/conf/jboss-log4j.xml' RollingFileAppender param "MaxFileSize".
+Valid options: string.
+Defaults to '10000KB'.
+
+##### `server_log_max_backups`
+
+Specifies the dcm4chee (jboss) log file path managing 'server/default/conf/jboss-log4j.xml' RollingFileAppender param "MaxBackupIndex".
+Valid options: integer.
+Defaults to '1'.
+
 ##### `server_dicom_aet`
 
 Specifies the dcm4chee DICOM AE Title.
