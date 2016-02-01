@@ -30,6 +30,14 @@ describe 'dcm4chee::config::jboss', :type => :class do
             .without_content(/^JAVA_OPTS=$/)
             .without_content(/^JAVA_OPTS=""$/)
       }
+      it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.1-#{database_type_short}/server/default/conf/jboss-log4j.xml")
+            .with({
+              'ensure'  => 'file',
+              'owner'   => 'dcm4chee',
+              'group'   => 'dcm4chee',
+              'mode'    => '0644',
+            })
+      }
     end
 
     describe "with database_type=#{database_type} and custom server_java_opts" do

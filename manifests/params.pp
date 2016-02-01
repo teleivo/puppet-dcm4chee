@@ -8,6 +8,9 @@ class dcm4chee::params {
   $server_java_opts = []
   $server_http_port = '8080'
   $server_ajp_connector_port = '8009'
+  $server_log_file_path = '${jboss.server.log.dir}/server.log'
+  $server_log_file_max_size = '10000KB'
+  $server_log_max_backups  = '1'
   $server_dicom_aet = 'DCM4CHEE'
   $server_dicom_port = '11112'
   $manage_user = true
