@@ -282,6 +282,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non boolean server_log_append' do
+        let :params do
+          valid_required_params.merge({
+            :server_log_append => 'NOTBOOLEAN',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non integer server_log_max_backups' do
         let :params do
           valid_required_params.merge({
