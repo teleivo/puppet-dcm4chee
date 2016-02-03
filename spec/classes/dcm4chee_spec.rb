@@ -395,6 +395,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given weasis_request_ids with invalid members' do
+        let :params do
+          valid_required_params.merge({
+            :weasis_request_ids => [ 'studyUID', 'patientID', 'TRUMPET' ],
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non array weasis_hosts_allow' do
         let :params do
           valid_required_params.merge({

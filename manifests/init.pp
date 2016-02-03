@@ -74,9 +74,14 @@ class dcm4chee (
   validate_bool($weasis)
   validate_string($weasis_aet)
   validate_string($weasis_request_addparams)
+  
+  # Only allow request.ids which are allowed by weasis-pacs-connector
   validate_array($weasis_request_ids)
   if empty($weasis_request_ids) {
     fail('weasis_request_ids cannot be empty. Choose from values: patientID, studyUID, accessionNumber, seriesUID, objectUID')
+  }
+  if ! member(['patientID', 'studyUID', 'accessionNumber', 'seriesUID', 'objectUID'], $weasis_request_ids) {
+    fail('weasis_request_ids contains invalid members. Choose from values: patientID, studyUID, accessionNumber, seriesUID, objectUID')
   }
   validate_array($weasis_hosts_allow)
 

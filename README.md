@@ -319,17 +319,8 @@ Default is undefined.
 ##### `weasis_request_ids`
 
 Specifies the weasis [pacs-connector](https://github.com/nroduit/weasis-pacs-connector) property 'request.ids'.
-Valid options: an array.
-Default is
-```
-   [
-      'patientID',
-     'studyUID',
-     'accessionNumber',
-     'seriesUID',
-     'objectUID',
-  ]
-```
+Valid options: an array containing elements from values 'patientID', 'studyUID', 'accessionNumber', 'seriesUID', 'objectUID'.
+Defaults to [ 'patientID', 'studyUID', 'accessionNumber', 'seriesUID', 'objectUID' ].
 
 ##### `weasis_hosts_allow`
 
