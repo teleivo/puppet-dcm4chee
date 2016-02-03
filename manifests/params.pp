@@ -10,6 +10,7 @@ class dcm4chee::params {
   $server_ajp_connector_port = '8009'
   $server_log_file_path = '${jboss.server.log.dir}/server.log'
   $server_log_file_max_size = '10000KB'
+  $server_log_append = false
   $server_log_max_backups  = '1'
   $server_log_appenders  = [
     'FILE',

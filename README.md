@@ -218,6 +218,12 @@ Specifies the dcm4chee (jboss) log file max size managing 'server/default/conf/j
 Valid options: string.
 Defaults to '10000KB'.
 
+##### `server_log_append`
+
+Specifies whether the dcm4chee dcm4chee (jboss) log file should be appended to. Managing 'server/default/conf/jboss-log4j.xml' RollingFileAppender param "Append".
+Valid options: 'true', 'false'.
+Defaults to 'false'.
+
 ##### `server_log_max_backups`
 
 Specifies the dcm4chee (jboss) log file path managing 'server/default/conf/jboss-log4j.xml' RollingFileAppender param "MaxBackupIndex".

@@ -9,6 +9,7 @@ class dcm4chee (
   $server_ajp_connector_port = $::dcm4chee::params::server_ajp_connector_port,
   $server_log_file_path      = $::dcm4chee::params::server_log_file_path,
   $server_log_file_max_size  = $::dcm4chee::params::server_log_file_max_size,
+  $server_log_append         = $::dcm4chee::params::server_log_append,
   $server_log_max_backups    = $::dcm4chee::params::server_log_max_backups,
   $server_log_appenders      = $::dcm4chee::params::server_log_appenders,
   $server_dicom_aet          = $::dcm4chee::params::server_dicom_aet,
@@ -40,6 +41,7 @@ class dcm4chee (
   validate_integer($server_ajp_connector_port, $tcp_port_max, $tcp_port_min)
   validate_string($server_log_file_path)
   validate_string($server_log_file_max_size)
+  validate_bool($server_log_append)
   validate_integer($server_log_max_backups)
 
   # Only allow appenders which actually exist in jboss-log4j.xml
