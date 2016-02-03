@@ -224,6 +224,12 @@ Specifies the dcm4chee (jboss) log file path managing 'server/default/conf/jboss
 Valid options: integer.
 Defaults to '1'.
 
+##### `server_log_appenders`
+
+Specifies the dcm4chee (jboss) log appenders managing 'server/default/conf/jboss-log4j.xml' <root> <appender-ref> elements.
+Valid options: array containing elements from values 'FILE', 'CONSOLE', 'JMX'.
+Defaults to [ 'FILE', 'JMX' ].
+
 ##### `server_dicom_aet`
 
 Specifies the dcm4chee DICOM AE Title.
