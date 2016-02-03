@@ -560,9 +560,9 @@
    <!-- ======================= -->
 
    <root>
-      <appender-ref ref="CONSOLE"/>
-      <appender-ref ref="FILE"/>
-      <appender-ref ref="JMX"/>
+   <% @jboss_log_appenders.each do |appender| -%>
+     <appender-ref ref="<%= appender %>"/>
+   <% end -%>
    </root>
 
    <!-- Clustering logging -->

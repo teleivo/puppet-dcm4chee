@@ -11,6 +11,10 @@ class dcm4chee::params {
   $server_log_file_path = '${jboss.server.log.dir}/server.log'
   $server_log_file_max_size = '10000KB'
   $server_log_max_backups  = '1'
+  $server_log_appenders  = [
+    'FILE',
+    'JMX',
+  ]
   $server_dicom_aet = 'DCM4CHEE'
   $server_dicom_port = '11112'
   $manage_user = true

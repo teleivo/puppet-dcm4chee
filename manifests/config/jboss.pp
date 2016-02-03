@@ -32,6 +32,7 @@ class dcm4chee::config::jboss () {
   $jboss_log_file_path = $::dcm4chee::server_log_file_path
   $jboss_log_file_max_size = $::dcm4chee::server_log_file_max_size
   $jboss_log_max_backups = $::dcm4chee::server_log_max_backups
+  $jboss_log_appenders = $::dcm4chee::server_log_appenders
   file { "${::dcm4chee::dcm4chee_server_conf_path}jboss-log4j.xml":
     ensure  => file,
     owner   => $::dcm4chee::user,

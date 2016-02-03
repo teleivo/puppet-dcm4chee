@@ -10,6 +10,7 @@ class dcm4chee (
   $server_log_file_path      = $::dcm4chee::params::server_log_file_path,
   $server_log_file_max_size  = $::dcm4chee::params::server_log_file_max_size,
   $server_log_max_backups    = $::dcm4chee::params::server_log_max_backups,
+  $server_log_appenders      = $::dcm4chee::params::server_log_appenders,
   $server_dicom_aet          = $::dcm4chee::params::server_dicom_aet,
   $server_dicom_port         = $::dcm4chee::params::server_dicom_port,
   $manage_user               = $::dcm4chee::params::manage_user,
@@ -40,6 +41,16 @@ class dcm4chee (
   validate_string($server_log_file_path)
   validate_string($server_log_file_max_size)
   validate_integer($server_log_max_backups)
+
+  # Only allow appenders which actually exist in jboss-log4j.xml
+  validate_array($server_log_appenders)
+  if empty($server_log_appenders) {
+    fail('server_log_appenders cannot be empty. Choose from values: FILE, CONSOLE, JMX')
+  }
+  if ! member(['FILE', 'CONSOLE', 'JMX'], $server_log_appenders) {
+    fail('server_log_appenders contains invalid members. Choose from values: FILE, CONSOLE, JMX')
+  }
+
   validate_string($server_dicom_aet)
   validate_integer($server_dicom_port, $tcp_port_max, $tcp_port_min)
   validate_bool($manage_user)

@@ -290,6 +290,30 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non array server_log_appenders' do
+        let :params do
+          valid_required_params.merge({
+            :server_log_appenders => 'FILE, JMX',
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given empty array server_log_appenders' do
+        let :params do
+          valid_required_params.merge({
+            :server_log_appenders => [],
+          })
+        end
+        it { should_not compile }
+      end
+      describe 'given server_log_appenders with member other than FILE, CONSOLE, JMX' do
+        let :params do
+          valid_required_params.merge({
+            :server_log_appenders => [ 'FILE', 'JMX', 'TRUMPET' ],
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non string server_dicom_aet' do
         let :params do
           valid_required_params.merge({
