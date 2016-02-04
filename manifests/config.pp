@@ -2,6 +2,8 @@
 class dcm4chee::config () {
   
   $database_class = "::dcm4chee::config::${dcm4chee::database_type}"
+
+  anchor { '::dcm4chee::config_begin': } ->
   class { $database_class: } ->
   class { '::dcm4chee::config::jboss': } ->
   anchor { '::dcm4chee::config_end': }
