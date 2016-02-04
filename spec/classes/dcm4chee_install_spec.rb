@@ -13,6 +13,14 @@ describe 'dcm4chee::install', :type => :class do
       'source'  => '/opt/dcm4chee/staging/dcm4chee-2.18.1-psql/',
       'recurse' => true,
     }) }
+    it { is_expected.to contain_file('/etc/init.d/dcm4chee')
+          .with({
+            'ensure' => 'file',
+            'owner'  => 'root',
+            'group'  => 'root',
+            'mode'   => '0755',
+          })
+    }
   end
 
   describe 'with defaults, server_java_path set and database_type=mysql' do

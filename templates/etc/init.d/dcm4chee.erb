@@ -1,11 +1,11 @@
 #! /bin/sh
 #
-# /etc/init.d/pacs-dcm4chee -- startup script for the dcm4chee PACS
+# /etc/init.d/dcm4chee -- startup script for the dcm4chee PACS
 #
 ### BEGIN INIT INFO
-# Provides:          pacs-dcm4chee
-# Required-Start:    $local_fs $remote_fs $network $time <%= @db_type %>
-# Required-Stop:     $local_fs $remote_fs $network $time <%= @db_type %>
+# Provides:          dcm4chee
+# Required-Start:    $local_fs $remote_fs $network $time
+# Required-Stop:     $local_fs $remote_fs $network $time
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # Short-Description: DCM4CHEE PACS
@@ -22,7 +22,7 @@ DAEMON="${JBOSS_HOME}/bin/run.sh"
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 5
 
-NAME="pacs-dcm4chee"
+NAME="dcm4chee"
 DESC="DCM4CHEE PACS"
 
 DAEMON_ARGS="-c ${JBOSS_CONF} -b 0.0.0.0"
@@ -40,7 +40,7 @@ if [ -z "`echo $PATH | grep $JAVAPTH`" ]; then
   export PATH=$PATH:$JAVAPTH
 fi
 
-# Define LSB log_* functions.
+# Define LSB functions.
 . /lib/lsb/init-functions
 
 #
@@ -48,32 +48,43 @@ fi
 #
 do_start()
 {
-    # Checked the PID file exists and check the actual status of process
-    if [ -e "${PIDFILE}" ]; then
-        status_of_proc -p ${PIDFILE} ${DAEMON} "${NAME}" && status="0" || status="$?"
-        # no need to start again on success
-        if [ ${status} -eq 0 ]; then
-            echo "PID: "$(cat "${PIDFILE}")
-            exit
-        fi
-    fi
+	# Return
+	#   0 if daemon has been started
+	#   1 if daemon was already running
+	#   2 if daemon could not be started
 
-    # Start the daemon.
-    log_daemon_msg "Starting ${NAME}"
+	if pidofproc -p $PIDFILE "$DAEMON" > /dev/null 2>&1 ; then
+	    return 1
+	fi
 
-    echo "As user: ${DAEMON_USER}"
-    if [ ! -d "${PIDDIR}" ]
-    then
+    if [ ! -d "${PIDDIR}" ]; then
         mkdir -p "${PIDDIR}"
         chown "${DAEMON_USER}":"${DAEMON_USER}" "${PIDDIR}"
     fi
 
-    if start-stop-daemon --start --user ${DAEMON_USER} --chuid ${DAEMON_USER} --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} -- ${DAEMON_ARGS} ; then
-        log_end_msg 0
-        echo "PID: "$(cat "${PIDFILE}")
-    else
-        log_end_msg 1
-    fi
+    start-stop-daemon --start --user ${DAEMON_USER} --chuid ${DAEMON_USER} --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} -- ${DAEMON_ARGS}
+    dcm4chee_wait_start $?
+    return $?
+}
+
+dcm4chee_wait_start() {
+	local STATUS=$1
+	local i=0
+	while : ; do
+        PIDTMP=$(pidofproc -p $PIDFILE $DAEMON)
+        if [ -n "${PIDTMP:-}" ] && kill -0 "${PIDTMP:-}" 2> /dev/null; then
+            return $STATUS
+        fi
+
+        if [ $i = "20" ] ; then
+            DCM4CHEE_INIT_MESSAGE="The dcm4chee $JBOSS_HOME instance did not start within 20 seconds. Please read the log files to discover problems"
+            return 2
+        fi
+
+        log_progress_msg "."
+        sleep 1
+        i=$(($i+1))
+	done
 }
 
 #
@@ -81,50 +92,107 @@ do_start()
 #
 do_stop()
 {
-    if [ -e "${PIDFILE}" ]; then
-        status_of_proc -p ${PIDFILE} ${DAEMON} "Stoppping ${NAME} which" && status="0" || status="$?"
+	# Return
+	#   0 if daemon has been stopped
+	#   1 if daemon was already stopped
+	#   2 if daemon could not be stopped
+	#   other if a failure occurred
 
-        if [ "${status}" = 0 ]; then
-            start-stop-daemon --stop --pidfile ${PIDFILE}
-            #start-stop-daemon --stop --retry=TERM/30/KILL/5 --pidfile ${PIDFILE}
-
-            RETVAL="$?"
-            [ "${RETVAL}" = 2 ] && return 2
-
-            if [ "${RETVAL}" -eq 0 ]; then
-                echo "[OK]"
-            else
-                echo "[WARNING] RETVAL: ${RETVAL}"
-                return "${RETVAL}"
-            fi
-
-            # Delete their pidfiles when they exit.
-            rm -f ${PIDFILE}
-        fi
+	if pidofproc -p $PIDFILE "$DAEMON" > /dev/null 2>&1 ; then
+        start-stop-daemon --stop --pidfile ${PIDFILE}
+        dcm4chee_wait_stop $?
+        return $?
     else
-        log_daemon_msg "${NAME} is not running"
-        log_end_msg 0
-    fi
+	    return 1
+	fi
+}
+
+dcm4chee_wait_stop() {
+	local STATUS=$1
+
+	PIDTMP=$(pidofproc -p $PIDFILE $DAEMON)
+	if [ -n "${PIDTMP:-}" ] && kill -0 "${PIDTMP:-}" 2> /dev/null; then
+	        local i=0
+	        while kill -0 "${PIDTMP:-}" 2> /dev/null;  do
+	                if [ $i = '60' ]; then
+	                        break
+	                        STATUS=2
+	                fi
+	                log_progress_msg "."
+	                sleep 1
+	                i=$(($i+1))
+	        done
+	        return $STATUS
+	else
+	    return $STATUS
+	fi
 }
 
 case "$1" in
   start)
+	log_daemon_msg "Starting $DESC" "$NAME"
     do_start
+	RET_STATUS=$?
+	case "$RET_STATUS" in
+		0|1)
+			[ $RET_STATUS = 1 ] && log_warning_msg "${NAME} was already running"
+	        ;;
+		2)
+			log_failure_msg
+			print_error_msg
+			exit 1
+			;;
+	esac
     ;;
   stop)
+	log_daemon_msg "Stopping $DESC" "$NAME"
     do_stop
+	RET_STATUS=$?
+	case "$RET_STATUS" in
+		0|1)
+			[ $RET_STATUS = 1 ] && log_warning_msg "${NAME} was not running"
+	        ;;
+		2)
+		    log_failure_msg
+			print_error_msg
+			exit 1
+	        ;;
+	esac
     ;;
+  restart)
+	log_daemon_msg "Restarting $DESC" "$NAME"
+	do_stop
+	case "$?" in
+		0|1)
+			do_start
+			case "$?" in
+				0)
+					log_end_msg 0
+					;;
+				1|*)
+					log_end_msg 1 # Old process is still or failed to running
+					print_error_msg
+					exit 1
+					;;
+			esac
+			;;
+		*)
+			# Failed to stop
+			log_end_msg 1
+			print_error_msg
+			exit 1
+			;;
+	esac
+	;;
   status)
-    if [ -e "${PIDFILE}" ]; then
-        status_of_proc -p "$PIDFILE" "$DAEMON" "$NAME process" && exit 0 || exit $?
-    else
-        log_daemon_msg "${NAME} is not running"
-        log_end_msg 3
-    fi
-    ;;
+	status_of_proc -p $PIDFILE "dcm4chee" "$NAME"
+	exit $?
+	;;
   *)
-    echo "Usage: ${SCRIPTNAME} {start|stop|status}" >&2
+    echo "Usage: ${SCRIPTNAME} {start|stop|restart|status}" >&2
     exit 3
     ;;
 esac
+
+exit 0
 

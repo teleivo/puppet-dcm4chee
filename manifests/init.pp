@@ -130,12 +130,15 @@ class dcm4chee (
     }
   }
   
-  class { '::dcm4chee::staging': }
+  anchor { '::dcm4chee::begin': } ->
+  class { '::dcm4chee::staging': } ->
+  anchor { '::dcm4chee::end': }
   
   if $database {
     class { '::dcm4chee::database': }
     Class['::dcm4chee::staging'] ->
-    Class['::dcm4chee::database']
+    Class['::dcm4chee::database'] ->
+    Anchor['::dcm4chee::end']
   }
   
   if $server {
@@ -145,11 +148,13 @@ class dcm4chee (
     Class['::dcm4chee::staging'] ->
     Class['::dcm4chee::install'] ->
     Class['::dcm4chee::config'] ~>
-    Class['::dcm4chee::service']
+    Class['::dcm4chee::service'] ->
+    Anchor['::dcm4chee::end']
 
     if $database {
       Class['::dcm4chee::database'] ->
-      Class['::dcm4chee::install']
+      Class['::dcm4chee::install'] ->
+      Anchor['::dcm4chee::end']
     }
   }
 }
