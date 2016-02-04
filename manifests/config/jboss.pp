@@ -27,6 +27,7 @@ class dcm4chee::config::jboss () {
     group   => $::dcm4chee::user,
     mode    => '0644',
     content => template('dcm4chee/dcm4chee_home/bin/run.conf.erb'),
+    notify  => Service['dcm4chee'],
   }
 
   $jboss_log_file_path = $::dcm4chee::server_log_file_path
