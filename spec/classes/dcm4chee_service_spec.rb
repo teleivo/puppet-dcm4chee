@@ -9,9 +9,6 @@ describe 'dcm4chee::service', :type => :class do
        }"
     end
 
-    it { is_expected.to contain_file('/etc/init.d/dcm4chee')
-          .that_notifies('Service[dcm4chee]')
-    }
     it { is_expected.to contain_service('dcm4chee')
           .only_with(
             'name'   => 'dcm4chee',
