@@ -7,6 +7,8 @@ class dcm4chee::staging () {
   $dcm4chee_bin_path = "${dcm4chee_home_path}${::dcm4chee::dcm4chee_bin_rel_path}"
   $dcm4chee_deploy_path =
   "${dcm4chee_home_path}${::dcm4chee::dcm4chee_server_deploy_rel_path}"
+  $dcm4chee_server_conf_path =
+  "${dcm4chee_home_path}${::dcm4chee::dcm4chee_server_conf_rel_path}"
 
   $jboss_extract_path = "${::dcm4chee::staging_path}jboss-${::dcm4chee::jboss_version}/"
 
@@ -83,6 +85,22 @@ class dcm4chee::staging () {
       class { '::dcm4chee::staging::weasis':
         require => File["${dcm4chee_bin_path}run.sh"],
       }
+    }
+
+    # Important Note: hack to prevent dcm4chee::install
+    # from overriding dcm4chee::config's work
+    # which manages these files
+    $db_connection_file = $::dcm4chee::database_type ? {
+      'postgresql' => 'pacs-postgres-ds.xml',
+      'mysql'      => 'pacs-mysql-ds.xml',
+    }
+    file {[
+      "${dcm4chee_deploy_path}${db_connection_file}",
+      "${dcm4chee_deploy_path}jboss-web.deployer/server.xml",
+      "${dcm4chee_bin_path}run.conf",
+      "${dcm4chee_server_conf_path}jboss-log4j.xml",
+    ]:
+      ensure => absent,
     }
   }
 }
