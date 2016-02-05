@@ -17,13 +17,14 @@ describe 'dcm4chee::config', :type => :class do
       }
       it { is_expected.to contain_class("dcm4chee::config::#{database_type}")
             .that_comes_before('dcm4chee::config::jboss')
+            .that_notifies('Anchor[dcm4chee::config::end]')
       }
       it { is_expected.to contain_class('dcm4chee::config::jboss')
             .that_comes_before('dcm4chee::config::weasis')
-            .that_comes_before('Anchor[dcm4chee::config::end]')
+            .that_notifies('Anchor[dcm4chee::config::end]')
       }
       it { is_expected.to contain_class('dcm4chee::config::weasis')
-            .that_comes_before('Anchor[dcm4chee::config::end]')
+            .that_notifies('Anchor[dcm4chee::config::end]')
       }
       it { is_expected.to contain_anchor('dcm4chee::config::end') }
     end

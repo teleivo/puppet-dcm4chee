@@ -10,10 +10,16 @@ class dcm4chee::config () {
   class { '::dcm4chee::config::jboss': } ->
   anchor { 'dcm4chee::config::end': }
   
+  # These are necessary to cause a service restart on config change
+  # Class['::dm4chee::config'] ~> Class['::dcm4chee::service']
+  # does not suffice due to submodules
+  Class[$database_class] ~> Anchor['dcm4chee::config::end']
+  Class['::dcm4chee::config::jboss'] ~> Anchor['dcm4chee::config::end']
+  
   if $::dcm4chee::weasis {
     class { '::dcm4chee::config::weasis': }
     Anchor['dcm4chee::config::begin'] ->
-    Class['::dcm4chee::config::weasis'] ->
+    Class['::dcm4chee::config::weasis'] ~>
     Anchor['dcm4chee::config::end']
 
     Class['::dcm4chee::config::jboss'] -> Class['::dcm4chee::config::weasis']
