@@ -14,9 +14,11 @@ describe 'dcm4chee::service', :type => :class do
     }
     it { is_expected.to contain_service('dcm4chee')
           .only_with(
-            'name'   => 'dcm4chee',
-            'ensure' => 'running',
-            'enable' => 'true',
+            'name'       => 'dcm4chee',
+            'ensure'     => 'running',
+            'enable'     => 'true',
+            'provider'   => 'init',
+            'hasrestart' => 'true',
           )
     }
   end
