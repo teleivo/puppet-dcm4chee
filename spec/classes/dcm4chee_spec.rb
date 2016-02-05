@@ -17,11 +17,13 @@ describe 'dcm4chee', :type => :class do
       it { is_expected.to compile }
       it { is_expected.to contain_class('dcm4chee') }
       it { is_expected.to contain_user('dcm4chee') }
+      it { is_expected.to contain_anchor('dcm4chee::begin').that_comes_before('dcm4chee::staging') }
       it { is_expected.to contain_class('dcm4chee::staging').that_comes_before('dcm4chee::database') }
       it { is_expected.to contain_class('dcm4chee::database').that_comes_before('dcm4chee::install') }
       it { is_expected.to contain_class('dcm4chee::install').that_comes_before('dcm4chee::config') }
-      it { is_expected.to contain_class('dcm4chee::config') }
-      it { is_expected.to contain_class('dcm4chee::service').that_subscribes_to('dcm4chee::config') }
+      it { is_expected.to contain_class('dcm4chee::config').that_notifies('dcm4chee::service') }
+      it { is_expected.to contain_class('dcm4chee::service').that_comes_before('Anchor[dcm4chee::end]') }
+      it { is_expected.to contain_anchor('dcm4chee::end') }
     end
 
     context 'with manage_user = false' do
@@ -46,8 +48,8 @@ describe 'dcm4chee', :type => :class do
       it { is_expected.to contain_class('dcm4chee::staging') }
       it { is_expected.not_to contain_class('dcm4chee::database') }
       it { is_expected.to contain_class('dcm4chee::install').that_comes_before('dcm4chee::config') }
-      it { is_expected.to contain_class('dcm4chee::config') }
-      it { is_expected.to contain_class('dcm4chee::service').that_subscribes_to('dcm4chee::config') }
+      it { is_expected.to contain_class('dcm4chee::config').that_notifies('dcm4chee::service') }
+      it { is_expected.to contain_class('dcm4chee::service') }
     end
 
     context 'with server = false and database = true' do

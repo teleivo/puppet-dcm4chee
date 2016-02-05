@@ -1,6 +1,7 @@
 # Class: dcm4chee::database. See README.md for documentation.
 class dcm4chee::database () {
 
-  $database_class = "::dcm4chee::database::${dcm4chee::database_type}"
-  class { $database_class: }
+  anchor { 'dcm4chee::database::begin': } ->
+  class { "::dcm4chee::database::${dcm4chee::database_type}": } ->
+  anchor { 'dcm4chee::database::end': }
 }

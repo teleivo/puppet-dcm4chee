@@ -130,22 +130,32 @@ class dcm4chee (
     }
   }
   
-  class { '::dcm4chee::staging': }
+  # Anchor this as per #8040 - this ensures that classes won't float off and
+  # mess everything up.  You can read about this at:
+  # http://docs.puppetlabs.com/puppet/2.7/reference/lang_containment.html#known-issues
+  anchor { 'dcm4chee::begin': } ->
+  class { '::dcm4chee::staging': } ->
+  anchor { 'dcm4chee::end': }
   
   if $database {
     class { '::dcm4chee::database': }
-    Class['::dcm4chee::staging'] ->
-    Class['::dcm4chee::database']
+    Anchor['dcm4chee::begin'] ->
+    Class['::dcm4chee::database'] ->
+    Anchor['dcm4chee::end']
+
+    Class['::dcm4chee::staging'] -> Class['::dcm4chee::database']
   }
   
   if $server {
     class { '::dcm4chee::install': }
     class { '::dcm4chee::config': }
     class { '::dcm4chee::service': }
+    Anchor['dcm4chee::begin'] ->
     Class['::dcm4chee::staging'] ->
     Class['::dcm4chee::install'] ->
     Class['::dcm4chee::config'] ~>
-    Class['::dcm4chee::service']
+    Class['::dcm4chee::service'] ->
+    Anchor['dcm4chee::end']
 
     if $database {
       Class['::dcm4chee::database'] ->

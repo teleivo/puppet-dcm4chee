@@ -36,11 +36,17 @@ describe 'dcm4chee::staging', :type => :class do
             })
             .that_requires('File[/opt/dcm4chee/staging/]')
       }
+      it { is_expected.to contain_anchor('dcm4chee::staging::begin')
+          .that_comes_before('dcm4chee::staging::jai_imageio')
+      }
       it { is_expected.to contain_class('dcm4chee::staging::jai_imageio')
             .that_requires("Staging::Deploy[dcm4chee-2.18.1-#{database['type_short']}.zip]")
+            .that_comes_before('Anchor[dcm4chee::staging::end]')
       }
       it { is_expected.to contain_class('dcm4chee::staging::jboss')
+            .that_requires('Anchor[dcm4chee::staging::begin]')
             .that_requires('File[/opt/dcm4chee/staging/]')
+            .that_comes_before('Anchor[dcm4chee::staging::end]')
       }
       it { is_expected.to contain_file('/usr/local/bin/validate_dcm4chee_jboss_installed.sh')
         .with({
@@ -73,7 +79,9 @@ describe 'dcm4chee::staging', :type => :class do
             .that_requires("Exec[/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database['type_short']}/bin/install_jboss.sh]")
       }
       it { is_expected.to contain_class('dcm4chee::staging::weasis')
-          .that_requires("File[/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database['type_short']}/bin/run.sh]")
+            .that_requires('Anchor[dcm4chee::staging::begin]')
+            .that_requires("File[/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database['type_short']}/bin/run.sh]")
+            .that_comes_before('Anchor[dcm4chee::staging::end]')
       }
       it { is_expected.to contain_file("/opt/dcm4chee/staging/dcm4chee-2.18.1-#{database['type_short']}/bin/run.conf")
             .with({
@@ -95,6 +103,7 @@ describe 'dcm4chee::staging', :type => :class do
               'ensure' => 'absent',
             })
       }
+      it { is_expected.to contain_anchor('dcm4chee::staging::end') }
     end
   end
 

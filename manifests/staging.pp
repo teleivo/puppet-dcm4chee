@@ -31,15 +31,24 @@ class dcm4chee::staging () {
     group   => $::dcm4chee::user,
     require => File[$::dcm4chee::staging_path],
   }
-
+  
   if $::dcm4chee::server {
+    # Anchor this as per #8040 - this ensures that classes won't float off and
+    # mess everything up.  You can read about this at:
+    # http://docs.puppetlabs.com/puppet/2.7/reference/lang_containment.html#known-issues
+    anchor { 'dcm4chee::staging::begin': } ->
     class { '::dcm4chee::staging::jai_imageio':
       require => Staging::Deploy[$dcm4chee_archive_name],
+      before  => Anchor['dcm4chee::staging::end'],
     }
 
     class { '::dcm4chee::staging::jboss':
-      require => File[$::dcm4chee::staging_path],
-    }
+      require => [
+        Anchor['dcm4chee::staging::begin'],
+        File[$::dcm4chee::staging_path],
+      ],
+    } ->
+    anchor { 'dcm4chee::staging::end': }
 
     # Copies jboss files over to dcm4chee
     # Custom script checks if run.jar is already in
@@ -85,6 +94,9 @@ class dcm4chee::staging () {
       class { '::dcm4chee::staging::weasis':
         require => File["${dcm4chee_bin_path}run.sh"],
       }
+      Anchor['dcm4chee::staging::begin'] ->
+      Class['::dcm4chee::staging::weasis'] ->
+      Anchor['dcm4chee::staging::end']
     }
 
     # Important Note: hack to prevent dcm4chee::install
