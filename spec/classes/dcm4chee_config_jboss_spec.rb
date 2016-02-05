@@ -26,9 +26,8 @@ describe 'dcm4chee::config::jboss', :type => :class do
               'group'   => 'dcm4chee',
               'mode'    => '0644',
             })
-            .without_content(/^# Options set via puppet$/)
             .without_content(/^JAVA_OPTS=$/)
-            .without_content(/^JAVA_OPTS=""$/)
+            .without_content(/^JAVA_OPTS="\$JAVA_OPTS"$/)
       }
       it { is_expected.to contain_file("/opt/dcm4chee/dcm4chee-2.18.1-#{database_type_short}/server/default/conf/jboss-log4j.xml")
             .with({
@@ -56,8 +55,9 @@ describe 'dcm4chee::config::jboss', :type => :class do
                 'group'   => 'dcm4chee',
                 'mode'    => '0644',
               })
-              .with_content(/^# Options set via puppet$/)
-              .with_content(/^JAVA_OPTS="-Xms256m -Xmx1024m -XX:MaxPermSize=512m"$/)
+              .with_content(/^JAVA_OPTS="\$JAVA_OPTS -Xms256m"$/)
+              .with_content(/^JAVA_OPTS="\$JAVA_OPTS -Xmx1024m"$/)
+              .with_content(/^JAVA_OPTS="\$JAVA_OPTS -XX:MaxPermSize=512m"$/)
         }
     end
   end
