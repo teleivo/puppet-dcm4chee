@@ -9,8 +9,6 @@
 # Managed by puppet Class['dcm4chee']
 # BE WARE
 
-### $Id: run.conf 13711 2010-07-07 09:59:21Z gunterze $
-
 #
 # This file is optional; it may be removed if not needed.
 #
@@ -45,10 +43,11 @@
 # Specify options to pass to the Java VM.
 #
 <%- if @jboss_java_opts -%>
-# Options set via puppet
-JAVA_OPTS="<%= @jboss_java_opts %>"
-
+<% @jboss_java_opts.each do |java_opt| -%>
+JAVA_OPTS="$JAVA_OPTS <%= java_opt %>"
 <%- end -%>
+<%- end -%>
+
 if [ "x$JAVA_OPTS" = "x" ]; then
    JAVA_OPTS="-Xms128m -Xmx512m -XX:MaxPermSize=128m -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000"
 fi
