@@ -14,6 +14,7 @@ class dcm4chee (
   $server_log_appenders      = $::dcm4chee::params::server_log_appenders,
   $server_dicom_aet          = $::dcm4chee::params::server_dicom_aet,
   $server_dicom_port         = $::dcm4chee::params::server_dicom_port,
+  $server_dicom_compression  = $::dcm4chee::params::server_dicom_compression,
   $manage_user               = $::dcm4chee::params::manage_user,
   $user                      = $::dcm4chee::params::user,
   $user_home                 = $::dcm4chee::params::user_home,

@@ -252,6 +252,12 @@ Defaults to '11112'.
 *Important note:* this parameter is only used to configure the connection of DICOM web viewer `weasis` to dcm4chee.
 It does not change dcm4chee's DICOM AE Title. This should be done from within dcm4chee's web UI!
 
+##### `server_dicom_compression`
+
+Specifies whether JAI Image IO library (libclib_jiio.so) for Linux-amd64 should be exchanged.
+Valid options: 'true', 'false'.
+Defaults to 'false'.
+
 ##### `manage_user`
 
 Determines whether to create the specified `user`, if it doesn't exist. Uses Puppet's native [`user` resource type](https://docs.puppetlabs.com/references/latest/type.html#user) with parameters `managehome` => true, `home` => `$::dcm4chee::user_home`. Valid options: 'true' and 'false'. Default: 'true'.

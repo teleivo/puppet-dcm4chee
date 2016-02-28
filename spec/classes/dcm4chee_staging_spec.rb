@@ -36,13 +36,7 @@ describe 'dcm4chee::staging', :type => :class do
             })
             .that_requires('File[/opt/dcm4chee/staging/]')
       }
-      it { is_expected.to contain_anchor('dcm4chee::staging::begin')
-          .that_comes_before('dcm4chee::staging::jai_imageio')
-      }
-      it { is_expected.to contain_class('dcm4chee::staging::jai_imageio')
-            .that_requires("Staging::Deploy[dcm4chee-2.18.1-#{database['type_short']}.zip]")
-            .that_comes_before('Anchor[dcm4chee::staging::end]')
-      }
+      it { is_expected.not_to contain_class('dcm4chee::staging::jai_imageio') }
       it { is_expected.to contain_class('dcm4chee::staging::jboss')
             .that_requires('Anchor[dcm4chee::staging::begin]')
             .that_requires('File[/opt/dcm4chee/staging/]')
@@ -163,9 +157,7 @@ describe 'dcm4chee::staging', :type => :class do
           })
           .that_requires('File[/opt/dcm4chee/staging/]')
     }
-    it { is_expected.to contain_class('dcm4chee::staging::jai_imageio')
-          .that_requires('Staging::Deploy[dcm4chee-2.18.1-psql.zip]')
-    }
+    it { is_expected.not_to contain_class('dcm4chee::staging::jai_imageio') }
     it { is_expected.to contain_class('dcm4chee::staging::jboss')
           .that_requires('File[/opt/dcm4chee/staging/]')
     }
@@ -184,5 +176,21 @@ describe 'dcm4chee::staging', :type => :class do
     }
     it { is_expected.not_to contain_class('dcm4chee::staging::weasis') }
   end
+
+    describe "with defaults, server_java_path set" do
+      let :pre_condition do
+        "class {'dcm4chee':
+           server_java_path         => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+           server_dicom_compression => true,
+        }"
+      end
+
+      it { is_expected.to contain_anchor('dcm4chee::staging::begin') }
+      it { is_expected.to contain_class('dcm4chee::staging::jai_imageio')
+            .that_requires('Anchor[dcm4chee::staging::begin]')
+            .that_requires("Staging::Deploy[dcm4chee-2.18.1-psql.zip]")
+            .that_comes_before('Anchor[dcm4chee::staging::end]')
+      }
+    end
 end
 

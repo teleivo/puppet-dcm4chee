@@ -36,10 +36,16 @@ class dcm4chee::staging () {
     # Anchor this as per #8040 - this ensures that classes won't float off and
     # mess everything up.  You can read about this at:
     # http://docs.puppetlabs.com/puppet/2.7/reference/lang_containment.html#known-issues
-    anchor { 'dcm4chee::staging::begin': } ->
-    class { '::dcm4chee::staging::jai_imageio':
-      require => Staging::Deploy[$dcm4chee_archive_name],
-      before  => Anchor['dcm4chee::staging::end'],
+    anchor { 'dcm4chee::staging::begin': }
+
+    if $::dcm4chee::server_dicom_compression {
+      class { '::dcm4chee::staging::jai_imageio':
+        require => [
+          Anchor['dcm4chee::staging::begin'],
+          Staging::Deploy[$dcm4chee_archive_name],
+        ],
+        before  => Anchor['dcm4chee::staging::end'],
+      }
     }
 
     class { '::dcm4chee::staging::jboss':
