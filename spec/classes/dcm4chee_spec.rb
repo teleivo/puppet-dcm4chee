@@ -340,6 +340,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non boolean server_dicom_compression' do
+        let :params do
+          valid_required_params.merge({
+            :server_dicom_compression => 'NOTBOOLEAN',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given server_dicom_port < 0' do
         let :params do
           valid_required_params.merge({
