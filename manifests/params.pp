@@ -19,6 +19,7 @@ class dcm4chee::params {
   $server_dicom_aet = 'DCM4CHEE'
   $server_dicom_port = '11112'
   $server_dicom_compression = false
+  $server_service_enable = true
   $manage_user = true
   $user = 'dcm4chee'
   $user_home = '/opt/dcm4chee/'

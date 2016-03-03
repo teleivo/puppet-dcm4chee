@@ -332,6 +332,14 @@ describe 'dcm4chee', :type => :class do
         end
         it { should_not compile }
       end
+      describe 'given non boolean server_service_enable' do
+        let :params do
+          valid_required_params.merge({
+            :server_service_enable => 'NOTBOOLEAN',
+          })
+        end
+        it { should_not compile }
+      end
       describe 'given non integer server_dicom_port' do
         let :params do
           valid_required_params.merge({
