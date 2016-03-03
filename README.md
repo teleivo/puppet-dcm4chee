@@ -258,6 +258,8 @@ Specifies whether JAI Image IO library (libclib_jiio.so) for Linux-amd64 should 
 Valid options: 'true', 'false'.
 Defaults to 'false'.
 
+**Important Note:** this was changed to `false` since server http://dicom.vital-it.ch:8087 is currently down. You thus have to exchange the library yourself manually or follow instructions under section 8. at https://dcm4che.atlassian.net/wiki/display/ee2/Installation/
+
 #####`server_service_ensure`
 
 Specifies whether to dcm4chee service should be running. Maps to the `ensure` parameter of Puppet's native [`service` resource type](https://docs.puppetlabs.com/references/latest/type.html#service)
