@@ -58,7 +58,6 @@ class dcm4chee (
 
   validate_string($server_dicom_aet)
   validate_integer($server_dicom_port, $tcp_port_max, $tcp_port_min)
-  validate_bool($server_service_enable)
   validate_bool($manage_user)
   validate_string($user)
   validate_absolute_path($user_home)
