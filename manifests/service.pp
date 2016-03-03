@@ -14,7 +14,7 @@ class dcm4chee::service () {
   }
 
   service { 'dcm4chee':
-    ensure     => 'running',
+    ensure     => $::dcm4chee::server_service_ensure,
     enable     => $::dcm4chee::server_service_enable,
     provider   => 'init',
     hasrestart => true,
