@@ -258,6 +258,12 @@ Specifies whether JAI Image IO library (libclib_jiio.so) for Linux-amd64 should 
 Valid options: 'true', 'false'.
 Defaults to 'false'.
 
+#####`server_service_ensure`
+
+Specifies whether to dcm4chee service should be running. Maps to the `ensure` parameter of Puppet's native [`service` resource type](https://docs.puppetlabs.com/references/latest/type.html#service)
+Valid options: 'running', 'stopped', 'true', and 'false'.
+Default: 'running'.
+
 #####`server_service_enable`
 
 Specifies whether to enable the dcm4chee service at boot. Maps to the `enable` parameter of Puppet's native [`service` resource type](https://docs.puppetlabs.com/references/latest/type.html#service)

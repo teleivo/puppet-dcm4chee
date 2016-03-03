@@ -15,6 +15,7 @@ class dcm4chee (
   $server_dicom_aet          = $::dcm4chee::params::server_dicom_aet,
   $server_dicom_port         = $::dcm4chee::params::server_dicom_port,
   $server_dicom_compression  = $::dcm4chee::params::server_dicom_compression,
+  $server_service_ensure     = $::dcm4chee::params::server_service_ensure,
   $server_service_enable     = $::dcm4chee::params::server_service_enable,
   $manage_user               = $::dcm4chee::params::manage_user,
   $user                      = $::dcm4chee::params::user,
