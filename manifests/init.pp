@@ -15,6 +15,7 @@ class dcm4chee (
   $server_dicom_aet          = $::dcm4chee::params::server_dicom_aet,
   $server_dicom_port         = $::dcm4chee::params::server_dicom_port,
   $server_dicom_compression  = $::dcm4chee::params::server_dicom_compression,
+  $server_service_enable     = $::dcm4chee::params::server_service_enable,
   $manage_user               = $::dcm4chee::params::manage_user,
   $user                      = $::dcm4chee::params::user,
   $user_home                 = $::dcm4chee::params::user_home,
@@ -56,6 +57,7 @@ class dcm4chee (
 
   validate_string($server_dicom_aet)
   validate_integer($server_dicom_port, $tcp_port_max, $tcp_port_min)
+  validate_bool($server_service_enable)
   validate_bool($manage_user)
   validate_string($user)
   validate_absolute_path($user_home)

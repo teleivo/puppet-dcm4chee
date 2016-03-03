@@ -258,6 +258,12 @@ Specifies whether JAI Image IO library (libclib_jiio.so) for Linux-amd64 should 
 Valid options: 'true', 'false'.
 Defaults to 'false'.
 
+#####`server_service_enable`
+
+Specifies whether to enable the dcm4chee service at boot. Maps to the `enable` parameter of Puppet's native [`service` resource type](https://docs.puppetlabs.com/references/latest/type.html#service)
+Valid options: 'true' and 'false'.
+Default: 'true'.
+
 ##### `manage_user`
 
 Determines whether to create the specified `user`, if it doesn't exist. Uses Puppet's native [`user` resource type](https://docs.puppetlabs.com/references/latest/type.html#user) with parameters `managehome` => true, `home` => `$::dcm4chee::user_home`. Valid options: 'true' and 'false'. Default: 'true'.
