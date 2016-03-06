@@ -20,7 +20,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
       }
       it { is_expected.to contain_staging__file('weasis.war')
             .with({
-              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/2.0.5/weasis.war',
+              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/2.0.6/weasis.war',
               'target'  => '/opt/dcm4chee/staging/weasis/weasis.war',
             })
             .that_requires('File[/opt/dcm4chee/staging/weasis/]')
@@ -68,7 +68,7 @@ describe 'dcm4chee::staging::weasis', :type => :class do
       }
       it { is_expected.to contain_staging__file('weasis-i18n.war')
             .with({
-              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/2.0.5/weasis-i18n.war',
+              'source'  => 'http://sourceforge.net/projects/dcm4che/files/Weasis/2.0.6/weasis-i18n.war',
               'target'  => '/opt/dcm4chee/staging/weasis/weasis-i18n.war',
             })
             .that_requires('File[/opt/dcm4chee/staging/weasis/]')
