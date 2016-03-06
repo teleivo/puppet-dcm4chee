@@ -113,7 +113,7 @@ class dcm4chee (
   $dcm4chee_server_conf_rel_path = "${dcm4chee_server_rel_path}conf/"
 
   # Dicom webviewer versions, settings
-  $weasis_version = '2.0.5'
+  $weasis_version = '2.0.6'
   $weasis_pacs_connector_version = '5.0.1'
 
   # Construct main paths needed by staging, installation, configuration
