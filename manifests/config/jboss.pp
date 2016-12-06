@@ -1,6 +1,6 @@
 # Class: dcm4chee::config::jboss. See README.md for documentation.
 class dcm4chee::config::jboss () {
-  
+
   $jboss_http_port = $::dcm4chee::server_http_port
   $jboss_ajp_connector_port = $::dcm4chee::server_ajp_connector_port
   file { "${::dcm4chee::dcm4chee_server_deploy_path}jboss-web.deployer/server.xml":

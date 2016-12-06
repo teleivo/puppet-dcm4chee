@@ -63,7 +63,8 @@ class dcm4chee (
   validate_string($user)
   validate_absolute_path($user_home)
   validate_bool($database)
-  validate_re($database_type, '(^mysql|postgresql$)', "database_type ${database_type} is not supported. Allowed values are 'mysql', 'postgresql'.")
+  validate_re($database_type, '(^mysql|postgresql$)',
+  "database_type ${database_type} is not supported. Allowed values are 'mysql', 'postgresql'.")
   validate_string($database_host)
 
   $database_port_picked = pick(
@@ -76,11 +77,11 @@ class dcm4chee (
   validate_integer($database_port_picked, $tcp_port_max, $tcp_port_min)
   validate_string($database_name)
   validate_string($database_owner_password)
-  
+
   validate_bool($weasis)
   validate_string($weasis_aet)
   validate_string($weasis_request_addparams)
-  
+
   # Only allow request.ids which are allowed by weasis-pacs-connector
   validate_array($weasis_request_ids)
   if empty($weasis_request_ids) {
@@ -133,14 +134,14 @@ class dcm4chee (
       managehome => true,
     }
   }
-  
+
   # Anchor this as per #8040 - this ensures that classes won't float off and
   # mess everything up.  You can read about this at:
   # http://docs.puppetlabs.com/puppet/2.7/reference/lang_containment.html#known-issues
   anchor { 'dcm4chee::begin': } ->
   class { '::dcm4chee::staging': } ->
   anchor { 'dcm4chee::end': }
-  
+
   if $database {
     class { '::dcm4chee::database': }
     Anchor['dcm4chee::begin'] ->
@@ -149,7 +150,7 @@ class dcm4chee (
 
     Class['::dcm4chee::staging'] -> Class['::dcm4chee::database']
   }
-  
+
   if $server {
     class { '::dcm4chee::install': }
     class { '::dcm4chee::config': }

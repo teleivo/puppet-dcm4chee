@@ -1,39 +1,24 @@
 source ENV['GEM_SOURCE'] || "https://rubygems.org"
 
-def location_for(place, fake_version = nil)
-  if place =~ /^(git:[^#]*)#(.*)/
-    [fake_version, { :git => $1, :branch => $2, :require => false }].compact
-  elsif place =~ /^file:\/\/(.*)/
-    ['>= 0', { :path => File.expand_path($1), :require => false }]
-  else
-    [place, { :require => false }]
-  end
-end
-
-group :development, :unit_tests do
-  gem 'rspec-core', '3.1.7',     :require => false
-  gem 'puppetlabs_spec_helper',  :require => false
-  gem 'simplecov',               :require => false
-  gem 'puppet_facts',            :require => false
-  gem 'json',                    :require => false
-  gem 'guard-rake',              :require => false
-  gem 'metadata-json-lint',      :require => false
-end
-
-group :system_tests do
-  if beaker_version = ENV['BEAKER_VERSION']
-    gem 'beaker', *location_for(beaker_version)
-  end
-  if beaker_rspec_version = ENV['BEAKER_RSPEC_VERSION']
-    gem 'beaker-rspec', *location_for(beaker_rspec_version)
-  else
-    gem 'beaker-rspec',  :require => false
-  end
-  gem 'serverspec',    :require => false
-  gem 'beaker-puppet_install_helper', :require => false
-end
-
-
+gem 'rake'
+gem 'rspec', '~> 3.0'
+gem 'rspec-puppet', '~> 2.3'
+gem 'rspec-puppet-facts', '>= 1.7'
+gem 'puppetlabs_spec_helper', '>= 0.8.0'
+gem 'puppet-lint', '>= 2'
+gem 'puppet-lint-unquoted_string-check'
+gem 'puppet-lint-empty_string-check'
+gem 'puppet-lint-spaceship_operator_without_tag-check'
+gem 'puppet-lint-variable_contains_upcase'
+gem 'puppet-lint-absolute_classname-check'
+gem 'puppet-lint-undef_in_function-check'
+gem 'puppet-lint-leading_zero-check'
+gem 'puppet-lint-trailing_comma-check'
+gem 'puppet-lint-file_ensure-check'
+gem 'simplecov'
+gem 'json', '~> 1.0'
+gem 'json_pure', '~> 1.0'
+gem 'metadata-json-lint'
 
 if facterversion = ENV['FACTER_GEM_VERSION']
   gem 'facter', facterversion, :require => false

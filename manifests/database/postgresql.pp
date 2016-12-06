@@ -11,7 +11,7 @@ class dcm4chee::database::postgresql () {
     grant    => 'ALL',
     require  => Staging::Deploy[$::dcm4chee::staging::dcm4chee_archive_name],
   }
-  
+
   # Allow local ident access to user
   # this rule is used to execute the database creation script
   ::postgresql::server::pg_hba_rule { "${::dcm4chee::user}_ident":
@@ -59,17 +59,22 @@ class dcm4chee::database::postgresql () {
     source =>
     'puppet:///modules/dcm4chee/validate_dcm4chee_database_created.sh',
   }
-  
+
   # Create tables in database from sql script
   $cmd_init = '/usr/bin/psql --quiet --tuples-only'
   $cmd_port = "-p ${::dcm4chee::database_port_picked}"
   $cmd_dbname = "--dbname ${::dcm4chee::database_name}"
-  
+
   $cmd_file = '-f create.psql'
   $create_cmd = join([$cmd_init, $cmd_port, $cmd_dbname, $cmd_file ], ' ')
 
   $check_table = 'ae'
-  $unless_cmd = join([$validate_dcm4chee_database_created, $::dcm4chee::database_name, $check_table, $::dcm4chee::database_port_picked ], ' ')
+  $unless_cmd = join([
+    $validate_dcm4chee_database_created,
+    $::dcm4chee::database_name,
+    $check_table,
+    $::dcm4chee::database_port_picked,
+  ], ' ')
 
   # Note: this needs pg_hba role ident
   exec { "create database ${::dcm4chee::database_name} for ${::dcm4chee::user}":

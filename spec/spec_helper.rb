@@ -6,6 +6,7 @@ RSpec.configure do |config|
     :operatingsystem           => 'Ubuntu',
     :operatingsystemrelease    => '14.04',
     :operatingsystemmajrelease => '14.04',
+    :lsbdistcodename           => 'trusty',
     :architecture              => 'amd64',
     :path                      => '/usr/local/bin:/usr/bin:/bin',
     :concat_basedir            => '/tmp',
