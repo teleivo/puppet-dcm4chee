@@ -12,6 +12,13 @@
 # Description:       DCM4CHEE DICOM Image Manager
 ### END INIT INFO
 
+<%- if @export_env_vars -%>
+# Export environment variables
+<% @export_env_vars.each do |env_var| -%>
+export <%= env_var %>
+<%- end -%>
+<%- end -%>
+
 # JBOSS configurations
 JBOSS_HOME=${JBOSS_HOME:-"<%= @jboss_home_path %>"}
 JBOSS_CONF=${JBOSS_CONF:-"default"}

@@ -21,6 +21,7 @@ class dcm4chee::params {
   $server_dicom_compression = false
   $server_service_ensure = 'running'
   $server_service_enable = true
+  $server_service_env_vars = []
   $manage_user = true
   $user = 'dcm4chee'
   $user_home = '/opt/dcm4chee/'

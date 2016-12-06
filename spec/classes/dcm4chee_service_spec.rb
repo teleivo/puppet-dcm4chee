@@ -11,6 +11,8 @@ describe 'dcm4chee::service', :type => :class do
 
     it { is_expected.to contain_file('/etc/init.d/dcm4chee')
           .that_notifies('Service[dcm4chee]')
+          .with_content(/^JBOSS_HOME=\${JBOSS_HOME:-"\/opt\/dcm4chee\/dcm4chee-2\.18\.1-psql\/"/)
+          .with_content(/^JAVAPTH=\${JAVAPTH:-"\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/bin\/java"/)
     }
     it { is_expected.to contain_service('dcm4chee')
           .only_with(
@@ -32,6 +34,8 @@ describe 'dcm4chee::service', :type => :class do
 
     it { is_expected.to contain_file('/etc/init.d/dcm4chee')
           .that_notifies('Service[dcm4chee]')
+          .with_content(/^JBOSS_HOME=\${JBOSS_HOME:-"\/opt\/dcm4chee\/dcm4chee-2\.18\.1-psql\/"/)
+          .with_content(/^JAVAPTH=\${JAVAPTH:-"\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/bin\/java"/)
     }
     it { is_expected.to contain_service('dcm4chee')
           .only_with(
@@ -53,11 +57,41 @@ describe 'dcm4chee::service', :type => :class do
 
     it { is_expected.to contain_file('/etc/init.d/dcm4chee')
           .that_notifies('Service[dcm4chee]')
+          .with_content(/^JBOSS_HOME=\${JBOSS_HOME:-"\/opt\/dcm4chee\/dcm4chee-2\.18\.1-psql\/"/)
+          .with_content(/^JAVAPTH=\${JAVAPTH:-"\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/bin\/java"/)
     }
     it { is_expected.to contain_service('dcm4chee')
           .only_with(
             'name'       => 'dcm4chee',
             'ensure'     => 'stopped',
+            'enable'     => 'true',
+            'provider'   => 'init',
+            'hasrestart' => 'true',
+          )
+    }
+  end
+  describe 'with server_service_env_vars set' do
+    let :pre_condition do
+      "class {'dcm4chee':
+         server_java_path        => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+         server_service_env_vars => [
+           'LANG=\"es_ES.UTF-8\"',
+           'EDITOR=\"vim\"',
+         ]
+       }"
+    end
+
+    it { is_expected.to contain_file('/etc/init.d/dcm4chee')
+          .that_notifies('Service[dcm4chee]')
+          .with_content(/^JBOSS_HOME=\${JBOSS_HOME:-"\/opt\/dcm4chee\/dcm4chee-2\.18\.1-psql\/"/)
+          .with_content(/^JAVAPTH=\${JAVAPTH:-"\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/bin\/java"/)
+          .with_content(/^export LANG="es_ES\.UTF-8"/)
+          .with_content(/^export EDITOR="vim"/)
+    }
+    it { is_expected.to contain_service('dcm4chee')
+          .only_with(
+            'name'       => 'dcm4chee',
+            'ensure'     => 'running',
             'enable'     => 'true',
             'provider'   => 'init',
             'hasrestart' => 'true',

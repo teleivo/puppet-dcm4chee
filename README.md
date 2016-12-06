@@ -272,6 +272,14 @@ Specifies whether to enable the dcm4chee service at boot. Maps to the `enable` p
 Valid options: 'true' and 'false'.
 Default: 'true'.
 
+#####`server_service_env_vars`
+
+Specifies environment variables which will be exported in the service.
+For example $server_service_env_vars=['LANG="es_ES.UTF-8"'] will lead to insert
+of line 'export LANG="es_ES.UTF-8"' at the top of the service file.
+Valid options: array
+Default: [].
+
 ##### `manage_user`
 
 Determines whether to create the specified `user`, if it doesn't exist. Uses Puppet's native [`user` resource type](https://docs.puppetlabs.com/references/latest/type.html#user) with parameters `managehome` => true, `home` => `$::dcm4chee::user_home`. Valid options: 'true' and 'false'. Default: 'true'.
