@@ -31,7 +31,7 @@ class dcm4chee::staging () {
     group   => $::dcm4chee::user,
     require => File[$::dcm4chee::staging_path],
   }
-  
+
   if $::dcm4chee::server {
     # Anchor this as per #8040 - this ensures that classes won't float off and
     # mess everything up.  You can read about this at:
@@ -95,7 +95,7 @@ class dcm4chee::staging () {
       source  => "${jboss_extract_path}bin/run.sh",
       require => Exec["${dcm4chee_bin_path}install_jboss.sh"],
     }
-  
+
     if $::dcm4chee::weasis {
       class { '::dcm4chee::staging::weasis':
         require => File["${dcm4chee_bin_path}run.sh"],
