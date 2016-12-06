@@ -8,7 +8,9 @@ class dcm4chee::params {
   $server_java_opts = []
   $server_http_port = '8080'
   $server_ajp_connector_port = '8009'
+  # lint:ignore:single_quote_string_with_variables
   $server_log_file_path = '${jboss.server.log.dir}/server.log'
+  # lint:endignore
   $server_log_file_max_size = '10000KB'
   $server_log_append = false
   $server_log_max_backups  = '1'

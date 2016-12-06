@@ -158,6 +158,12 @@ class role::pacs {
 
 #### Private classes
 
+### Defines
+
+#### Public Defines
+
+* `dcm4chee::default::entry`: Adds an entry to a dcm4chee configuration file (e.g., `/etc/default/dcm4chee`).
+
 ### Parameters
 
 All parameters are optional except where otherwise noted.
@@ -353,6 +359,34 @@ Defaults to [ 'patientID', 'studyUID', 'accessionNumber', 'seriesUID', 'objectUI
 Specifies the weasis [pacs-connector](https://github.com/nroduit/weasis-pacs-connector) property 'hosts.allow'.
 Valid options: an array.
 Default is [].
+
+#### dcm4chee::default::entry
+
+##### `value`
+
+*Required.* Provides the value of the managed parameter. Valid options: a
+string.
+
+##### `ensure`
+
+Determines whether the fragment should exist in the configuration file. Valid
+options: 'present', 'absent'. Default: 'present'.
+
+##### `param`
+
+Specifies a parameter to manage. Valid options: a string. Default: the '[title]'
+passed in your define.
+
+##### `order`
+
+Determines the ordering of your parameters in the configuration file
+(parameters with lower `order` values appear first.) Valid options: an integer
+or a string containing an integer. Default: '10'.
+
+##### `quote_char`
+
+Specifies a character to include before and after the specified value. Valid
+options: a string (usually a single or double quote). Default: (blank).
 
 ##Limitations
 
