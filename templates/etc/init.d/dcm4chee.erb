@@ -40,6 +40,10 @@ if [ -z "`echo $PATH | grep $JAVAPTH`" ]; then
   export PATH=$PATH:$JAVAPTH
 fi
 
+if [ -r "/etc/default/dcm4chee" ]; then
+  . "/etc/default/dcm4chee"
+fi
+
 # Define LSB functions.
 . /lib/lsb/init-functions
 
